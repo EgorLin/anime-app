@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+
+  &,
+  &::before,
+  &::after {
+    box-sizing: border-box;
+  }
+}
+
+html {
+  font-size: 10px;
+}
+
+.wrapper {
+  padding: 0 100px;
+
+  @media (max-width: 1000) {
+    padding: 0 2.5vw;
+  }
+}
