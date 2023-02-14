@@ -5,4 +5,7 @@
   width: 100vw;
   color: $primary-font;
   background-color: $primary-bg;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

@@ -1,4 +1,5 @@
-@import 'fonts';
+@use 'fonts';
+@use './mixins/breakpoints' as m;
 
 * {
   margin: 0;
@@ -18,10 +19,20 @@ html {
   }
 }
 
+img,
+picture,
+video {
+  max-width: 100%;
+}
+
 .wrapper {
   padding: 0 100px;
 
-  @media (max-width: 1000) {
+  @include m.breakpoints(mobile) {
     padding: 0 2.5vw;
   }
+
+  /*@media (max-width: 1000px) {
+    padding: 0 2.5vw;
+  }*/
 }
