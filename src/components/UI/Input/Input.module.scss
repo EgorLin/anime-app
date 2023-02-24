@@ -1,13 +1,20 @@
 @use '/src/styles/colors';
 @use '/src/styles/sizes';
+@use '/src/styles/mixins/transitions';
 
 .input {
   width: 100%;
   background-color: colors.$bg-secondary;
-  border: none;
+  border: rgba(#000, 0);
   font-size: sizes.$font-default;
   border-radius: 1.6rem;
   padding: 1rem 1.5rem;
   color: colors.$font-default;
   outline: none;
+  @include transitions.default(border);
+
+  &:focus {
+    border: 0.2rem solid rgba(colors.$bg-accent, 0.6);
+    @include transitions.default(border);
+  }
 }

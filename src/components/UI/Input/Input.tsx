@@ -5,7 +5,7 @@ interface IProps {
 }
 
 function Input({ className }: IProps) {
-  return <input className={styles.input + " " + className} />
+  return <input className={[styles.input, className].join(' ')} />
 }
 
 export default Input
