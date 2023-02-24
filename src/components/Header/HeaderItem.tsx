@@ -4,13 +4,27 @@ import SearchPanelItem from '../SearchPanel/SearchPanelItem'
 import Logo from '../UI/Logo/Logo'
 import styles from './Header.module.scss'
 
-function HeaderItem() {
+interface IProps {
+  isWideScreen: boolean
+}
+
+function HeaderItem({ isWideScreen }: IProps) {
   return (
     <header className={[styles.header, 'wrapper'].join(' ')}>
-      <Logo />
-      <Nav />
-      <SearchPanelItem />
-      <ControlPanel />
+      {isWideScreen ? (
+        <>
+          <Logo />
+          <Nav />
+          <SearchPanelItem />
+          <ControlPanel />
+        </>
+      ) : (
+        <>
+          <Logo />
+          <SearchPanelItem />
+          <ControlPanel />
+        </>
+      )}
     </header>
   )
 }

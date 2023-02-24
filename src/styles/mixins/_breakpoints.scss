@@ -1,10 +1,15 @@
+:root {
+  --mobile-size: 992px; // uses for ts consts as well
+  --laptop-size: 1300px;
+}
+
 @mixin breakpoints($size) {
   @if $size == mobile {
-    @media (max-width: 991px) {
+    @media (max-width: calc(var(--mobile-size) - 1px)) {
       @content;
     }
   } @else if $size == laptop-desktop {
-    @media (min-width: 992px) and (max-width: 1299px) {
+    @media (min-width: var(--mobile-size)) and (max-width: calc(var(--laptop-size) - 1px)) {
       @content;
     }
     /*@if $size == mobile {
