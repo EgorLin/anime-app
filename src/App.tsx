@@ -6,7 +6,7 @@ import Root from './pages/Root/Root'
 function App() {
   const router = createBrowserRouter([
     {
-      path: '/',
+               path: '/',
       element: <Root />,
       errorElement: <ErrorPage />,
     },

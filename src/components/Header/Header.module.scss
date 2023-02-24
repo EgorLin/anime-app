@@ -1,10 +1,8 @@
-@import '../../styles/colors';
-
+@use '/src/styles/colors';
 .header {
   height: 60px;
   width: 100vw;
-  color: $primary-font;
-  background-color: $primary-bg;
+  color: colors.$font-headers;
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -1,10 +1,17 @@
+import Catalog from '../../components/Catalog/Catalog'
+import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
-import Nav from '../../components/Nav/Nav'
+import SliderPanel from '../../components/SliderPanel/SliderPanel'
 
 function Root() {
   return (
     <div>
       <Header />
+      <main>
+        <SliderPanel />
+        <Catalog />
+      </main>
+      <Footer />
     </div>
   )
 }

@@ -1,5 +1,7 @@
 @use 'fonts';
-@use './mixins/breakpoints' as m;
+@use './mixins/breakpoints';
+@use 'sizes';
+@use 'colors';
 
 * {
   margin: 0;
@@ -19,6 +21,12 @@ html {
   }
 }
 
+body {
+  font-size: 1.4rem;
+  color: colors.$font-default;
+  background-color: colors.$bg-primary;
+}
+
 img,
 picture,
 video {
@@ -26,13 +34,13 @@ video {
 }
 
 .wrapper {
-  padding: 0 100px;
+  padding: 0 calc((100% - sizes.$max-wrapper-width) / 2);
 
-  @include m.breakpoints(mobile) {
+  @include breakpoints.breakpoints(mobile) {
     padding: 0 2.5vw;
   }
 
-  /*@media (max-width: 1000px) {
-    padding: 0 2.5vw;
-  }*/
+  @include breakpoints.breakpoints(laptop-desktop) {
+    padding: 0 100px;
+  }
 }

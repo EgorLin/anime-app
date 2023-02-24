@@ -3,6 +3,10 @@
     @media (max-width: 991px) {
       @content;
     }
+  } @else if $size == laptop-desktop {
+    @media (min-width: 992px) and (max-width: 1299px) {
+      @content;
+    }
     /*@if $size == mobile {
     @media (max-width: 599px) {
       @content;
