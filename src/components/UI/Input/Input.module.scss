@@ -1,5 +1,13 @@
-@use "/src/styles/colors";
+@use '/src/styles/colors';
+@use '/src/styles/sizes';
 
 .input {
+  width: 100%;
   background-color: colors.$bg-secondary;
+  border: none;
+  font-size: sizes.$font-default;
+  border-radius: 1.6rem;
+  padding: 1rem 1.5rem;
+  color: colors.$font-default;
+  outline: none;
 }

@@ -1,9 +1,11 @@
-import styles from "./Input.module.scss"
+import styles from './Input.module.scss'
 
-interface InputProps {}
+interface IProps {
+  className: string
+}
 
-function Input() {
-  return <input className={styles.input}/>
+function Input({ className }: IProps) {
+  return <input className={styles.input + " " + className} />
 }
 
 export default Input

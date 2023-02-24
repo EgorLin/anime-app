@@ -1,7 +1,7 @@
-import Input from "../UI/Input/Input"
+import Search from "../UI/Search/Search"
 
 function SearchPanelItem() {
-  return <div><Input /></div>
+  return <div><Search /></div>
 }
 
 export default SearchPanelItem
