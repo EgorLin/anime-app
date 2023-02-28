@@ -33,6 +33,10 @@ video {
   max-width: 100%;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .wrapper {
   padding: 0 calc((100% - sizes.$max-wrapper-width) / 2);
 

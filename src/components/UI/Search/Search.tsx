@@ -1,6 +1,7 @@
+import { ReactElement } from "react"
 import SearchItem from "./SearchItem"
 
-function Search() {
+function Search():ReactElement {
   return (
   <><SearchItem /></>
   )

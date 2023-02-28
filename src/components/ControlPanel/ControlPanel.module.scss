@@ -1,0 +1,28 @@
+@use '/src/styles/colors';
+@use '/src/styles/mixins/transitions';
+
+.container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.text {
+
+  @include transitions.default(color);
+}
+
+.text:hover {
+  color: colors.$font-accent;
+  @include transitions.default(color);
+}
+
+.button {
+  margin-left: 0.5rem;
+}
+
+.icon {
+  & > path {
+    fill: colors.$bg-accent;
+  }
+}

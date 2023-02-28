@@ -1,9 +1,30 @@
 @use '/src/styles/colors';
+@use '/src/styles/mixins/transitions';
+
 .header {
-  height: 60px;
   width: 100vw;
+  position: fixed;
+  background-color: colors.$bg-primary;
+}
+
+.menu {
+  height: 6rem;
   color: colors.$font-headers;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.burgerBtn {
+  margin-right: 2rem;
+}
+
+.opened {
+  transform: translateY(0%);
+  @include transitions.easeOut(transform);
+}
+
+.closed {
+  transform: translateY(calc(-100% + 6rem));
+  @include transitions.easeOut(transform);
 }

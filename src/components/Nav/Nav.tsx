@@ -1,10 +1,13 @@
+import { ReactElement } from 'react'
 import NavItem from './NavItem'
 
-function Nav() {
+interface IProps {
+  className?: string
+}
+
+function Nav({ className }: IProps): ReactElement {
   return (
-    <>
-      <NavItem />
-    </>
+      <NavItem className={className} />
   )
 }
 

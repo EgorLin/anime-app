@@ -1,0 +1,10 @@
+@use '/src/styles/colors';
+
+.menu {
+  width: 3rem;
+  height: 3rem;
+}
+
+.menu > path {
+  stroke: colors.$font-headers;
+}

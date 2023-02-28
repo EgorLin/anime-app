@@ -1,0 +1,30 @@
+@use '/src/styles/mixins/breakpoints';
+@use '/src/styles/mixins/transitions';
+@use '/src/styles/colors';
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-weight: 700;
+
+  @include breakpoints.breakpoints(mobile) {
+    flex-direction: column;
+    height: 14rem;
+  }
+
+  & > li {
+    cursor: pointer;
+    margin-right: calc(6.5vw);
+    @include transitions.default(color);
+  }
+
+  & > li:last-child {
+    margin-right: 0;
+  }
+
+  & > li:hover {
+    color: colors.$font-accent;
+    @include transitions.default(color);
+  }
+}

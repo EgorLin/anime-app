@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react'
 
 export function useWindowSize(size: number): boolean {
-  const [width, setWidth] = useState(0)
+  const [isGreater, setIsGreater] = useState(false)
 
   useEffect(() => {
     function handleResize() {
-      setWidth(window.innerWidth)
+      const newCond: boolean = window.innerWidth > size
+
+      if (newCond !== isGreater) {
+        setIsGreater(newCond)
+      }
     }
 
     window.addEventListener('resize', handleResize)
@@ -15,7 +19,7 @@ export function useWindowSize(size: number): boolean {
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [setWidth])
+  }, [isGreater, size])
 
-  return width > size
+  return isGreater
 }
