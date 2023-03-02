@@ -48,3 +48,15 @@ ul {
     padding: 0 100px;
   }
 }
+
+.wrapperM {
+  margin: 0 calc((100% - sizes.$max-wrapper-width) / 2);
+
+  @include breakpoints.breakpoints(mobile) {
+    margin: 0 2.5vw;
+  }
+
+  @include breakpoints.breakpoints(laptop-desktop) {
+    margin: 0 100px;
+  }
+}

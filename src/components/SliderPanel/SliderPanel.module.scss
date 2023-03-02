@@ -1,0 +1,74 @@
+@use '/src/styles/colors';
+@use '/src/styles/mixins/transitions';
+@use '/src/styles/mixins/breakpoints';
+
+.container {
+  position: relative;
+}
+.slider {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    height: 0px;
+  }
+}
+
+.card {
+  scroll-snap-align: start;
+  margin-right: 3rem;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  & img {
+    @include breakpoints.breakpoints(mobile) {
+      min-width: 32rem;
+    }
+
+    @include breakpoints.breakpoints(laptop-desktop) {
+      min-width: 36rem;
+    }
+  }
+}
+
+.button {
+  display: none;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  z-index: 10;
+  width: 14rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: linear-gradient(90deg, rgba(#000, 0.3) 0%, rgba(#000, 0) 100%);
+
+    & path {
+      fill: rgba(colors.$font-default, 1);
+      @include transitions.default(fill);
+    }
+  }
+}
+
+.button svg {
+  height: 100px;
+}
+
+.button path {
+  fill: rgba(colors.$font-default, 0);
+  @include transitions.default(fill);
+}
+
+.right {
+  right: 0;
+
+  &:hover {
+    background: linear-gradient(270deg, rgba(#000, 0.3) 0%, rgba(#000, 0) 100%);
+  }
+}

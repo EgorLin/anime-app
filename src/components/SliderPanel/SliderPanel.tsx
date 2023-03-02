@@ -1,11 +1,8 @@
+import { ReactElement } from 'react'
 import SliderPanelItem from './SliderPanelItem'
 
-function SliderPanel() {
-  return (
-    <>
-      <SliderPanelItem />
-    </>
-  )
+function SliderPanel(): ReactElement {
+  return <SliderPanelItem />
 }
 
 export default SliderPanel
