@@ -1,0 +1,20 @@
+@use '/src/styles/colors';
+@use '/src/styles/mixins/breakpoints';
+
+.footer {
+  height: 10rem;
+  background-color: colors.$bg-secondary;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6rem;
+  font-size: 2rem;
+
+  @include breakpoints.breakpoint(mobile) {
+    margin-top: 3rem;
+  }
+
+  @include breakpoints.breakpoint(laptop-desktop) {
+    margin-top: 4rem;
+  }
+}
