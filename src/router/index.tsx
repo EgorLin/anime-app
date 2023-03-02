@@ -1,8 +1,10 @@
-import ErrorPage from '../pages/ErrorPage/ErrorPage'
-import Search from '../pages/Search/Search'
-import Home from '../pages/Home/Home'
 import { RouteObject } from 'react-router-dom'
-import Root from '../pages/Root/Root'
+import { lazy, Suspense } from 'react'
+
+const Root = lazy(() => import('../pages/Root/Root'))
+const Home = lazy(() => import('../pages/Home/Home'))
+const Search = lazy(() => import('../pages/Search/Search'))
+const ErrorPage = lazy(() => import('../pages/ErrorPage/ErrorPage'))
 
 export enum RouteNames {
   HOME = '/',
@@ -12,13 +14,32 @@ export enum RouteNames {
 export const publicRoutes: RouteObject[] = [
   {
     path: RouteNames.HOME,
-    element: <Root />,
-    errorElement: <ErrorPage />,
+    element: (
+      <Suspense>
+        <Root />
+      </Suspense>
+    ),
+    errorElement: (
+      <Suspense>
+        <ErrorPage />
+      </Suspense>
+    ),
     children: [
-      { path: RouteNames.HOME, element: <Home /> },
+      {
+        path: RouteNames.HOME,
+        element: (
+          <Suspense>
+            <Home />
+          </Suspense>
+        ),
+      },
       {
         path: RouteNames.SEARCH,
-        element: <Search />,
+        element: (
+          <Suspense>
+            <Search />
+          </Suspense>
+        ),
       },
     ],
   },
