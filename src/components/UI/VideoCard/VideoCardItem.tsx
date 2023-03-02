@@ -11,13 +11,20 @@ interface IProps {
 function VideoCardItem({ id, className }: IProps): ReactElement {
   return (
     <div id={id} className={[styles.container, className].join(' ')}>
-      <PlayIcon className={styles.playButton}/>
-      <img
-        className={styles.img}
-        src='https://2.bp.blogspot.com/-UAZx3kxPEmA/VrxH1X89yII/AAAAAAAAAEw/-JgxE8GPWXI/s1600/221298.jpg'
-      />
+      <div className={styles.imageContainer}>
+        <PlayIcon className={styles.playButton} />
+        <img
+          className={styles.img}
+          src='https://2.bp.blogspot.com/-UAZx3kxPEmA/VrxH1X89yII/AAAAAAAAAEw/-JgxE8GPWXI/s1600/221298.jpg'
+        />
+      </div>
       <Bookmark className={styles.bookmark} />
+      <span className={styles.lastEpisode}>11</span>
       <span className={styles.title}>Pipi popo</span>
+      <span className={styles.genres}>
+        <span className={styles.genre}>Comedy</span>
+        <span className={styles.genre}>Documentary</span>
+      </span>
     </div>
   )
 }

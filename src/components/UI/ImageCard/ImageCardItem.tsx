@@ -14,6 +14,7 @@ function ImageCardItem({ id, className }: IProps) {
         src='https://2.bp.blogspot.com/-UAZx3kxPEmA/VrxH1X89yII/AAAAAAAAAEw/-JgxE8GPWXI/s1600/221298.jpg'
       />
       <Bookmark className={styles.bookmark} />
+      <div className={styles.year}>2023</div>
       <span className={styles.title}>Pipi popo</span>
       <div className={styles.genres}>
         <span className={styles.genre}>Comedy</span>

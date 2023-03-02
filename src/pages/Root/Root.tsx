@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom'
 import Catalog from '../../components/Catalog/Catalog'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
@@ -9,8 +10,7 @@ function Root() {
     <div>
       <Header />
       <main className={styles.main}>
-        <SliderPanel />
-        <Catalog/>
+        <Outlet />
       </main>
       <Footer />
     </div>

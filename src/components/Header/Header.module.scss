@@ -29,3 +29,9 @@
   transform: translateY(calc(-100% + 6rem));
   @include transitions.easeOut(transform);
 }
+
+.leftContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-right: 1rem;
+}

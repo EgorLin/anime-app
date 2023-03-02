@@ -9,7 +9,7 @@ interface IProps {
 function CatalogItem({ className }: IProps): ReactElement {
   return (
     <div className={[styles.container, className, 'wrapperM'].join(' ')}>
-      <h2 className={styles.title}>New releases</h2>
+      <h2 className={styles.title}>Recent Release</h2>
       <div className={styles.catalog}>
         <VideoCard className={styles.card} />
         <VideoCard className={styles.card} />

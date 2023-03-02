@@ -24,13 +24,22 @@
       height: 3rem;
       @include transitions.default(all);
     }
+
+    .year {
+      width: 5rem;
+      height: 3rem;
+      @include transitions.default(all);
+      border: 0.2rem solid colors.$bg-accent;
+      font-size: 1.5rem;
+      border-radius: 1rem;
+    }
   }
 }
 
 .bookmark {
   position: absolute;
-  top: 3rem;
-  right: 3rem;
+  top: 2.5rem;
+  left: 3rem;
   width: 0rem;
   height: 0rem;
   @include transitions.default(all);
@@ -65,4 +74,20 @@
   color: colors.$font-headers;
   margin-right: 2rem;
   font-weight: 300;
+}
+
+.year {
+  position: absolute;
+  top: 2.5rem;
+  right: 3rem;
+  width: 0rem;
+  height: 0rem;
+  font-size: 0;
+
+  @include transitions.default(all);
+
+  background: colors.$bg-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

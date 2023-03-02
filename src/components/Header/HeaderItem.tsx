@@ -35,7 +35,7 @@ function HeaderItem({
         >
           <Nav className='wrapper' />
           <div className={[styles.menu, 'wrapper'].join(' ')}>
-            <div>
+            <div className={styles.leftContainer}>
               <BurgerMenu
                 isOpened={isMenuOpened}
                 setIsOpened={setIsMenuOpened}
