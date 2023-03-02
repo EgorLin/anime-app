@@ -1,0 +1,72 @@
+@use '/src/styles/colors';
+@use '/src/styles/mixins/breakpoints';
+@use '/src/styles/mixins/transitions';
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.6rem;
+  cursor: pointer;
+
+  &:hover {
+    .img {
+      filter: blur(2px);
+      @include transitions.default(filter);
+    }
+
+    .title {
+      color: colors.$font-accent;
+      @include transitions.default(color);
+    }
+
+    .playButton {
+      width: 8rem;
+      z-index: 10;
+      @include transitions.default(width);
+
+      @include breakpoints.breakpoint(mobile) {
+        width: 6rem;
+      }
+    }
+
+    .bookmark {
+      width: 3rem;
+      height: 3rem;
+      @include transitions.default(all);
+    }
+  }
+}
+
+.playButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  transform: translate(-43%, -70%);
+  @include transitions.default(width);
+}
+
+.bookmark {
+  position: absolute;
+  top: 5%;
+  right: 10%;
+  width: 0rem;
+  height: 0rem;
+  @include transitions.default(all);
+}
+
+.img {
+  aspect-ratio: 4/6;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 1.6rem;
+  @include transitions.default(filter);
+}
+
+.title {
+  color: colors.$font-headers;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 1em;
+}

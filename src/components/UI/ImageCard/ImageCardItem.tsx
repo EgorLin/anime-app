@@ -13,7 +13,7 @@ function ImageCardItem({ id, className }: IProps) {
         className={styles.img}
         src='https://2.bp.blogspot.com/-UAZx3kxPEmA/VrxH1X89yII/AAAAAAAAAEw/-JgxE8GPWXI/s1600/221298.jpg'
       />
-      <Bookmark className={styles.bookmark}/>
+      <Bookmark className={styles.bookmark} />
       <span className={styles.title}>Pipi popo</span>
       <div className={styles.genres}>
         <span className={styles.genre}>Comedy</span>

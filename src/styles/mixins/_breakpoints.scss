@@ -6,7 +6,7 @@ $lp-s: 1300px;
   --laptop-size: #{$lp-s};
 }
 
-@mixin breakpoints($size) {
+@mixin breakpoint($size) {
   @if $size == mobile {
     @media (max-width: calc($mb-s - 1px)) {
       @content;

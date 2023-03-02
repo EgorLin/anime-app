@@ -10,7 +10,7 @@ function Root() {
       <Header />
       <main className={styles.main}>
         <SliderPanel />
-        <Catalog />
+        <Catalog/>
       </main>
       <Footer />
     </div>

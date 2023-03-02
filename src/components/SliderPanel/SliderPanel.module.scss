@@ -25,11 +25,11 @@
   }
 
   & img {
-    @include breakpoints.breakpoints(mobile) {
+    @include breakpoints.breakpoint(mobile) {
       min-width: 32rem;
     }
 
-    @include breakpoints.breakpoints(laptop-desktop) {
+    @include breakpoints.breakpoint(laptop-desktop) {
       min-width: 36rem;
     }
   }

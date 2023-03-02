@@ -8,7 +8,7 @@
   justify-content: space-around;
   font-weight: 700;
 
-  @include breakpoints.breakpoints(mobile) {
+  @include breakpoints.breakpoint(mobile) {
     flex-direction: column;
     height: 14rem;
   }

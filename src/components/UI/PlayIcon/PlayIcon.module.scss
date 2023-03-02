@@ -1,0 +1,10 @@
+@use '/src/styles/colors';
+
+.svg {
+  width: 8rem;
+  height: 8rem;
+
+  & > path {
+    fill: colors.$font-headers;
+  }
+}

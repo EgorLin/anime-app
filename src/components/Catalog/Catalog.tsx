@@ -1,8 +1,12 @@
-import { ReactElement } from "react";
-import CatalogItem from "./CatalogItem";
+import { ReactElement } from 'react'
+import CatalogItem from './CatalogItem'
 
-function Catalog(): ReactElement {
-  return <CatalogItem />
+interface IProps {
+  className?: string
+}
+
+function Catalog({ className }: IProps): ReactElement {
+  return <CatalogItem className={className} />
 }
 
 export default Catalog

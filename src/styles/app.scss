@@ -40,11 +40,11 @@ ul {
 .wrapper {
   padding: 0 calc((100% - sizes.$max-wrapper-width) / 2);
 
-  @include breakpoints.breakpoints(mobile) {
+  @include breakpoints.breakpoint(mobile) {
     padding: 0 2.5vw;
   }
 
-  @include breakpoints.breakpoints(laptop-desktop) {
+  @include breakpoints.breakpoint(laptop-desktop) {
     padding: 0 100px;
   }
 }
@@ -52,11 +52,11 @@ ul {
 .wrapperM {
   margin: 0 calc((100% - sizes.$max-wrapper-width) / 2);
 
-  @include breakpoints.breakpoints(mobile) {
+  @include breakpoints.breakpoint(mobile) {
     margin: 0 2.5vw;
   }
 
-  @include breakpoints.breakpoints(laptop-desktop) {
+  @include breakpoints.breakpoint(laptop-desktop) {
     margin: 0 100px;
   }
 }
