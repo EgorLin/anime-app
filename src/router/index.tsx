@@ -1,4 +1,3 @@
-import { ComponentType, ReactNode } from 'react'
 import ErrorPage from '../pages/ErrorPage/ErrorPage'
 import Search from '../pages/Search/Search'
 import Home from '../pages/Home/Home'

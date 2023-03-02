@@ -1,5 +1,6 @@
 import { ReactElement } from 'react'
 import { Link } from 'react-router-dom'
+import { RouteNames } from '../../../router'
 import ButtonIcon from '../ButtonIcon/ButtonIcon'
 import Input from '../Input/Input'
 import styles from './Search.module.scss'
@@ -8,7 +9,7 @@ function SearchItem(): ReactElement {
   return (
     <div className={styles.search}>
       <Input className={styles.input} />
-      <Link to='/search'>
+      <Link to={RouteNames.SEARCH}>
         <ButtonIcon className={styles.button}>
           <svg className={styles.image} viewBox='0 0 1024 1024'>
             <path
