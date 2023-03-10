@@ -1,8 +1,8 @@
-import { ReactElement } from "react"
-import Search from "../UI/Search/Search"
+import { ReactElement } from "react";
+import SearchIcon from "../UI/SearchIcon/SearchIcon";
 
-function SearchPanelItem():ReactElement {
-  return <div><Search /></div>
+function SearchPanelItem(): ReactElement {
+  return <SearchIcon />;
 }
 
-export default SearchPanelItem
+export default SearchPanelItem;
