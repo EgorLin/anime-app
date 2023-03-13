@@ -1,0 +1,31 @@
+@use "/src/styles/colors";
+@use "/src/styles/mixins/transitions";
+@use "/src/styles/sizes";
+
+.container {
+  position: relative;
+}
+
+.text {
+  cursor: pointer;
+  @include transitions.default(color);
+
+  &:hover {
+    color: colors.$font-accent;
+    @include transitions.default(color);
+  }
+}
+
+.popUp {
+  position: absolute;
+  padding: 2rem;
+  background-color: colors.$bg-secondary;
+  border: 0.2rem solid colors.$bg-primary;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-gap: 1rem 1rem;
+  min-width: 30rem;
+  border-radius: sizes.$border-radius;
+  z-index: 50;
+  top: 2.5rem;
+}
