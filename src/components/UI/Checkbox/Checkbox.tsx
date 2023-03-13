@@ -1,7 +1,11 @@
 import { ReactElement, useState } from "react";
 import CheckboxItem from "./CheckboxItem";
 
-function Checkbox(): ReactElement {
+interface IProps {
+  title: string;
+}
+
+function Checkbox({ title }: IProps): ReactElement {
   const [showPopUp, setShowPopUp] = useState(false);
 
   function changeVisibility(value?: boolean): void {
@@ -13,7 +17,11 @@ function Checkbox(): ReactElement {
   }
 
   return (
-    <CheckboxItem showPopUp={showPopUp} changeVisibility={changeVisibility} />
+    <CheckboxItem
+      title={title}
+      showPopUp={showPopUp}
+      changeVisibility={changeVisibility}
+    />
   );
 }
 

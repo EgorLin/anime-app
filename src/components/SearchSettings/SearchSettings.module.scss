@@ -1,4 +1,6 @@
 @use "/src/styles/colors";
+@use "/src/styles/sizes";
+@use "/src/styles/mixins/breakpoints";
 
 .container {
   background-color: colors.$bg-secondary;
@@ -6,4 +8,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-radius: sizes.$border-radius;
+  padding: 0 3rem;
+
+  @include breakpoints.breakpoint(mobile) {
+    padding: 0 1.5rem;
+  }
+}
+
+.leftHand {
+  display: flex;
+
+  & div {
+    margin-right: 2rem;
+  }
+
+  & div:last-child {
+    margin-right: 0rem;
+  }
 }

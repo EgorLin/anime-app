@@ -3,15 +3,20 @@ import CheckboxButton from "../CheckboxButton/CheckboxButton";
 import styles from "./Checkbox.module.scss";
 
 interface IProps {
+  title: string;
   showPopUp: boolean;
   changeVisibility: (value?: boolean) => void;
 }
 
-function CheckboxItem({ showPopUp, changeVisibility }: IProps): ReactElement {
+function CheckboxItem({
+  title,
+  showPopUp,
+  changeVisibility,
+}: IProps): ReactElement {
   return (
     <div className={styles.container}>
       <span className={styles.text} onClick={() => changeVisibility()}>
-        Custom genres
+        {title}
       </span>
       {showPopUp ? (
         <div
