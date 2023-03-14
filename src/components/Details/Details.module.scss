@@ -2,29 +2,30 @@
 @use "/src/styles/mixins/transitions";
 
 .container {
+  display: block;
   position: relative;
-  height: 45rem;
+  min-height: 45rem;
   width: 100vw;
 
   & img {
+    z-index: -10;
+    position: absolute;
     width: 100%;
     mask-image: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.6),
       rgba(0, 0, 0, 0)
     );
-    height: inherit;
+    min-height: inherit;
     object-fit: cover;
     object-position: top;
   }
 }
 
 .content {
-  position: absolute;
-  top: 25%;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  padding-top: 10rem;
+  display: block;
+  height: 100%;
 }
 
 .trailerContainer {
@@ -37,6 +38,8 @@
   height: 5rem;
   width: 10.5rem;
   margin-bottom: 2rem;
+  color: colors.$font-default;
+  text-decoration: none;
 
   & > span {
     display: inline-block;
@@ -86,4 +89,6 @@
 
 .description {
   line-height: 1.5em;
+  height: auto;
+  display: block;
 }

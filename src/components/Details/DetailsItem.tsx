@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
+import { NavLink } from "react-router-dom";
 import { IAnimeInfo } from "../../pages/AnimePage/AnimePage";
-import ArtPlayer from "../ArtPlayer/ArtPlayer";
 import PlayIcon from "../UI/PlayIcon/PlayIcon";
 import StarIcon from "../UI/StarIcon/StarIcon";
 import styles from "./Details.module.scss";
@@ -14,8 +14,19 @@ function DetailsItem({ animeInfo }: IProps): ReactElement {
     <div className={styles.container}>
       <img src={animeInfo?.cover} alt="" />
       <div className={[styles.content, "wrapperM"].join(" ")}>
-        <div className={styles.trailerContainer}>
-          <PlayIcon className={styles.trailerIcon} /> <span>Trailer</span>
+        <div>
+          <NavLink
+            to={
+              "https://www." +
+              animeInfo?.trailer.site +
+              ".com/watch?v=" +
+              animeInfo?.trailer.id
+            }
+            target="_blank"
+            className={styles.trailerContainer}
+          >
+            <PlayIcon className={styles.trailerIcon} /> <span>Trailer</span>
+          </NavLink>
         </div>
         <h1>{animeInfo?.title.english}</h1>
         <div className={styles.shortDetails}>
@@ -39,7 +50,6 @@ function DetailsItem({ animeInfo }: IProps): ReactElement {
             __html: animeInfo?.description ? animeInfo?.description : "",
           }}
         ></div>
-        <ArtPlayer />
       </div>
     </div>
   );

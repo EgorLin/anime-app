@@ -6,9 +6,10 @@ interface IProps {
   option: {
     url: string;
     container?: HTMLDivElement | string;
+    poster?: string;
   };
   getInstance: (art: Artplayer) => any;
-  style?: string;
+  className?: string;
 }
 
 function ArtPlayer({ option, getInstance, ...rest }: IProps) {
@@ -39,6 +40,11 @@ function ArtPlayer({ option, getInstance, ...rest }: IProps) {
       customType: {
         m3u8: playM3u8,
       },
+      // moreVideoAttr: {
+      //   crossOrigin: "anonymous",
+      //   preload: "none",
+      //   playsInline: true,
+      // },
     });
 
     if (getInstance && typeof getInstance === "function") {
