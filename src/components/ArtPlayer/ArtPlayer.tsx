@@ -1,63 +1,61 @@
-import { useEffect, useRef } from 'react'
-import Artplayer from 'artplayer'
-import Hls from 'hls.js'
+import { useEffect, useRef } from "react";
+import Artplayer from "artplayer";
+import Hls from "hls.js";
 
-interface ArtPlayerProps {
+interface IProps {
   option: {
-    url: string
-    container?: HTMLDivElement | string
-  }
-  getInstance: (art: Artplayer) => any
-  style?: any
+    url: string;
+    container?: HTMLDivElement | string;
+  };
+  getInstance: (art: Artplayer) => any;
+  style?: string;
 }
 
-export default function ArtPlayer({
-  option,
-  getInstance,
-  ...rest
-}: ArtPlayerProps) {
-  const artRef = useRef<HTMLDivElement>(null)
+function ArtPlayer({ option, getInstance, ...rest }: IProps) {
+  const artRef = useRef<HTMLDivElement>(null);
 
   function playM3u8(video: HTMLMediaElement, url: string, art: Artplayer) {
     if (Hls.isSupported()) {
-      const hls = new Hls()
-      hls.loadSource(url)
-      hls.attachMedia(video)
+      const hls = new Hls();
+      hls.loadSource(url);
+      hls.attachMedia(video);
 
       // optional
       //art.hls = hls
-      art.once('url', () => hls.destroy())
-      art.once('destroy', () => hls.destroy())
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = url
+      art.once("url", () => hls.destroy());
+      art.once("destroy", () => hls.destroy());
+    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      video.src = url;
     } else {
-      art.notice.show = 'Unsupported playback format: m3u8'
+      art.notice.show = "Unsupported playback format: m3u8";
     }
   }
 
   useEffect(() => {
     const art = new Artplayer({
       ...option,
-      container: artRef.current ? artRef.current : '',
-      type: 'm3u8',
+      container: artRef.current ? artRef.current : "",
+      type: "m3u8",
       customType: {
         m3u8: playM3u8,
       },
-    })
+    });
 
-    if (getInstance && typeof getInstance === 'function') {
-      getInstance(art)
+    if (getInstance && typeof getInstance === "function") {
+      getInstance(art);
     }
 
     return () => {
       if (art && art.destroy) {
-        art.destroy(false)
+        art.destroy(false);
       }
-    }
-  }, [])
+    };
+  }, []);
 
-  return <div ref={artRef} {...rest}></div>
+  return <div ref={artRef} {...rest}></div>;
 }
+
+export default ArtPlayer;
 /*
   useEffect(() => {
     data()

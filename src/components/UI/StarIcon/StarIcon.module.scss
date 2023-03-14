@@ -1,0 +1,7 @@
+@use "/src/styles/colors";
+
+.icon {
+  height: 2rem;
+  width: 2rem;
+  fill: colors.$bg-accent;
+}

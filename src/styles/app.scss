@@ -1,7 +1,7 @@
-@use 'fonts';
-@use './mixins/breakpoints';
-@use 'sizes';
-@use 'colors';
+@use "fonts";
+@use "./mixins/breakpoints";
+@use "sizes";
+@use "colors";
 
 * {
   margin: 0;
@@ -17,12 +17,12 @@
 html {
   font: {
     size: 10px;
-    family: 'Roboto', sans-serif;
+    family: "Roboto", sans-serif;
   }
 }
 
 body {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: colors.$font-default;
   background-color: colors.$bg-primary;
 }
@@ -31,6 +31,12 @@ img,
 picture,
 video {
   max-width: 100%;
+}
+
+h1 {
+  margin-bottom: 0.5em;
+  font-size: 3.6rem;
+  font-weight: 500;
 }
 
 ul {
