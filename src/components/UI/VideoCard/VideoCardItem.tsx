@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
 import Bookmark from "../Bookmark/Bookmark";
+import EpisodeBox from "../EpisodeBox/EpisodeBox";
 import PlayIcon from "../PlayIcon/PlayIcon";
 import styles from "./VideoCard.module.scss";
 
@@ -20,7 +21,7 @@ function VideoCardItem({ id, className }: IProps): ReactElement {
         />
       </div>
       <Bookmark className={styles.bookmark} />
-      <span className={styles.lastEpisode}>12</span>
+      <EpisodeBox className={styles.lastEpisode}>12</EpisodeBox>
       <span className={styles.title}>Pipi popo</span>
       <span className={styles.genres}>
         <span className={styles.genre}>Comedy</span>

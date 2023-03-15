@@ -1,6 +1,8 @@
 import { ReactElement } from "react";
 import ArtPlayer from "../../components/ArtPlayer/ArtPlayer";
 import Details from "../../components/Details/Details";
+import SliderPanel from "../../components/SliderPanel/SliderPanel";
+import EpisodeCard from "../../components/UI/EpisodeCard/EpisodeCard";
 import { proxyUrl } from "../../const/corsProxy";
 import { IAnimeInfo, IStreamInfo } from "./AnimePage";
 import styles from "./AnimePage.module.scss";
@@ -11,7 +13,6 @@ interface IProps {
 }
 
 function AnimePageItem({ animeInfo, streamInfo }: IProps): ReactElement {
-  console.log(animeInfo?.episodes[0].image);
   return (
     <div>
       <Details animeInfo={animeInfo} />
@@ -20,7 +21,7 @@ function AnimePageItem({ animeInfo, streamInfo }: IProps): ReactElement {
           option={{
             url: proxyUrl + streamInfo.sources[3].url,
             container: ".artplayer-container",
-            poster: animeInfo?.episodes[0].image,
+            poster: proxyUrl + animeInfo?.episodes[0].image,
             quality: streamInfo.sources
               .filter((source) => source.quality.match(/\d[p]/))
               .map((source) => {
@@ -34,6 +35,22 @@ function AnimePageItem({ animeInfo, streamInfo }: IProps): ReactElement {
           className={[styles.player, "wrapperM"].join(" ")}
         />
       ) : null}
+      {animeInfo ? (
+        <SliderPanel
+          title="Episodes"
+          elements={animeInfo?.episodes.map((episode) => (
+            <EpisodeCard
+              id={episode.id}
+              title={episode.title}
+              number={episode.number}
+              image={episode.image}
+            />
+          ))}
+        />
+      ) : null}{" "}
+      <p>relations</p>
+      <p>recommendations</p>
+      <p>comments</p>
     </div>
   );
 }

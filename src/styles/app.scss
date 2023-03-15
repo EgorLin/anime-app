@@ -34,9 +34,17 @@ video {
 }
 
 h1 {
+  color: colors.$font-headers;
   margin-bottom: 0.5em;
   font-size: 3.6rem;
   font-weight: 500;
+}
+
+h2 {
+  color: colors.$font-headers;
+  margin-bottom: 1em;
+  font-size: 3rem;
+  font-weight: 400;
 }
 
 ul {

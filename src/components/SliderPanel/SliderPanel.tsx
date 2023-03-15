@@ -1,8 +1,13 @@
-import { ReactElement } from 'react'
-import SliderPanelItem from './SliderPanelItem'
+import { ReactElement, ReactNode } from "react";
+import SliderPanelItem from "./SliderPanelItem";
 
-function SliderPanel(): ReactElement {
-  return <SliderPanelItem />
+interface IProps {
+  title?: string;
+  elements: ReactNode[] | undefined;
 }
 
-export default SliderPanel
+function SliderPanel({ title, elements }: IProps): ReactElement {
+  return <SliderPanelItem title={title} elements={elements} />;
+}
+
+export default SliderPanel;

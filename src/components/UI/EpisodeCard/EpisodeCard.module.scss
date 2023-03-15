@@ -1,0 +1,71 @@
+@use "/src/styles/colors";
+@use "/src/styles/mixins/transitions";
+
+.container {
+  position: relative;
+  display: inline-block;
+  background-color: black;
+  border-radius: 1.6rem;
+  cursor: pointer;
+
+  &:hover {
+    .img {
+      filter: blur(2px);
+      @include transitions.default(filter);
+    }
+
+    .title {
+      color: colors.$font-accent;
+      @include transitions.default(color);
+    }
+
+    .bookmark {
+      width: 3rem;
+      height: 3rem;
+      @include transitions.default(all);
+    }
+  }
+}
+
+.bookmark {
+  position: absolute;
+  top: 2.5rem;
+  left: 3rem;
+  width: 0rem;
+  height: 0rem;
+  @include transitions.default(all);
+}
+
+.img {
+  min-width: 40rem;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.8;
+  border-radius: 1.6rem;
+  @include transitions.default(filter);
+}
+
+.title {
+  width: 100%;
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
+  color: colors.$font-headers;
+  font-weight: 700;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  z-index: 10;
+
+  & sup {
+    font-size: 1.4rem;
+  }
+}
+
+.episode {
+  position: absolute;
+  top: 2.5rem;
+  right: 3rem;
+}
