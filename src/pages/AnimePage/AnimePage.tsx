@@ -125,15 +125,29 @@ export interface IAnimeInfo {
   episodes: IEpisode[];
 }
 
+interface IStreamSource {
+  url: string;
+  isM3U8: boolean;
+  quality: string;
+}
+
+export interface IStreamInfo {
+  download: string;
+  headers: Object;
+  sources: IStreamSource[];
+}
+
 function AnimePage(): ReactElement {
   const [animeInfo, setAnimeInfo] = useState<IAnimeInfo | null>(null);
-  const url = "https://api.consumet.org/meta/anilist/info/127230";
-  const data = async () => {
+  const [streamInfo, setStreamInfo] = useState<IStreamInfo | null>(null);
+
+  async function getAnimeInfo() {
+    const url = "https://api.consumet.org/meta/anilist/info/127230";
     try {
       const { data } = await axios.get<IAnimeInfo>(url, {
         params: { provider: "gogoanime" },
       });
-      setAnimeInfo(data);
+      return data;
     } catch (err) {
       if (err instanceof AxiosError) {
         if (err.code === "ECONNABORTED" || err.code === "ERR_NETWORK") {
@@ -143,13 +157,36 @@ function AnimePage(): ReactElement {
         }
       }
     }
-  };
+  }
+
+  async function getStreamInfo(id: string) {
+    const url = "https://api.consumet.org/meta/anilist/watch/" + id;
+    try {
+      const { data } = await axios.get<IStreamInfo>(url);
+      return data;
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        if (err.code === "ECONNABORTED" || err.code === "ERR_NETWORK") {
+          console.log(err.message);
+        } else {
+          console.log(err);
+        }
+      }
+    }
+  }
+
+  async function fetchData() {
+    const info = await getAnimeInfo();
+    setAnimeInfo(info ? info : null);
+    const streams = await getStreamInfo(info ? info?.episodes[0].id : "");
+    setStreamInfo(streams ? streams : null);
+  }
 
   useEffect(() => {
-    data();
+    fetchData();
   }, []);
 
-  return <AnimePageItem animeInfo={animeInfo} />;
+  return <AnimePageItem animeInfo={animeInfo} streamInfo={streamInfo} />;
 }
 
 export default AnimePage;

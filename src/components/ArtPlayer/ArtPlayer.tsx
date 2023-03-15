@@ -1,15 +1,24 @@
 import { useEffect, useRef } from "react";
 import Artplayer from "artplayer";
 import Hls from "hls.js";
+import Option from "artplayer/types/option";
+
+interface IQuiality {
+  default: boolean | undefined;
+  html: string | HTMLElement;
+  url: string;
+}
 
 interface IProps {
-  option: {
-    url: string;
-    container?: HTMLDivElement | string;
-    poster?: string;
-  };
+  // option: {
+  //   url: string;
+  //   container?: HTMLDivElement | string;
+  //   poster?: string;
+  //   quality?: IQuiality;
+  // };
   getInstance: (art: Artplayer) => any;
   className?: string;
+  option: Option;
 }
 
 function ArtPlayer({ option, getInstance, ...rest }: IProps) {
@@ -36,15 +45,14 @@ function ArtPlayer({ option, getInstance, ...rest }: IProps) {
     const art = new Artplayer({
       ...option,
       container: artRef.current ? artRef.current : "",
+      theme: "#2f80ed",
       type: "m3u8",
+      setting: true,
+      playbackRate: true,
+      fullscreen: true,
       customType: {
         m3u8: playM3u8,
       },
-      // moreVideoAttr: {
-      //   crossOrigin: "anonymous",
-      //   preload: "none",
-      //   playsInline: true,
-      // },
     });
 
     if (getInstance && typeof getInstance === "function") {
