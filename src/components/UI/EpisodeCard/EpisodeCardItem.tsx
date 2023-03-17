@@ -15,7 +15,6 @@ function EpisodeCardItem({ id, title, number, image, className }: IProps) {
   return (
     <div id={id} className={[styles.container, className].join(" ")}>
       <img className={styles.img} src={proxyUrl + image} alt={id} />
-      <Bookmark className={styles.bookmark} />
       <EpisodeBox className={styles.episode}>{number}</EpisodeBox>
       <span className={styles.title}>{title}</span>
     </div>

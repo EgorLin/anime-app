@@ -1,5 +1,6 @@
-@use '/src/styles/colors';
-@use '/src/styles/mixins/transitions';
+@use "/src/styles/colors";
+@use "/src/styles/mixins/transitions";
+@use "/src/styles/mixins/breakpoints";
 
 .container {
   position: relative;
@@ -53,6 +54,14 @@
   opacity: 0.8;
   border-radius: 1.6rem;
   @include transitions.default(filter);
+
+  @include breakpoints.breakpoint(mobile) {
+    min-width: 32rem;
+  }
+
+  @include breakpoints.breakpoint(laptop-desktop) {
+    min-width: 36rem;
+  }
 }
 
 .title {

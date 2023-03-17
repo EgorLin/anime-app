@@ -142,7 +142,8 @@ function AnimePage(): ReactElement {
   const [streamInfo, setStreamInfo] = useState<IStreamInfo | null>(null);
 
   async function getAnimeInfo() {
-    const url = "https://api.consumet.org/meta/anilist/info/127230";
+    // const url = "https://api.consumet.org/meta/anilist/info/127230";
+    const url = "https://api.consumet.org/meta/anilist/info/16498";
     try {
       const { data } = await axios.get<IAnimeInfo>(url, {
         params: { provider: "gogoanime" },

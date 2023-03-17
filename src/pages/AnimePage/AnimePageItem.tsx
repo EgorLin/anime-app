@@ -3,6 +3,7 @@ import ArtPlayer from "../../components/ArtPlayer/ArtPlayer";
 import Details from "../../components/Details/Details";
 import SliderPanel from "../../components/SliderPanel/SliderPanel";
 import EpisodeCard from "../../components/UI/EpisodeCard/EpisodeCard";
+import RelationCard from "../../components/UI/RelationCard/RelationCard";
 import { proxyUrl } from "../../const/corsProxy";
 import { IAnimeInfo, IStreamInfo } from "./AnimePage";
 import styles from "./AnimePage.module.scss";
@@ -47,7 +48,21 @@ function AnimePageItem({ animeInfo, streamInfo }: IProps): ReactElement {
             />
           ))}
         />
-      ) : null}{" "}
+      ) : null}
+      <SliderPanel
+        title="Relations"
+        elements={animeInfo?.relations
+          .filter((relation) => relation.type.match(/TV|MOVIE|OVA/))
+          .map((relation) => (
+            <RelationCard
+              id={relation.id + ""}
+              title={relation.title.english}
+              type={relation.type}
+              image={relation.image}
+              relationType={relation.relationType}
+            />
+          ))}
+      />
       <p>relations</p>
       <p>recommendations</p>
       <p>comments</p>
