@@ -21,7 +21,7 @@ interface IAnimeDate {
   day: number;
 }
 
-interface IRecomendation {
+interface IRecommendation {
   id: number;
   mailId: number;
   title: ILanguageTitles;
@@ -118,7 +118,7 @@ export interface IAnimeInfo {
   studios: string[];
   subOrDub: string;
   type: string;
-  recomedations: IRecomendation[];
+  recommendations: IRecommendation[];
   characters: ICharacter[];
   mappings: IMapping[];
   relations: IRelation[];

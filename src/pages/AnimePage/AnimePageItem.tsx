@@ -3,6 +3,7 @@ import ArtPlayer from "../../components/ArtPlayer/ArtPlayer";
 import Details from "../../components/Details/Details";
 import SliderPanel from "../../components/SliderPanel/SliderPanel";
 import EpisodeCard from "../../components/UI/EpisodeCard/EpisodeCard";
+import RecommendationCard from "../../components/UI/RecommendationCard/RecommendationCard";
 import RelationCard from "../../components/UI/RelationCard/RelationCard";
 import { proxyUrl } from "../../const/corsProxy";
 import { IAnimeInfo, IStreamInfo } from "./AnimePage";
@@ -49,23 +50,36 @@ function AnimePageItem({ animeInfo, streamInfo }: IProps): ReactElement {
           ))}
         />
       ) : null}
-      <SliderPanel
-        title="Relations"
-        elements={animeInfo?.relations
-          .filter((relation) => relation.type.match(/TV|MOVIE|OVA/))
-          .map((relation) => (
-            <RelationCard
-              id={relation.id + ""}
-              title={relation.title.english}
-              type={relation.type}
-              image={relation.image}
-              relationType={relation.relationType}
+      {animeInfo ? (
+        <SliderPanel
+          title="Relations"
+          elements={animeInfo?.relations
+            .filter((relation) => relation.type.match(/TV|MOVIE|OVA/))
+            .map((relation) => (
+              <RelationCard
+                id={relation.id + ""}
+                title={relation.title.english}
+                type={relation.type}
+                image={relation.image}
+                relationType={relation.relationType}
+              />
+            ))}
+        />
+      ) : null}
+      {animeInfo ? (
+        <SliderPanel
+          title="Recommendations"
+          elements={animeInfo?.recommendations.map((recommendation) => (
+            <RecommendationCard
+              id={recommendation.id + ""}
+              title={recommendation.title.english}
+              type={recommendation.type}
+              image={recommendation.image}
+              rating={recommendation.rating}
             />
           ))}
-      />
-      <p>relations</p>
-      <p>recommendations</p>
-      <p>comments</p>
+        />
+      ) : null}
     </div>
   );
 }
