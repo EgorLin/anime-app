@@ -1,7 +1,8 @@
 import { ReactElement } from "react";
+import SignUpItem from "./SignUpItem";
 
 function SignUp(): ReactElement {
-  return <div>SignUp</div>;
+  return <SignUpItem />;
 }
 
 export default SignUp;

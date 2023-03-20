@@ -1,7 +1,8 @@
 import { ReactElement } from "react";
+import LogInItem from "./LogInItem";
 
 function LogIn(): ReactElement {
-  return <div>LogIn</div>;
+  return <LogInItem />;
 }
 
 export default LogIn;

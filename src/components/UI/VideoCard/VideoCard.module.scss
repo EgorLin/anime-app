@@ -86,11 +86,20 @@
 }
 
 .img {
-  aspect-ratio: 4/6;
+  // min-width: 40rem;
+  aspect-ratio: 4/3;
   object-fit: cover;
   object-position: center;
   border-radius: 1.6rem;
   @include transitions.default(filter);
+
+  // @include breakpoints.breakpoint(mobile) {
+  //   min-width: 32rem;
+  // }
+  //
+  // @include breakpoints.breakpoint(laptop-desktop) {
+  //   min-width: 36rem;
+  // }
 }
 
 .title {

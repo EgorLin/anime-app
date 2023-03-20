@@ -27,60 +27,40 @@ export const publicRoutes: RouteObject[] = [
         <Root />
       </Suspense>
     ),
-    errorElement: (
-      <Suspense>
-        <ErrorPage />
-      </Suspense>
-    ),
+    errorElement: <ErrorPage />,
     children: [
       {
         path: RouteNames.HOME,
-        element: (
-          <Suspense>
-            <Home />
-          </Suspense>
-        ),
+        element: <Home />,
       },
       {
         path: RouteNames.SEARCH,
-        element: (
-          <Suspense>
-            <Search />
-          </Suspense>
-        ),
+        element: <Search />,
       },
       {
         path: RouteNames.ANITITLE,
-        element: (
-          <Suspense>
-            <AnimePage />
-          </Suspense>
-        ),
-      },
-      {
-        path: RouteNames.LOGIN,
-        element: (
-          <Suspense>
-            <LogIn />
-          </Suspense>
-        ),
-      },
-      {
-        path: RouteNames.SINGUP,
-        element: (
-          <Suspense>
-            <SignUp />
-          </Suspense>
-        ),
+        element: <AnimePage />,
       },
       {
         path: RouteNames.PROFILE,
-        element: (
-          <Suspense>
-            <Profile />
-          </Suspense>
-        ),
+        element: <Profile />,
       },
     ],
+  },
+  {
+    path: RouteNames.LOGIN,
+    element: (
+      <Suspense>
+        <LogIn />
+      </Suspense>
+    ),
+  },
+  {
+    path: RouteNames.SINGUP,
+    element: (
+      <Suspense>
+        <SignUp />
+      </Suspense>
+    ),
   },
 ];

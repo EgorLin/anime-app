@@ -1,0 +1,59 @@
+@use "/src/styles/colors";
+@use "/src/styles/sizes";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("../../assets/images/errorBg/screenshot.png");
+  // linear-gradient(to bottom, #000000 0%, #000000 50%);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.window {
+  background: colors.$bg-secondary;
+  border-radius: sizes.$border-radius;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40rem;
+  padding: 3rem;
+}
+
+.logo {
+  margin-bottom: 2.5rem;
+}
+
+.input {
+  background-color: colors.$bg-primary;
+  margin-bottom: 1.5rem;
+}
+
+.error404 {
+  color: colors.$font-accent;
+}
+
+.button {
+  // display: inline-block;
+  background-color: colors.$bg-accent;
+  padding: 1rem;
+  font-size: 1.6rem;
+  border-radius: sizes.$border-radius;
+  width: 100%;
+  height: auto;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  color: colors.$font-headers;
+  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.signUp {
+  text-decoration: none;
+  color: colors.$font-accent;
+}
