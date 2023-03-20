@@ -1,7 +1,8 @@
 import { ReactElement } from "react";
+import ProfileItem from "./ProfileItem";
 
 function Profile(): ReactElement {
-  return <div>Profile</div>;
+  return <ProfileItem />;
 }
 
 export default Profile;

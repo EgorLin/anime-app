@@ -1,29 +1,20 @@
-import { ReactElement } from 'react'
-import VideoCard from '../UI/VideoCard/VideoCard'
-import styles from './Catalog.module.scss'
+import { ReactElement, ReactNode } from "react";
+import VideoCard from "../UI/VideoCard/VideoCard";
+import styles from "./Catalog.module.scss";
 
 interface IProps {
-  className?: string
+  title?: string;
+  className?: string;
+  elements: ReactElement[];
 }
 
-function CatalogItem({ className }: IProps): ReactElement {
+function CatalogItem({ title, className, elements }: IProps): ReactElement {
   return (
-    <div className={[styles.container, className, 'wrapperM'].join(' ')}>
-      <h2 className={styles.title}>Recent Release</h2>
-      <div className={styles.catalog}>
-        <VideoCard className={styles.card} />
-        <VideoCard className={styles.card} />
-        <VideoCard className={styles.card} />
-        <VideoCard className={styles.card} />
-        <VideoCard className={styles.card} />
-        <VideoCard className={styles.card} />
-        <VideoCard className={styles.card} />
-        <VideoCard className={styles.card} />
-        <VideoCard className={styles.card} />
-        <VideoCard className={styles.card} />
-      </div>
+    <div className={[styles.container, className, "wrapperM"].join(" ")}>
+      <h2 className={styles.title}>{title}</h2>
+      <div className={styles.catalog}>{elements}</div>
     </div>
-  )
+  );
 }
 
-export default CatalogItem
+export default CatalogItem;

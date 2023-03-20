@@ -1,6 +1,7 @@
 import Catalog from "../../components/Catalog/Catalog";
 import SliderPanel from "../../components/SliderPanel/SliderPanel";
 import ImageCard from "../../components/UI/ImageCard/ImageCard";
+import VideoCard from "../../components/UI/VideoCard/VideoCard";
 
 function Home() {
   return (
@@ -15,7 +16,24 @@ function Home() {
           <ImageCard id="card-1" />,
         ]}
       />
-      <Catalog />
+      <Catalog
+        title="Recent releases"
+        elements={[
+          <VideoCard />,
+          <VideoCard />,
+          <VideoCard />,
+          <VideoCard />,
+          <VideoCard />,
+          <VideoCard />,
+          <VideoCard />,
+          <VideoCard />,
+          <VideoCard />,
+          <VideoCard />,
+          <VideoCard />,
+          <VideoCard />,
+          <VideoCard />,
+        ]}
+      />
     </>
   );
 }
