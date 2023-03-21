@@ -7,7 +7,7 @@ interface IProps {
 }
 
 function SliderPanelItem({ title, elements }: IProps): ReactElement {
-  console.log(elements);
+  console.log("slider panel " + title + " rerender");
   return (
     <div className={[styles.container, "wrapperM"].join(" ")}>
       {title ? <h2>{title}</h2> : null}
