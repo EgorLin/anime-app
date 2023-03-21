@@ -1,10 +1,11 @@
 import "./styles/app.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ReactElement } from "react";
-import { publicRoutes } from "./router";
+import { privateRoutes, publicRoutes } from "./router";
 
 function App(): ReactElement {
-  const router = createBrowserRouter(publicRoutes);
+  const auth = true;
+  const router = createBrowserRouter(auth ? privateRoutes : publicRoutes);
 
   return <RouterProvider router={router} />;
 }

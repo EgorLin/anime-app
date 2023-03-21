@@ -41,10 +41,6 @@ export const publicRoutes: RouteObject[] = [
         path: RouteNames.ANITITLE,
         element: <AnimePage />,
       },
-      {
-        path: RouteNames.PROFILE,
-        element: <Profile />,
-      },
     ],
   },
   {
@@ -62,5 +58,35 @@ export const publicRoutes: RouteObject[] = [
         <SignUp />
       </Suspense>
     ),
+  },
+];
+
+export const privateRoutes: RouteObject[] = [
+  {
+    path: RouteNames.HOME,
+    element: (
+      <Suspense>
+        <Root />
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: RouteNames.HOME,
+        element: <Home />,
+      },
+      {
+        path: RouteNames.SEARCH,
+        element: <Search />,
+      },
+      {
+        path: RouteNames.ANITITLE,
+        element: <AnimePage />,
+      },
+      {
+        path: RouteNames.PROFILE,
+        element: <Profile />,
+      },
+    ],
   },
 ];
