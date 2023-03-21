@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { IAnimeInfo } from "../../pages/AnimePage/AnimePage";
+import { IAnimeInfo } from "../../types/IAnimeInfo";
 import DetailsItem from "./DetailsItem";
 
 interface IProps {

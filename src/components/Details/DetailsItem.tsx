@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { NavLink } from "react-router-dom";
-import { IAnimeInfo } from "../../pages/AnimePage/AnimePage";
+import { IAnimeInfo } from "../../types/IAnimeInfo";
 import PlayIcon from "../UI/PlayIcon/PlayIcon";
 import StarIcon from "../UI/StarIcon/StarIcon";
 import styles from "./Details.module.scss";

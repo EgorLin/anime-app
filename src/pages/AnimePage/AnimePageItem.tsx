@@ -6,7 +6,8 @@ import EpisodeCard from "../../components/UI/EpisodeCard/EpisodeCard";
 import RecommendationCard from "../../components/UI/RecommendationCard/RecommendationCard";
 import RelationCard from "../../components/UI/RelationCard/RelationCard";
 import { proxyUrl } from "../../const/corsProxy";
-import { IAnimeInfo, IStreamInfo } from "./AnimePage";
+import { IAnimeInfo } from "../../types/IAnimeInfo";
+import { IStreamInfo } from "../../types/IStreamInfo";
 import styles from "./AnimePage.module.scss";
 
 interface IProps {
