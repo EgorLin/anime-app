@@ -6,7 +6,10 @@ import EpisodeCard from "../../components/UI/EpisodeCard/EpisodeCard";
 import RecommendationCard from "../../components/UI/RecommendationCard/RecommendationCard";
 import RelationCard from "../../components/UI/RelationCard/RelationCard";
 import { proxyUrl } from "../../const/corsProxy";
+import { IEpisode } from "../../types/IAnimeEpisode";
 import { IAnimeInfo } from "../../types/IAnimeInfo";
+import { IRecommendation } from "../../types/IAnimeRecommendation";
+import { IRelation } from "../../types/IAnimeRelation";
 import { IStreamInfo } from "../../types/IStreamInfo";
 import styles from "./AnimePage.module.scss";
 
@@ -23,6 +26,12 @@ function AnimePageItem({
   animeInfo,
   streamInfo,
 }: IProps): ReactElement {
+  const episodes: IEpisode[] = animeInfo?.episodes;
+  const relations: IRelation[] = animeInfo?.relations.filter((relation) =>
+    relation.type.match(/TV|MOVIE|OVA/)
+  );
+  const recommendations: IRecommendation[] = animeInfo?.recommendations;
+
   console.log("anime page rerender");
   return (
     <div>
@@ -47,23 +56,24 @@ function AnimePageItem({
           {/*   className={[styles.player, "wrapperM"].join(" ")} */}
           {/* /> */}
 
-          <SliderPanel
-            title="Episodes"
-            elements={animeInfo?.episodes.map((episode) => (
-              <EpisodeCard
-                id={episode.id}
-                title={episode.title}
-                number={episode.number}
-                image={episode.image}
-              />
-            ))}
-          />
+          {episodes.length ? (
+            <SliderPanel
+              title="Episodes"
+              elements={episodes.map((episode) => (
+                <EpisodeCard
+                  id={episode.id}
+                  title={episode.title}
+                  number={episode.number}
+                  image={episode.image}
+                />
+              ))}
+            />
+          ) : null}
 
-          <SliderPanel
-            title="Relations"
-            elements={animeInfo?.relations
-              .filter((relation) => relation.type.match(/TV|MOVIE|OVA/))
-              .map((relation) => (
+          {relations.length ? (
+            <SliderPanel
+              title="Relations"
+              elements={relations.map((relation) => (
                 <RelationCard
                   id={relation.id + ""}
                   title={relation.title.english}
@@ -72,20 +82,23 @@ function AnimePageItem({
                   relationType={relation.relationType}
                 />
               ))}
-          />
+            />
+          ) : null}
 
-          <SliderPanel
-            title="Recommendations"
-            elements={animeInfo?.recommendations.map((recommendation) => (
-              <RecommendationCard
-                id={recommendation.id + ""}
-                title={recommendation.title.english}
-                type={recommendation.type}
-                image={recommendation.image}
-                rating={recommendation.rating}
-              />
-            ))}
-          />
+          {recommendations.length ? (
+            <SliderPanel
+              title="Recommendations"
+              elements={recommendations.map((recommendation) => (
+                <RecommendationCard
+                  id={recommendation.id + ""}
+                  title={recommendation.title.english}
+                  type={recommendation.type}
+                  image={recommendation.image}
+                  rating={recommendation.rating}
+                />
+              ))}
+            />
+          ) : null}
         </>
       ) : (
         <div>loading</div>
