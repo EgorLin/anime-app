@@ -14,15 +14,19 @@ import { IStreamInfo } from "../../types/IStreamInfo";
 import styles from "./AnimePage.module.scss";
 
 interface IProps {
-  isLoading: boolean;
-  error: string;
+  isLoadingAnime: boolean;
+  isLoadingStream: boolean;
+  animeError: string;
+  streamError: string;
   animeInfo: IAnimeInfo;
-  streamInfo: IStreamInfo | null;
+  streamInfo: IStreamInfo;
 }
 
 function AnimePageItem({
-  isLoading,
-  error,
+  isLoadingAnime,
+  isLoadingStream,
+  animeError,
+  streamError,
   animeInfo,
   streamInfo,
 }: IProps): ReactElement {
@@ -33,28 +37,31 @@ function AnimePageItem({
   const recommendations: IRecommendation[] = animeInfo?.recommendations;
 
   console.log("anime page rerender");
+  console.log("STREAM INFO!!!!!!!!!!!!!", streamInfo);
   return (
     <div>
-      {!isLoading ? (
+      {!isLoadingAnime ? (
         <>
           <Details animeInfo={animeInfo} />
-          {/* <ArtPlayer */}
-          {/*   option={{ */}
-          {/*     url: proxyUrl + streamInfo?.sources[3].url, */}
-          {/*     container: ".artplayer-container", */}
-          {/*     poster: proxyUrl + animeInfo?.episodes[0].image, */}
-          {/*     quality: streamInfo?.sources */}
-          {/*       .filter((source) => source.quality.match(/\d[p]/)) */}
-          {/*       .map((source) => { */}
-          {/*         return { */}
-          {/*           html: source.quality, */}
-          {/*           url: proxyUrl + source.url, */}
-          {/*         }; */}
-          {/*       }), */}
-          {/*   }} */}
-          {/*   getInstance={(art) => console.log(art)} */}
-          {/*   className={[styles.player, "wrapperM"].join(" ")} */}
-          {/* /> */}
+          {!isLoadingStream ? (
+            <ArtPlayer
+              option={{
+                url: proxyUrl + streamInfo?.sources[3].url,
+                container: ".artplayer-container",
+                poster: proxyUrl + animeInfo?.episodes[0].image,
+                quality: streamInfo?.sources
+                  .filter((source) => source.quality.match(/\d[p]/))
+                  .map((source) => {
+                    return {
+                      html: source.quality,
+                      url: proxyUrl + source.url,
+                    };
+                  }),
+              }}
+              getInstance={(art) => console.log(art)}
+              className={[styles.player, "wrapperM"].join(" ")}
+            />
+          ) : null}
 
           {episodes.length ? (
             <SliderPanel
