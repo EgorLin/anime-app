@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 import { privateRoutes, publicRoutes } from "./router";
 
 function App(): ReactElement {
-  const auth = true;
+  const auth = false;
   const router = createBrowserRouter(auth ? privateRoutes : publicRoutes);
 
   return <RouterProvider router={router} />;
