@@ -6,13 +6,13 @@ import StarIcon from "../UI/StarIcon/StarIcon";
 import styles from "./Details.module.scss";
 
 interface IProps {
-  animeInfo: IAnimeInfo | null;
+  animeInfo: IAnimeInfo;
 }
 
 function DetailsItem({ animeInfo }: IProps): ReactElement {
   return (
     <div className={styles.container}>
-      <img src={animeInfo?.cover} alt="" />
+      <img src={animeInfo.cover} alt="" />
       <div className={[styles.content, "wrapperM"].join(" ")}>
         <div>
           <NavLink

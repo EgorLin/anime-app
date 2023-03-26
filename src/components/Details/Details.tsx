@@ -3,7 +3,7 @@ import { IAnimeInfo } from "../../types/IAnimeInfo";
 import DetailsItem from "./DetailsItem";
 
 interface IProps {
-  animeInfo: IAnimeInfo | null;
+  animeInfo: IAnimeInfo;
 }
 
 function Details({ animeInfo }: IProps): ReactElement {

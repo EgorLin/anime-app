@@ -1,34 +1,36 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect } from "react";
+import { compareRelations } from "../../helpers/compareFunctions";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { fetchAnimeInfo, fetchStreamInfo } from "../../store/ActionCreators";
+import {
+  fetchAnimeInfo,
+  selectAnimeInfo,
+  selectAnimeRelations,
+} from "../../store/reducers/AnimeInfoSlice";
 import AnimePageItem from "./AnimePageItem";
 
 function AnimePage(): ReactElement {
   const dispatch = useAppDispatch();
+
   const {
-    animeInfo,
+    data: animeInfo,
     error: animeError,
-    isLoading: isLoadingAnime,
-  } = useAppSelector((state) => state.animeInfo);
-  const {
-    streamInfo,
-    error: streamError,
-    isLoading: isLoadingStream,
-  } = useAppSelector((state) => state.streamInfo);
+    status: animeStatus,
+  } = useAppSelector(selectAnimeInfo);
+  const relations = useAppSelector(
+    selectAnimeRelations,
+    compareRelations // to prevent re-renders
+  );
 
   useEffect(() => {
     dispatch(fetchAnimeInfo());
-    dispatch(fetchStreamInfo());
   }, []);
 
   return (
     <AnimePageItem
-      isLoadingAnime={isLoadingAnime}
+      animeStatus={animeStatus}
       animeError={animeError}
-      isLoadingStream={isLoadingStream}
-      streamError={streamError}
       animeInfo={animeInfo}
-      streamInfo={streamInfo}
+      relations={relations}
     />
   );
 }

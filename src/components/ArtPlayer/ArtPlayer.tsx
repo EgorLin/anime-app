@@ -1,105 +1,60 @@
-import { useEffect, useRef } from "react";
-import Artplayer from "artplayer";
-import Hls from "hls.js";
-import Option from "artplayer/types/option";
-
-interface IQuiality {
-  default: boolean | undefined;
-  html: string | HTMLElement;
-  url: string;
-}
+import { ReactElement, useEffect } from "react";
+import { proxyUrl } from "../../const/corsProxy";
+import { RequestStatuses } from "../../const/requestStatuses";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { fetchStreamInfo } from "../../store/reducers/StreamInfoSlice";
+import ArtPlayerItem from "./ArtPlayerItem";
 
 interface IProps {
-  // option: {
-  //   url: string;
-  //   container?: HTMLDivElement | string;
-  //   poster?: string;
-  //   quality?: IQuiality;
-  // };
-  getInstance: (art: Artplayer) => any;
   className?: string;
-  option: Option;
+  animeId: string;
+  poster: string;
 }
 
-function ArtPlayer({ option, getInstance, ...rest }: IProps) {
-  const artRef = useRef<HTMLDivElement>(null);
+function ArtPlayer({ animeId, className, poster }: IProps): ReactElement {
+  const dispatch = useAppDispatch();
 
-  function playM3u8(video: HTMLMediaElement, url: string, art: Artplayer) {
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(url);
-      hls.attachMedia(video);
-
-      // optional
-      //art.hls = hls
-      art.once("url", () => hls.destroy());
-      art.once("destroy", () => hls.destroy());
-    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-      video.src = url;
-    } else {
-      art.notice.show = "Unsupported playback format: m3u8";
-    }
-  }
+  const { data, status, error } = useAppSelector((store) => store.streamInfo);
 
   useEffect(() => {
-    const art = new Artplayer({
-      ...option,
-      container: artRef.current ? artRef.current : "",
-      theme: "#2f80ed",
-      type: "m3u8",
-      setting: true,
-      playbackRate: true,
-      fullscreen: true,
-      customType: {
-        m3u8: playM3u8,
-      },
-    });
-
-    if (getInstance && typeof getInstance === "function") {
-      getInstance(art);
-    }
-
-    return () => {
-      if (art && art.destroy) {
-        art.destroy(false);
-      }
-    };
+    dispatch(fetchStreamInfo(animeId));
   }, []);
 
-  return <div ref={artRef} {...rest}></div>;
+  let content;
+  switch (status) {
+    case RequestStatuses.IDLE:
+      content = <></>;
+      break;
+    case RequestStatuses.LOADING:
+      content = <div>loading...</div>;
+      break;
+    case RequestStatuses.SUCCEEDED:
+      content = (
+        <ArtPlayerItem
+          option={{
+            url: proxyUrl + data.sources[3].url,
+            container: ".artplayer-container",
+            poster: proxyUrl + poster,
+            quality: data.sources
+              .filter((source) => source.quality.match(/\d[p]/))
+              .map((source) => {
+                return {
+                  html: source.quality,
+                  url: proxyUrl + source.url,
+                };
+              }),
+          }}
+          getInstance={() => { }}
+          className={className}
+        />
+      );
+      break;
+    case RequestStatuses.FAILED:
+      content = <div>{error}</div>;
+      break;
+  }
+
+  return <>{content}</>;
 }
 
 export default ArtPlayer;
-/*
-  useEffect(() => {
-    data()
-  }, [])
-
-  const url =
-    'https://api.consumet.org/anime/gogoanime/watch/spy-x-family-episode-1'
-  const data = async () => {
-    try {
-      const { data } = await axios.get(url, { params: { server: 'gogocdn' } })
-      console.log(data)
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  return (
-    <div className='App'>
-      <ArtPlayer
-        option={{
-          //url: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-          url: 'https://www02.gofcdn.com/videos/hls/yUc-RjpUBOf82KOsAFnBiA/1676331507/184141/0789fd4f049c3ca2a49b860ea5d1f456/ep.1.1649522303.360.m3u8',
-        }}
-        style={{
-          width: '600px',
-          height: '400px',
-          margin: '60px auto 0',
-        }}
-        getInstance={(art) => console.info(art)}
-      />
-    </div>
-  )
-*/

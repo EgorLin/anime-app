@@ -5,65 +5,45 @@ import SliderPanel from "../../components/SliderPanel/SliderPanel";
 import EpisodeCard from "../../components/UI/EpisodeCard/EpisodeCard";
 import RecommendationCard from "../../components/UI/RecommendationCard/RecommendationCard";
 import RelationCard from "../../components/UI/RelationCard/RelationCard";
-import { proxyUrl } from "../../const/corsProxy";
+import { RequestStatuses } from "../../const/requestStatuses";
 import { IEpisode } from "../../types/IAnimeEpisode";
 import { IAnimeInfo } from "../../types/IAnimeInfo";
 import { IRecommendation } from "../../types/IAnimeRecommendation";
 import { IRelation } from "../../types/IAnimeRelation";
-import { IStreamInfo } from "../../types/IStreamInfo";
 import styles from "./AnimePage.module.scss";
 
 interface IProps {
-  isLoadingAnime: boolean;
-  isLoadingStream: boolean;
+  animeStatus: string;
   animeError: string;
-  streamError: string;
   animeInfo: IAnimeInfo;
-  streamInfo: IStreamInfo;
+  relations: IRelation[];
 }
 
 function AnimePageItem({
-  isLoadingAnime,
-  isLoadingStream,
-  animeError,
-  streamError,
+  animeStatus,
   animeInfo,
-  streamInfo,
+  animeError,
+  relations,
 }: IProps): ReactElement {
-  const episodes: IEpisode[] = animeInfo?.episodes;
-  const relations: IRelation[] = animeInfo?.relations.filter((relation) =>
-    relation.type.match(/TV|MOVIE|OVA/)
-  );
-  const recommendations: IRecommendation[] = animeInfo?.recommendations;
+  const episodes: IEpisode[] = animeInfo.episodes;
+  const recommendations: IRecommendation[] = animeInfo.recommendations;
 
-  console.log("anime page rerender");
-  console.log("STREAM INFO!!!!!!!!!!!!!", streamInfo);
-  return (
-    <div>
-      {!isLoadingAnime ? (
-        <>
+  let content;
+  switch (animeStatus) {
+    case RequestStatuses.IDLE:
+      content = <></>;
+      break;
+    case RequestStatuses.SUCCEEDED:
+      content = (
+        <div>
           <Details animeInfo={animeInfo} />
-          {!isLoadingStream ? (
-            <ArtPlayer
-              option={{
-                url: proxyUrl + streamInfo?.sources[3].url,
-                container: ".artplayer-container",
-                poster: proxyUrl + animeInfo?.episodes[0].image,
-                quality: streamInfo?.sources
-                  .filter((source) => source.quality.match(/\d[p]/))
-                  .map((source) => {
-                    return {
-                      html: source.quality,
-                      url: proxyUrl + source.url,
-                    };
-                  }),
-              }}
-              getInstance={(art) => console.log(art)}
-              className={[styles.player, "wrapperM"].join(" ")}
-            />
-          ) : null}
+          <ArtPlayer
+            animeId={animeInfo.episodes[0].id}
+            poster={animeInfo.episodes[0].image}
+            className={[styles.player, "wrapperM"].join(" ")}
+          />
 
-          {episodes.length ? (
+          {episodes.length > 0 && (
             <SliderPanel
               title="Episodes"
               elements={episodes.map((episode) => (
@@ -75,9 +55,9 @@ function AnimePageItem({
                 />
               ))}
             />
-          ) : null}
+          )}
 
-          {relations.length ? (
+          {relations.length > 0 && (
             <SliderPanel
               title="Relations"
               elements={relations.map((relation) => (
@@ -90,9 +70,9 @@ function AnimePageItem({
                 />
               ))}
             />
-          ) : null}
+          )}
 
-          {recommendations.length ? (
+          {recommendations.length > 0 && (
             <SliderPanel
               title="Recommendations"
               elements={recommendations.map((recommendation) => (
@@ -105,13 +85,19 @@ function AnimePageItem({
                 />
               ))}
             />
-          ) : null}
-        </>
-      ) : (
-        <div>loading</div>
-      )}
-    </div>
-  );
+          )}
+        </div>
+      );
+      break;
+    case RequestStatuses.LOADING:
+      content = <div>loading...</div>;
+      break;
+    case RequestStatuses.FAILED:
+      content = <div>{animeError}</div>;
+      break;
+  }
+
+  return <div>{content}</div>;
 }
 
 export default AnimePageItem;

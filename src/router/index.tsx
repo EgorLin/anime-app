@@ -1,5 +1,5 @@
 import { RouteObject } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 
 const Root = lazy(() => import("../pages/Root/Root"));
 const Home = lazy(() => import("../pages/Home/Home"));
@@ -22,11 +22,7 @@ export enum RouteNames {
 export const publicRoutes: RouteObject[] = [
   {
     path: RouteNames.HOME,
-    element: (
-      <Suspense>
-        <Root />
-      </Suspense>
-    ),
+    element: <Root />,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -45,30 +41,18 @@ export const publicRoutes: RouteObject[] = [
   },
   {
     path: RouteNames.LOGIN,
-    element: (
-      <Suspense>
-        <LogIn />
-      </Suspense>
-    ),
+    element: <LogIn />,
   },
   {
     path: RouteNames.SINGUP,
-    element: (
-      <Suspense>
-        <SignUp />
-      </Suspense>
-    ),
+    element: <SignUp />,
   },
 ];
 
 export const privateRoutes: RouteObject[] = [
   {
     path: RouteNames.HOME,
-    element: (
-      <Suspense>
-        <Root />
-      </Suspense>
-    ),
+    element: <Root />,
     errorElement: <ErrorPage />,
     children: [
       {

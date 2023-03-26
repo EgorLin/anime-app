@@ -1,15 +1,13 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import { RequestStatuses } from "../../const/requestStatuses";
 import { IAnimeInfo } from "../../types/IAnimeInfo";
-import { fetchAnimeInfo } from "../ActionCreators";
+import { IRelation } from "../../types/IAnimeRelation";
+import { IDataFetch } from "../../types/IDataFetch";
+import { RootState } from "../store";
 
-interface IAnimeInfoFetch {
-  animeInfo: IAnimeInfo;
-  error: string;
-  isLoading: boolean;
-}
-
-const initialState: IAnimeInfoFetch = {
-  animeInfo: {
+const initialState: IDataFetch<IAnimeInfo> = {
+  data: {
     id: "",
     title: { romaji: "", english: "", native: "" },
     malId: 0,
@@ -55,31 +53,43 @@ const initialState: IAnimeInfoFetch = {
     episodes: [],
   },
   error: "",
-  isLoading: false,
+  status: RequestStatuses.IDLE,
 };
+
+export const fetchAnimeInfo = createAsyncThunk("animeInfo/fetch", async () => {
+  const url = "https://api.consumet.org/meta/anilist/info/16498";
+  const response = await axios.get<IAnimeInfo>(url, {
+    params: { provider: "gogoanime" },
+  });
+  return response.data;
+});
 
 export const AnimeInfoSlice = createSlice({
   name: "animeInfo",
   initialState,
   reducers: {},
-  extraReducers: {
-    [fetchAnimeInfo.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [fetchAnimeInfo.fulfilled.type]: (
-      state,
-      action: PayloadAction<IAnimeInfo>
-    ) => {
-      state.isLoading = false;
-      state.error = "";
-      state.animeInfo = action.payload;
-    },
-
-    [fetchAnimeInfo.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchAnimeInfo.pending, (state) => {
+        state.status = RequestStatuses.LOADING;
+      })
+      .addCase(fetchAnimeInfo.fulfilled, (state, action) => {
+        state.status = RequestStatuses.SUCCEEDED;
+        state.error = "";
+        state.data = action.payload;
+      })
+      .addCase(fetchAnimeInfo.rejected, (state, action) => {
+        state.status = RequestStatuses.FAILED;
+        state.error = action.error.message + "";
+      });
   },
 });
 
 export default AnimeInfoSlice.reducer;
+
+export const selectAnimeInfo = (store: RootState) => store.animeInfo;
+
+export const selectAnimeRelations = (store: RootState): IRelation[] =>
+  store.animeInfo.data.relations.filter((relation) =>
+    relation.type.match(/TV|MOVIE|OVA/)
+  );
