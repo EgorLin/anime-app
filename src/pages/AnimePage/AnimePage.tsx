@@ -1,5 +1,5 @@
 import { ReactElement, useEffect } from "react";
-import { compareRelations } from "../../helpers/compareFunctions";
+import { compareId } from "../../helpers/compareFunctions";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import {
   fetchAnimeInfo,
@@ -18,7 +18,7 @@ function AnimePage(): ReactElement {
   } = useAppSelector(selectAnimeInfo);
   const relations = useAppSelector(
     selectAnimeRelations,
-    compareRelations // to prevent re-renders
+    compareId // to prevent re-renders
   );
 
   useEffect(() => {

@@ -1,4 +1,3 @@
-import { IRelation } from "../types/IAnimeRelation";
 import { IDataFetch } from "../types/IDataFetch";
 
 export function compareStatus<T>(
@@ -8,10 +7,14 @@ export function compareStatus<T>(
   return oldValue.status === newValue.status;
 }
 
+interface IObjectId {
+  id: number | string;
+}
+
 //TODO rewrite with generics
-export function compareRelations(
-  oldValue: IRelation[],
-  newValue: IRelation[]
+export function compareId<T extends IObjectId>(
+  oldValue: Array<T>,
+  newValue: Array<T>
 ): boolean {
   if (oldValue.length !== newValue.length) {
     return false;
