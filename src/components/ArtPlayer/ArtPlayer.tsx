@@ -3,15 +3,22 @@ import { proxyUrl } from "../../const/corsProxy";
 import { RequestStatuses } from "../../const/requestStatuses";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { fetchStreamInfo } from "../../store/reducers/StreamInfoSlice";
+import Spinner from "../UI/Spinner/Spinner";
 import ArtPlayerItem from "./ArtPlayerItem";
 
 interface IProps {
   className?: string;
+  spinnerContainerSize?: string;
   animeId: string;
   poster: string;
 }
 
-function ArtPlayer({ animeId, className, poster }: IProps): ReactElement {
+function ArtPlayer({
+  animeId,
+  className,
+  poster,
+  spinnerContainerSize,
+}: IProps): ReactElement {
   const dispatch = useAppDispatch();
 
   const { data, status, error } = useAppSelector((store) => store.streamInfo);
@@ -26,7 +33,7 @@ function ArtPlayer({ animeId, className, poster }: IProps): ReactElement {
       content = <></>;
       break;
     case RequestStatuses.LOADING:
-      content = <div>loading...</div>;
+      content = <Spinner containerSize={spinnerContainerSize} />;
       break;
     case RequestStatuses.SUCCEEDED:
       content = (

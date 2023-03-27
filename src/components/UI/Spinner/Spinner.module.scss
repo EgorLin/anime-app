@@ -1,0 +1,107 @@
+@use "/src/styles/colors";
+
+$duration: 2s;
+$countSpins: 3;
+
+.container {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg {
+  stroke: colors.$bg-accent;
+  width: 10rem;
+  height: 10rem;
+
+  filter: drop-shadow(0px 0px 2px colors.$bg-accent);
+  & * {
+    transform-box: fill-box;
+  }
+}
+
+.bigPath {
+  animation: rotateBig $duration ease-in-out infinite;
+  transform-origin: left bottom;
+}
+
+.middlePath {
+  animation: rotateMiddle $duration ease-in-out infinite;
+  transform-origin: left bottom;
+}
+
+.smallPath {
+  animation: rotateSmall $duration ease-in-out infinite;
+  transform-origin: left bottom;
+}
+
+@keyframes rotateBig {
+  0% {
+    stroke-dasharray: 1, 27;
+    stroke-dashoffset: -27;
+
+    transform: rotate(0);
+  }
+
+  30%,
+  60% {
+    stroke-dasharray: 27, 27;
+    stroke-dashoffset: 0;
+  }
+
+  80%,
+  100% {
+    stroke-dasharray: 1, 27;
+    stroke-dashoffset: -27;
+
+    transform: rotate(calc($countSpins * 360deg));
+  }
+}
+
+@keyframes rotateMiddle {
+  0%,
+  10% {
+    stroke-dasharray: 1, 27;
+    stroke-dashoffset: -18;
+
+    transform: rotate(0);
+  }
+
+  35%,
+  70% {
+    stroke-dasharray: 27, 27;
+    stroke-dashoffset: 0;
+  }
+
+  90%,
+  100% {
+    stroke-dasharray: 1, 27;
+    stroke-dashoffset: -18;
+
+    transform: rotate(calc($countSpins * -360deg));
+  }
+}
+
+@keyframes rotateSmall {
+  0%,
+  20% {
+    stroke-dasharray: 1, 27;
+    stroke-dashoffset: -9;
+
+    transform: rotate(0);
+  }
+
+  40%,
+  80% {
+    stroke-dasharray: 27, 27;
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dasharray: 1, 27;
+    stroke-dashoffset: -9;
+
+    transform: rotate(calc($countSpins * 360deg));
+  }
+}

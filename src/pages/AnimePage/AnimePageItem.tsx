@@ -5,6 +5,7 @@ import SliderPanel from "../../components/SliderPanel/SliderPanel";
 import EpisodeCard from "../../components/UI/EpisodeCard/EpisodeCard";
 import RecommendationCard from "../../components/UI/RecommendationCard/RecommendationCard";
 import RelationCard from "../../components/UI/RelationCard/RelationCard";
+import Spinner from "../../components/UI/Spinner/Spinner";
 import { RequestStatuses } from "../../const/requestStatuses";
 import { IAnimeEpisode } from "../../types/IAnimeEpisode";
 import { IAnimeInfo } from "../../types/IAnimeInfo";
@@ -41,6 +42,7 @@ function AnimePageItem({
             animeId={animeInfo.episodes[0].id}
             poster={animeInfo.episodes[0].image}
             className={[styles.player, "wrapperM"].join(" ")}
+            spinnerContainerSize={styles.spinnerPlayerSize}
           />
 
           {episodes.length > 0 && (
@@ -90,7 +92,7 @@ function AnimePageItem({
       );
       break;
     case RequestStatuses.LOADING:
-      content = <div>loading...</div>;
+      content = <Spinner containerSize={styles.spinnerHeight} />;
       break;
     case RequestStatuses.FAILED:
       content = <div>{animeError}</div>;
