@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { relationType } from "../../const/animeInfoConsts";
 import { RequestStatuses } from "../../const/requestStatuses";
 import { IAnimeInfo } from "../../types/IAnimeInfo";
 import { IAnimeRelation } from "../../types/IAnimeRelation";
@@ -89,7 +90,10 @@ export default AnimeInfoSlice.reducer;
 
 export const selectAnimeInfo = (store: RootState) => store.animeInfo;
 
-export const selectAnimeRelations = (store: RootState): IAnimeRelation[] =>
-  store.animeInfo.data.relations.filter((relation) =>
-    relation.type.match(/TV|MOVIE|OVA/)
+export const selectAnimeRelations = (store: RootState): IAnimeRelation[] => {
+  const str = `${relationType.TV}|${relationType.MOVIE}|${relationType.OVA}`;
+  const reg = new RegExp(str);
+  return store.animeInfo.data.relations.filter((relation) =>
+    relation.type.match(reg)
   );
+};
