@@ -9,7 +9,7 @@ function Spinner({ containerSize }: IProps): ReactElement {
   return (
     <div className={[styles.container, containerSize].join(" ")}>
       <svg className={styles.svg} viewBox="0 0 38 38">
-        <g fill="none" fill-rule="evenodd">
+        <g fill="none" fillRule="evenodd">
           <g transform="translate(1 1)" strokeWidth="1.4">
             <path className={styles.bigPath} d="M36 18c0-9.94-8.06-18-18-18" />
             <path
