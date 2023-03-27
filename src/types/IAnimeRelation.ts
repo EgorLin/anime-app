@@ -1,6 +1,6 @@
 import { ILanguageTitles } from "./ILanguageTitles";
 
-export interface IRelation {
+export interface IAnimeRelation {
   id: number;
   relationType: string;
   malId: number;

@@ -1,8 +1,8 @@
 import { ICharacter } from "./IAnimeCharacter";
-import { IEpisode } from "./IAnimeEpisode";
+import { IAnimeEpisode } from "./IAnimeEpisode";
 import { IMapping } from "./IAnimeMapping";
-import { IRecommendation } from "./IAnimeRecommendation";
-import { IRelation } from "./IAnimeRelation";
+import { IAnimeRecommendation } from "./IAnimeRecommendation";
+import { IAnimeRelation } from "./IAnimeRelation";
 import { ILanguageTitles } from "./ILanguageTitles";
 
 interface ITrailerInfo {
@@ -43,9 +43,9 @@ export interface IAnimeInfo {
   studios: string[];
   subOrDub: string;
   type: string;
-  recommendations: IRecommendation[];
+  recommendations: IAnimeRecommendation[];
   characters: ICharacter[];
   mappings: IMapping[];
-  relations: IRelation[];
-  episodes: IEpisode[];
+  relations: IAnimeRelation[];
+  episodes: IAnimeEpisode[];
 }

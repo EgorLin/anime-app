@@ -6,17 +6,17 @@ import EpisodeCard from "../../components/UI/EpisodeCard/EpisodeCard";
 import RecommendationCard from "../../components/UI/RecommendationCard/RecommendationCard";
 import RelationCard from "../../components/UI/RelationCard/RelationCard";
 import { RequestStatuses } from "../../const/requestStatuses";
-import { IEpisode } from "../../types/IAnimeEpisode";
+import { IAnimeEpisode } from "../../types/IAnimeEpisode";
 import { IAnimeInfo } from "../../types/IAnimeInfo";
-import { IRecommendation } from "../../types/IAnimeRecommendation";
-import { IRelation } from "../../types/IAnimeRelation";
+import { IAnimeRecommendation } from "../../types/IAnimeRecommendation";
+import { IAnimeRelation } from "../../types/IAnimeRelation";
 import styles from "./AnimePage.module.scss";
 
 interface IProps {
   animeStatus: string;
   animeError: string;
   animeInfo: IAnimeInfo;
-  relations: IRelation[];
+  relations: IAnimeRelation[];
 }
 
 function AnimePageItem({
@@ -25,8 +25,8 @@ function AnimePageItem({
   animeError,
   relations,
 }: IProps): ReactElement {
-  const episodes: IEpisode[] = animeInfo.episodes;
-  const recommendations: IRecommendation[] = animeInfo.recommendations;
+  const episodes: IAnimeEpisode[] = animeInfo.episodes;
+  const recommendations: IAnimeRecommendation[] = animeInfo.recommendations;
 
   let content;
   switch (animeStatus) {

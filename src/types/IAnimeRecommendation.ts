@@ -1,6 +1,6 @@
 import { ILanguageTitles } from "./ILanguageTitles";
 
-export interface IRecommendation {
+export interface IAnimeRecommendation {
   id: number;
   mailId: number;
   title: ILanguageTitles;
