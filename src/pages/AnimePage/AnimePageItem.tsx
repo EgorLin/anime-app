@@ -65,7 +65,9 @@ function AnimePageItem({
               </LazyLoadingContainer>
             </>
           ) : (
-            <p>This anime isn't available for watching. We are sorry</p>
+            <div className={styles.sorry}>
+              This anime isn't available for watching. We are sorry
+            </div>
           )}
 
           {relations.length > 0 && (

@@ -24,7 +24,7 @@ export const publicRoutes: RouteObject[] = [
   {
     path: RouteNames.HOME,
     element: (
-      <Suspense>
+      <Suspense fallback={<Spinner />}>
         <Root />
       </Suspense>
     ),
@@ -41,9 +41,9 @@ export const publicRoutes: RouteObject[] = [
       {
         path: RouteNames.ANITITLE,
         element: (
-          <Suspense fallback={<Spinner />}>
-            <AnimePage />
-          </Suspense>
+          //<Suspense fallback={<Spinner />}>
+          <AnimePage />
+          // </Suspense>
         ),
       },
     ],
