@@ -4,12 +4,7 @@ import { IMapping } from "./IAnimeMapping";
 import { IAnimeRecommendation } from "./IAnimeRecommendation";
 import { IAnimeRelation } from "./IAnimeRelation";
 import { ILanguageTitles } from "./ILanguageTitles";
-
-interface ITrailerInfo {
-  id: string;
-  site: string;
-  thumbnail: string;
-}
+import { ITrailerInfo } from "./ITrailerInfo";
 
 interface IAnimeDate {
   year: number;
