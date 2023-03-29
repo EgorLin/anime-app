@@ -48,4 +48,4 @@ export const AnimeRecentSlice = createSlice({
 
 export default AnimeRecentSlice.reducer;
 
-export const selectAnimeTrending = (store: RootState) => store.animeRecent;
+export const selectAnimeRecent = (store: RootState) => store.animeRecent;
