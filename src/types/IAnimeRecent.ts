@@ -1,5 +1,5 @@
-import { IDataFetch } from "./IDataFetch";
 import { ILanguageTitles } from "./ILanguageTitles";
+import { IPages } from "./IPages";
 
 export interface ISingleAnimeRecent {
   id: string;
@@ -15,4 +15,4 @@ export interface ISingleAnimeRecent {
   type: string;
 }
 
-export interface IAnimeRecent extends IDataFetch<ISingleAnimeRecent> { }
+export interface IAnimeRecent extends IPages<ISingleAnimeRecent> { }
