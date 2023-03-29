@@ -11,7 +11,8 @@ export interface ISingleAnimeTrending {
   description: string;
   status: string;
   cover: string;
-  rating: string;
+  rating: number;
+  releaseDate: number;
   genres: string[];
   totalEpisodes: number;
   duration: number;

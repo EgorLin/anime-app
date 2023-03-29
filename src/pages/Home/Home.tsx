@@ -1,12 +1,20 @@
-import { ReactElement } from "react";
-import Catalog from "../../components/Catalog/Catalog";
-import SliderPanel from "../../components/SliderPanel/SliderPanel";
-import ImageCard from "../../components/UI/ImageCard/ImageCard";
-import VideoCard from "../../components/UI/VideoCard/VideoCard";
+import { ReactElement, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import {
+  fetchAnimeTrending,
+  selectAnimeTrending,
+} from "../../store/reducers/AnimeTrendingSlice";
 import HomeItem from "./HomeItem";
 
 function Home(): ReactElement {
-  return <HomeItem />;
+  const dispatch = useAppDispatch();
+  const trending = useAppSelector(selectAnimeTrending);
+
+  useEffect(() => {
+    dispatch(fetchAnimeTrending());
+  }, []);
+
+  return <HomeItem trending={trending} />;
 }
 
 export default Home;

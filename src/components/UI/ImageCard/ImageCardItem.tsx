@@ -1,27 +1,31 @@
-import Bookmark from '../Bookmark/Bookmark'
-import styles from './ImageCard.module.scss'
+import Bookmark from "../Bookmark/Bookmark";
+import styles from "./ImageCard.module.scss";
 
 interface IProps {
-  id?: string
-  className?: string
+  id: string;
+  title: string;
+  image: string;
+  genres: string[];
+  data: number;
+  className?: string;
 }
 
-function ImageCardItem({ id, className }: IProps) {
+function ImageCardItem({ id, title, image, genres, data, className }: IProps) {
   return (
-    <div id={id} className={[styles.container, className].join(' ')}>
-      <img
-        className={styles.img}
-        src='https://2.bp.blogspot.com/-UAZx3kxPEmA/VrxH1X89yII/AAAAAAAAAEw/-JgxE8GPWXI/s1600/221298.jpg'
-      />
+    <div id={id} className={[styles.container, className].join(" ")}>
+      <img className={styles.img} src={image} alt="" />
       <Bookmark className={styles.bookmark} />
-      <div className={styles.year}>2023</div>
-      <span className={styles.title}>Pipi popo</span>
+      <div className={styles.year}>{data}</div>
+      <span className={styles.title}>{title}</span>
       <div className={styles.genres}>
-        <span className={styles.genre}>Comedy</span>
-        <span className={styles.genre}>Documentary</span>
+        {genres.map((genre) => (
+          <span className={styles.genre} key={genre}>
+            {genre}
+          </span>
+        ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default ImageCardItem
+export default ImageCardItem;
