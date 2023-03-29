@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Bookmark from "../Bookmark/Bookmark";
 import styles from "./ImageCard.module.scss";
 
@@ -11,8 +12,15 @@ interface IProps {
 }
 
 function ImageCardItem({ id, title, image, genres, data, className }: IProps) {
+  const navigate = useNavigate();
+  function handleClick(id: string) {
+    navigate("/anititle/" + id);
+  }
   return (
-    <div id={id} className={[styles.container, className].join(" ")}>
+    <div
+      onClick={() => handleClick(id)}
+      className={[styles.container, className].join(" ")}
+    >
       <img className={styles.img} src={image} alt="" />
       <Bookmark className={styles.bookmark} />
       <div className={styles.year}>{data}</div>

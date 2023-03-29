@@ -1,4 +1,5 @@
 import { ReactElement, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { compareId } from "../../helpers/compareFunctions";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import {
@@ -10,6 +11,7 @@ import AnimePageItem from "./AnimePageItem";
 
 function AnimePage(): ReactElement {
   const dispatch = useAppDispatch();
+  const { id } = useParams();
 
   const {
     data: animeInfo,
@@ -22,7 +24,7 @@ function AnimePage(): ReactElement {
   );
 
   useEffect(() => {
-    dispatch(fetchAnimeInfo());
+    dispatch(fetchAnimeInfo(String(id)));
   }, []);
 
   return (

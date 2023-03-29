@@ -14,20 +14,22 @@ function DetailsItem({ animeInfo }: IProps): ReactElement {
     <div className={styles.container}>
       <img src={animeInfo.cover} alt="" />
       <div className={[styles.content, "wrapperM"].join(" ")}>
-        <div>
-          <NavLink
-            to={
-              "https://www." +
-              animeInfo?.trailer.site +
-              ".com/watch?v=" +
-              animeInfo?.trailer.id
-            }
-            target="_blank"
-            className={styles.trailerContainer}
-          >
-            <PlayIcon className={styles.trailerIcon} /> <span>Trailer</span>
-          </NavLink>
-        </div>
+        {animeInfo.trailer && (
+          <div>
+            <NavLink
+              to={
+                "https://www." +
+                animeInfo?.trailer.site +
+                ".com/watch?v=" +
+                animeInfo?.trailer.id
+              }
+              target="_blank"
+              className={styles.trailerContainer}
+            >
+              <PlayIcon className={styles.trailerIcon} /> <span>Trailer</span>
+            </NavLink>
+          </div>
+        )}
         <h1>{animeInfo?.title.english}</h1>
         <div className={styles.shortDetails}>
           <span className={styles.rating}>

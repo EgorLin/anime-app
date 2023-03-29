@@ -36,30 +36,36 @@ function AnimePageItem({
       content = <></>;
       break;
     case RequestStatuses.SUCCEEDED:
+      console.log(animeInfo);
       content = (
         <div>
           <Details animeInfo={animeInfo} />
-          <ArtPlayer
-            animeId={animeInfo.episodes[0].id}
-            poster={animeInfo.episodes[0].image}
-            className={[styles.player, "wrapperM"].join(" ")}
-            spinnerContainerSize={styles.spinnerPlayerSize}
-          />
 
-          {episodes.length > 0 && (
-            <LazyLoadingContainer>
-              <SliderPanel
-                title="Episodes"
-                elements={episodes.map((episode) => (
-                  <EpisodeCard
-                    id={episode.id}
-                    title={episode.title}
-                    number={episode.number}
-                    image={episode.image}
-                  />
-                ))}
+          {episodes.length > 0 ? (
+            <>
+              <ArtPlayer
+                animeId={episodes[0].id}
+                poster={episodes[0].image}
+                className={[styles.player, "wrapperM"].join(" ")}
+                spinnerContainerSize={styles.spinnerPlayerSize}
               />
-            </LazyLoadingContainer>
+
+              <LazyLoadingContainer>
+                <SliderPanel
+                  title="Episodes"
+                  elements={episodes.map((episode) => (
+                    <EpisodeCard
+                      id={episode.id}
+                      title={episode.title}
+                      number={episode.number}
+                      image={episode.image}
+                    />
+                  ))}
+                />
+              </LazyLoadingContainer>
+            </>
+          ) : (
+            <p>This anime isn't available for watching. We are sorry</p>
           )}
 
           {relations.length > 0 && (

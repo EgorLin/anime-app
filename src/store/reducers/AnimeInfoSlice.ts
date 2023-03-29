@@ -57,13 +57,16 @@ const initialState: IDataFetch<IAnimeInfo> = {
   status: RequestStatuses.IDLE,
 };
 
-export const fetchAnimeInfo = createAsyncThunk("animeInfo/fetch", async () => {
-  const url = "https://api.consumet.org/meta/anilist/info/16498";
-  const response = await axios.get<IAnimeInfo>(url, {
-    params: { provider: "gogoanime" },
-  });
-  return response.data;
-});
+export const fetchAnimeInfo = createAsyncThunk(
+  "animeInfo/fetch",
+  async (id: string = "1") => {
+    const url = "https://api.consumet.org/meta/anilist/info/" + id;
+    const response = await axios.get<IAnimeInfo>(url, {
+      params: { provider: "gogoanime" },
+    });
+    return response.data;
+  }
+);
 
 export const AnimeInfoSlice = createSlice({
   name: "animeInfo",

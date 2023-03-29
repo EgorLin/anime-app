@@ -1,5 +1,6 @@
 import { RouteObject } from "react-router-dom";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
+import Spinner from "../components/UI/Spinner/Spinner";
 
 const Root = lazy(() => import("../pages/Root/Root"));
 const Home = lazy(() => import("../pages/Home/Home"));
@@ -22,7 +23,11 @@ export enum RouteNames {
 export const publicRoutes: RouteObject[] = [
   {
     path: RouteNames.HOME,
-    element: <Root />,
+    element: (
+      <Suspense>
+        <Root />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
@@ -35,7 +40,11 @@ export const publicRoutes: RouteObject[] = [
       },
       {
         path: RouteNames.ANITITLE,
-        element: <AnimePage />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <AnimePage />
+          </Suspense>
+        ),
       },
     ],
   },
