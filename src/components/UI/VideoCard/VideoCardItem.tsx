@@ -6,26 +6,34 @@ import styles from "./VideoCard.module.scss";
 
 interface IProps {
   id?: string;
+  title?: string;
+  image?: string;
+  lastEpisode?: string;
+  genres?: string[];
   className?: string;
 }
 
-function VideoCardItem({ id, className }: IProps): ReactElement {
+function VideoCardItem({
+  id,
+  title,
+  image,
+  lastEpisode,
+  genres,
+  className,
+}: IProps): ReactElement {
   return (
-    <div id={id} className={[styles.container, className].join(" ")}>
+    <div className={[styles.container, className].join(" ")}>
       <div className={styles.imageContainer}>
         <PlayIcon className={styles.playButton} />
-        <img
-          className={styles.img}
-          src="https://2.bp.blogspot.com/-UAZx3kxPEmA/VrxH1X89yII/AAAAAAAAAEw/-JgxE8GPWXI/s1600/221298.jpg"
-          alt=""
-        />
+        <img className={styles.img} src={image} alt="" />
       </div>
       <Bookmark className={styles.bookmark} />
-      <EpisodeBox className={styles.lastEpisode}>12</EpisodeBox>
-      <span className={styles.title}>Pipi popo</span>
+      <EpisodeBox className={styles.lastEpisode}>{lastEpisode}</EpisodeBox>
+      <span className={styles.title}>{title}</span>
       <span className={styles.genres}>
-        <span className={styles.genre}>Comedy</span>
-        <span className={styles.genre}>Documentary</span>
+        {genres?.map((genre) => (
+          <span className={styles.genre}>{genre}</span>
+        ))}
       </span>
     </div>
   );

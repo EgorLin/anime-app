@@ -5,15 +5,16 @@ import ImageCard from "../../components/UI/ImageCard/ImageCard";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import VideoCard from "../../components/UI/VideoCard/VideoCard";
 import { RequestStatuses } from "../../const/requestStatuses";
+import { IAnimeRecent } from "../../types/IAnimeRecent";
 import { IAnimeTrending } from "../../types/IAnimeTrending";
 import { IDataFetch } from "../../types/IDataFetch";
 
 interface IProps {
   trending: IDataFetch<IAnimeTrending>;
+  recent: IDataFetch<IAnimeRecent>;
 }
 
-function HomeItem({ trending }: IProps): ReactElement {
-  console.log(trending.data.results);
+function HomeItem({ trending, recent }: IProps): ReactElement {
   let trendingContent;
   switch (trending.status) {
     case RequestStatuses.IDLE:
@@ -46,27 +47,42 @@ function HomeItem({ trending }: IProps): ReactElement {
       trendingContent = <div>{trending.error}</div>;
       break;
   }
+
+  let recentContent;
+  switch (recent.status) {
+    case RequestStatuses.IDLE:
+      recentContent = <></>;
+      break;
+    case RequestStatuses.LOADING:
+      recentContent = (
+        <div>
+          <Spinner />
+        </div>
+      );
+      break;
+    case RequestStatuses.SUCCEEDED:
+      recentContent = (
+        <Catalog
+          title="Recent releases"
+          elements={recent.data.results.map((anime) => (
+            <VideoCard
+              id={anime.id}
+              title={anime.title.english}
+              image={anime.image}
+              genres={anime.genres}
+              lastEpisode={anime.episodeNumber}
+            />
+          ))}
+        />
+      );
+      break;
+    case RequestStatuses.FAILED:
+      recentContent = <div>{recent.error}</div>;
+      break;
+  }
   return (
     <div>
-      {trendingContent}
-      <Catalog
-        title="Recent releases"
-        elements={[
-          <VideoCard />,
-          <VideoCard />,
-          <VideoCard />,
-          <VideoCard />,
-          <VideoCard />,
-          <VideoCard />,
-          <VideoCard />,
-          <VideoCard />,
-          <VideoCard />,
-          <VideoCard />,
-          <VideoCard />,
-          <VideoCard />,
-          <VideoCard />,
-        ]}
-      />
+      {trendingContent} {recentContent}
     </div>
   );
 }

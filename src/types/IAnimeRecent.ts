@@ -11,7 +11,7 @@ export interface ISingleAnimeRecent {
   episodeId: string;
   episodeTitle: string;
   episodeNumber: string;
-  genres: string;
+  genres: string[];
   type: string;
 }
 
