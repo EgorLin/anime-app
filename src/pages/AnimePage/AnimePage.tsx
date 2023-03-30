@@ -25,7 +25,7 @@ function AnimePage(): ReactElement {
 
   useEffect(() => {
     dispatch(fetchAnimeInfo(String(id)));
-  }, []);
+  }, [id]);
 
   return (
     <AnimePageItem

@@ -3,9 +3,9 @@ import ArtPlayer from "../../components/ArtPlayer/ArtPlayer";
 import Details from "../../components/Details/Details";
 import LazyLoadingContainer from "../../components/LazyLoadingContainer/LazyLoadingContainer";
 import SliderPanel from "../../components/SliderPanel/SliderPanel";
+import RecommendationCard from "../../components/UI/Cards/RecommendationCard/RecommendationCard";
 import RelationCard from "../../components/UI/Cards/RelationCard/RelationCard";
 import EpisodeCard from "../../components/UI/EpisodeCard/EpisodeCard";
-import RecommendationCard from "../../components/UI/RecommendationCard/RecommendationCard";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import { RequestStatuses } from "../../const/requestStatuses";
 import { IAnimeEpisode } from "../../types/IAnimeEpisode";
@@ -29,14 +29,13 @@ function AnimePageItem({
 }: IProps): ReactElement {
   const episodes: IAnimeEpisode[] = animeInfo.episodes;
   const recommendations: IAnimeRecommendation[] = animeInfo.recommendations;
-
+  console.log(animeInfo);
   let content;
   switch (animeStatus) {
     case RequestStatuses.IDLE:
       content = <></>;
       break;
     case RequestStatuses.SUCCEEDED:
-      console.log(animeInfo);
       content = (
         <div>
           <Details animeInfo={animeInfo} />
@@ -93,8 +92,8 @@ function AnimePageItem({
                 title="Recommendations"
                 elements={recommendations.map((recommendation) => (
                   <RecommendationCard
-                    id={recommendation.id + ""}
-                    title={recommendation.title.english}
+                    id={recommendation.id}
+                    title={recommendation.title}
                     type={recommendation.type}
                     image={recommendation.image}
                     rating={recommendation.rating}

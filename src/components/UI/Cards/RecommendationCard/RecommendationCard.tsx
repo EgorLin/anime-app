@@ -1,6 +1,8 @@
 import { ReactElement } from "react";
 import useNavigateAnime from "../../../../hooks/useNavigateAnime";
 import { ILanguageTitles } from "../../../../types/ILanguageTitles";
+import StarIcon from "../../StarIcon/StarIcon";
+import YearWindow from "../../YearWindow/YearWindow";
 import EmptyCard, { CardSizes } from "../EmptyCard/EmptyCard";
 
 interface IProps {
@@ -8,24 +10,26 @@ interface IProps {
   id: number;
   image: string;
   type: string;
-  relationType: string;
+  rating: number;
 }
 
-function RelationCard({
+function RecommendationCard({
   title,
   id,
   image,
   type,
-  relationType,
+  rating,
 }: IProps): ReactElement {
   const openAnime = useNavigateAnime(id);
-  const list = [type, relationType];
-  // if (type) {
-  //   list.push(type);
-  // }
-  // if (relationType) {
-  //   list.push(relationType);
-  // }
+  const ratingWindow = (
+    <YearWindow roundedCorners>
+      <StarIcon /> {rating}
+    </YearWindow>
+  );
+  const list = [];
+  if (type) {
+    list.push(type);
+  }
 
   return (
     <EmptyCard
@@ -35,9 +39,10 @@ function RelationCard({
       title={title}
       image={image}
       list={list}
+      rightCornerContent={ratingWindow}
       onClick={openAnime}
     />
   );
 }
 
-export default RelationCard;
+export default RecommendationCard;

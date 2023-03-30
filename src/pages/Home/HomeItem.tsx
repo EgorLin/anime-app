@@ -1,12 +1,9 @@
 import { ReactElement } from "react";
 import Catalog from "../../components/Catalog/Catalog";
 import SliderPanel from "../../components/SliderPanel/SliderPanel";
-import EmptyCard from "../../components/UI/Cards/EmptyCard/EmptyCard";
 import RecentCard from "../../components/UI/Cards/RecentCard/RecentCard";
 import TrendingCard from "../../components/UI/Cards/TrendingCard/TrendingCard";
-import ImageCard from "../../components/UI/ImageCard/ImageCard";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import VideoCard from "../../components/UI/VideoCard/VideoCard";
 import { RequestStatuses } from "../../const/requestStatuses";
 import { IAnimeRecent } from "../../types/IAnimeRecent";
 import { IAnimeTrending } from "../../types/IAnimeTrending";
