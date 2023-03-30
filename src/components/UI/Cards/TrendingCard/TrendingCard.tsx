@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { useNavigate } from "react-router-dom";
+import useNavigateAnime from "../../../../hooks/useNavigateAnime";
 import { ILanguageTitles } from "../../../../types/ILanguageTitles";
 import YearWindow from "../../YearWindow/YearWindow";
 import EmptyCard, { CardSizes } from "../EmptyCard/EmptyCard";
@@ -19,11 +19,8 @@ function TrendingCard({
   genres,
   date,
 }: IProps): ReactElement {
-  const dateWindow = <YearWindow>{date}</YearWindow>;
-  const navigate = useNavigate();
-  function openAnime(): void {
-    navigate("/anititle/" + id);
-  }
+  const dateWindow = date ? <YearWindow>{date}</YearWindow> : null;
+  const openAnime = useNavigateAnime(id);
 
   return (
     <EmptyCard

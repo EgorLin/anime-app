@@ -3,9 +3,9 @@ import ArtPlayer from "../../components/ArtPlayer/ArtPlayer";
 import Details from "../../components/Details/Details";
 import LazyLoadingContainer from "../../components/LazyLoadingContainer/LazyLoadingContainer";
 import SliderPanel from "../../components/SliderPanel/SliderPanel";
+import RelationCard from "../../components/UI/Cards/RelationCard/RelationCard";
 import EpisodeCard from "../../components/UI/EpisodeCard/EpisodeCard";
 import RecommendationCard from "../../components/UI/RecommendationCard/RecommendationCard";
-import RelationCard from "../../components/UI/RelationCard/RelationCard";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import { RequestStatuses } from "../../const/requestStatuses";
 import { IAnimeEpisode } from "../../types/IAnimeEpisode";
@@ -76,8 +76,8 @@ function AnimePageItem({
                 title="Relations"
                 elements={relations.map((relation) => (
                   <RelationCard
-                    id={relation.id + ""}
-                    title={relation.title.english}
+                    id={relation.id}
+                    title={relation.title}
                     type={relation.type}
                     image={relation.image}
                     relationType={relation.relationType}

@@ -14,7 +14,8 @@ const Profile = lazy(() => import("../pages/Profile/Profile"));
 export enum RouteNames {
   HOME = "/",
   SEARCH = "/search",
-  ANITITLE = "/anititle/:id",
+  ANITITLE = "/anititle/",
+  ANITITLE_DIRTY = "/anititle/:id",
   LOGIN = "/login",
   SINGUP = "/signup",
   PROFILE = "/profile",
@@ -39,12 +40,8 @@ export const publicRoutes: RouteObject[] = [
         element: <Search />,
       },
       {
-        path: RouteNames.ANITITLE,
-        element: (
-          //<Suspense fallback={<Spinner />}>
-          <AnimePage />
-          // </Suspense>
-        ),
+        path: RouteNames.ANITITLE_DIRTY,
+        element: <AnimePage />,
       },
     ],
   },

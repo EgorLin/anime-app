@@ -6,36 +6,39 @@ import EmptyCard, { CardSizes } from "../EmptyCard/EmptyCard";
 
 interface IProps {
   title: ILanguageTitles;
-  id: string;
+  id: number;
   image: string;
-  genres: string[];
-  lastEpisode: string;
+  type: string;
+  relationType: string;
 }
 
-function RecentCard({
+function RelationCard({
   title,
   id,
   image,
-  genres,
-  lastEpisode,
+  type,
+  relationType,
 }: IProps): ReactElement {
-  const episodeWindow = lastEpisode ? (
-    <EpisodeBox>{lastEpisode}</EpisodeBox>
-  ) : null;
   const openAnime = useNavigateAnime(id);
+  const list = [];
+  if (type) {
+    list.push(type);
+  }
+  if (relationType) {
+    list.push(relationType);
+  }
 
   return (
     <EmptyCard
-      imageSize={CardSizes.AUTO}
+      imageSize={CardSizes.SMALL}
       hasBookmark
       hasPlayButton
       title={title}
       image={image}
-      list={genres}
+      list={list}
       onClick={openAnime}
-      rightCornerContent={episodeWindow}
     />
   );
 }
 
-export default RecentCard;
+export default RelationCard;
