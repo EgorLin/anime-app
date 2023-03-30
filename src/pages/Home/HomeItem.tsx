@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 import Catalog from "../../components/Catalog/Catalog";
 import SliderPanel from "../../components/SliderPanel/SliderPanel";
 import EmptyCard from "../../components/UI/Cards/EmptyCard/EmptyCard";
+import RecentCard from "../../components/UI/Cards/RecentCard/RecentCard";
 import TrendingCard from "../../components/UI/Cards/TrendingCard/TrendingCard";
 import ImageCard from "../../components/UI/ImageCard/ImageCard";
 import Spinner from "../../components/UI/Spinner/Spinner";
@@ -67,10 +68,10 @@ function HomeItem({ trending, recent }: IProps): ReactElement {
         <Catalog
           title="Recent releases"
           elements={recent.data.results.map((anime) => (
-            <VideoCard
+            <RecentCard
               key={anime.id}
               id={anime.id}
-              title={anime.title.english}
+              title={anime.title}
               image={anime.image}
               genres={anime.genres}
               lastEpisode={anime.episodeNumber}
