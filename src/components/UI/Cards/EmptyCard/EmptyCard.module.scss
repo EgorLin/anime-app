@@ -73,6 +73,10 @@
   @include transitions.default(all);
 }
 
+.visibleRightCorner {
+  opacity: 1;
+}
+
 .wideSize {
   min-width: 40rem;
   aspect-ratio: 4/3;

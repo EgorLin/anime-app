@@ -96,7 +96,6 @@ export const selectAnimeInfo = (store: RootState) => store.animeInfo;
 export const selectAnimeRelations = (store: RootState): IAnimeRelation[] => {
   const str = `${relationType.TV}|${relationType.MOVIE}|${relationType.OVA}`;
   const reg = new RegExp(str);
-  return store.animeInfo.data.relations.filter((relation) =>
-    relation.type.match(reg)
-  );
+  const relations = store.animeInfo.data.relations;
+  return relations.filter((relation) => relation.type?.match(reg));
 };

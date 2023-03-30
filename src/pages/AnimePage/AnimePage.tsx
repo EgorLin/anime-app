@@ -22,6 +22,7 @@ function AnimePage(): ReactElement {
     selectAnimeRelations,
     compareId // to prevent re-renders
   );
+  // const relations = animeInfo.relations;
 
   useEffect(() => {
     dispatch(fetchAnimeInfo(String(id)));

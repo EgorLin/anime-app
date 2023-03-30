@@ -25,7 +25,7 @@ function ArtPlayer({
 
   useEffect(() => {
     dispatch(fetchStreamInfo(animeId));
-  }, []);
+  }, [animeId]);
 
   let content;
   switch (status) {

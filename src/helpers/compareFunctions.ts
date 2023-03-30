@@ -11,7 +11,6 @@ interface IObjectId {
   id: number | string;
 }
 
-//TODO rewrite with generics
 export function compareId<T extends IObjectId>(
   oldValue: Array<T>,
   newValue: Array<T>

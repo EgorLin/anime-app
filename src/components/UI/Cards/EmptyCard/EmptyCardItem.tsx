@@ -9,6 +9,7 @@ interface IProps {
   hasBookmark: boolean;
   hasPlayButton: boolean;
   rightCornerContent: ReactElement | null;
+  visibleRightCorner: boolean;
   title: string;
   image: string;
   list: string[];
@@ -21,6 +22,7 @@ function EmptyCardItem({
   hasBookmark,
   hasPlayButton,
   rightCornerContent,
+  visibleRightCorner,
   list,
   title,
   image,
@@ -42,7 +44,14 @@ function EmptyCardItem({
       </div>
 
       {hasBookmark && <Bookmark className={styles.bookmark} />}
-      <div className={styles.rightCornerContent}>{rightCornerContent}</div>
+      <div
+        className={[
+          styles.rightCornerContent,
+          visibleRightCorner ? styles.visibleRightCorner : null,
+        ].join(" ")}
+      >
+        {rightCornerContent}
+      </div>
       <div className={isMainContentIn ? styles.contentIn : styles.contentOut}>
         <span className={styles.title}>{title}</span>
         <div className={styles.list}>
