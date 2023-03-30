@@ -1,0 +1,17 @@
+@use "/src/styles/colors";
+@use "/src/styles/mixins/transitions";
+
+.year {
+  width: 5rem;
+  height: 3rem;
+  border: 0.2rem solid colors.$bg-accent;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+
+  @include transitions.default(all);
+
+  background: colors.$bg-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

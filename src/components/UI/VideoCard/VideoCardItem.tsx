@@ -32,7 +32,9 @@ function VideoCardItem({
       <span className={styles.title}>{title}</span>
       <span className={styles.genres}>
         {genres?.map((genre) => (
-          <span className={styles.genre}>{genre}</span>
+          <span key={genre} className={styles.genre}>
+            {genre}
+          </span>
         ))}
       </span>
     </div>

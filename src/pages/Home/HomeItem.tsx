@@ -1,6 +1,8 @@
 import { ReactElement } from "react";
 import Catalog from "../../components/Catalog/Catalog";
 import SliderPanel from "../../components/SliderPanel/SliderPanel";
+import EmptyCard from "../../components/UI/Cards/EmptyCard/EmptyCard";
+import TrendingCard from "../../components/UI/Cards/TrendingCard/TrendingCard";
 import ImageCard from "../../components/UI/ImageCard/ImageCard";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import VideoCard from "../../components/UI/VideoCard/VideoCard";
@@ -31,13 +33,13 @@ function HomeItem({ trending, recent }: IProps): ReactElement {
       trendingContent = (
         <SliderPanel
           elements={trending.data.results.map((result) => (
-            <ImageCard
+            <TrendingCard
               key={result.id}
-              title={result.title.english}
               id={result.id}
+              title={result.title}
               image={result.image}
               genres={result.genres}
-              data={result.releaseDate}
+              date={result.releaseDate}
             />
           ))}
         />
@@ -66,6 +68,7 @@ function HomeItem({ trending, recent }: IProps): ReactElement {
           title="Recent releases"
           elements={recent.data.results.map((anime) => (
             <VideoCard
+              key={anime.id}
               id={anime.id}
               title={anime.title.english}
               image={anime.image}
