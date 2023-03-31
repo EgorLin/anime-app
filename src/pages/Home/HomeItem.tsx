@@ -15,17 +15,14 @@ interface IProps {
 }
 
 function HomeItem({ trending, recent }: IProps): ReactElement {
+  const isLoading =
+    trending.status === RequestStatuses.LOADING ||
+    recent.status === RequestStatuses.LOADING;
+
   let trendingContent;
   switch (trending.status) {
     case RequestStatuses.IDLE:
       trendingContent = <></>;
-      break;
-    case RequestStatuses.LOADING:
-      trendingContent = (
-        <div>
-          <Spinner />
-        </div>
-      );
       break;
     case RequestStatuses.SUCCEEDED:
       trendingContent = (
@@ -53,20 +50,13 @@ function HomeItem({ trending, recent }: IProps): ReactElement {
     case RequestStatuses.IDLE:
       recentContent = <></>;
       break;
-    case RequestStatuses.LOADING:
-      recentContent = (
-        <div>
-          <Spinner />
-        </div>
-      );
-      break;
     case RequestStatuses.SUCCEEDED:
       recentContent = (
         <Catalog
           title="Recent releases"
           elements={recent.data.results.map((anime) => (
             <RecentCard
-              key={anime.id}
+              key={anime.id + anime.episodeNumber}
               id={anime.id}
               title={anime.title}
               image={anime.image}
@@ -83,7 +73,13 @@ function HomeItem({ trending, recent }: IProps): ReactElement {
   }
   return (
     <div>
-      {trendingContent} {recentContent}
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          {trendingContent} {recentContent}
+        </>
+      )}
     </div>
   );
 }
