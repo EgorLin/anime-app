@@ -3,11 +3,25 @@ import EmptySliderPanelItem from "./EmptySliderPanelItem";
 
 interface IProps {
   title?: string;
-  elements: ReactNode[] | undefined;
+  status: string;
+  error: string;
+  elements: ReactNode[];
 }
 
-function EmptySliderPanel({ title, elements }: IProps): ReactElement {
-  return <EmptySliderPanelItem title={title} elements={elements} />;
+function EmptySliderPanel({
+  title,
+  elements,
+  status,
+  error,
+}: IProps): ReactElement {
+  return (
+    <EmptySliderPanelItem
+      title={title}
+      elements={elements}
+      status={status}
+      error={error}
+    />
+  );
 }
 
 export default EmptySliderPanel;

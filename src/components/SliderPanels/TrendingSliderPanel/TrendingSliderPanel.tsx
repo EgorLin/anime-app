@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
-import { RequestStatuses } from "../../../const/requestStatuses";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import {
   fetchAnimeTrending,
   selectAnimeTrending,
 } from "../../../store/reducers/AnimeTrendingSlice";
 import TrendingCard from "../../UI/Cards/TrendingCard/TrendingCard";
-import Spinner from "../../UI/Spinner/Spinner";
 import EmptySliderPanel from "../EmptySliderPanel/EmptySliderPanel";
 
 function TrendingSliderPanel() {
@@ -17,35 +15,22 @@ function TrendingSliderPanel() {
     dispatch(fetchAnimeTrending());
   }, []);
 
-  let trendingContent;
-  switch (trending.status) {
-    case RequestStatuses.IDLE:
-      trendingContent = <></>;
-      break;
-    case RequestStatuses.LOADING:
-      trendingContent = <Spinner />;
-      break;
-    case RequestStatuses.SUCCEEDED:
-      trendingContent = (
-        <EmptySliderPanel
-          elements={trending.data.results.map((result) => (
-            <TrendingCard
-              key={result.id}
-              id={result.id}
-              title={result.title}
-              image={result.image}
-              genres={result.genres}
-              date={result.releaseDate}
-            />
-          ))}
+  return (
+    <EmptySliderPanel
+      status={trending.status}
+      error={trending.error}
+      elements={trending.data.results.map((result) => (
+        <TrendingCard
+          key={result.id}
+          id={result.id}
+          title={result.title}
+          image={result.image}
+          genres={result.genres}
+          date={result.releaseDate}
         />
-      );
-      break;
-    case RequestStatuses.FAILED:
-      trendingContent = <div>{trending.error}</div>;
-      break;
-  }
-  return <div>{trendingContent}</div>;
+      ))}
+    />
+  );
 }
 
 export default TrendingSliderPanel;
