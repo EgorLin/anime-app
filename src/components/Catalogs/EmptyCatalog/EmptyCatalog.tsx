@@ -1,5 +1,4 @@
-import { ReactElement, useEffect, useRef, useState } from "react";
-import { RequestStatuses } from "../../../const/requestStatuses";
+import { ReactElement } from "react";
 import { useObserver } from "../../../hooks/useObserver";
 import EmptyCatalogItem from "./EmptyCatalogItem";
 
@@ -20,7 +19,6 @@ function EmptyCatalog({
   error,
   handleTrigger,
 }: IProps): ReactElement {
-  console.log(status);
   const target = useObserver(() => {
     handleTrigger();
   }, status);

@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import {
   fetchAnimeRecent,
@@ -12,11 +12,11 @@ function RecentReleasesCatalog(): ReactElement {
   const recent = useAppSelector(selectAnimeRecent);
   const [currentPage, setCurrentPage] = useState(1);
 
-  function changePage() {
+  const changePage = useCallback(() => {
     if (recent.data.hasNextPage) {
       setCurrentPage((CP) => CP + 1);
     }
-  }
+  }, [recent.data.hasNextPage]);
 
   useEffect(() => {
     dispatch(fetchAnimeRecent(currentPage));

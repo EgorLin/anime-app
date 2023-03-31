@@ -1,24 +1,8 @@
-import { ReactElement, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import {
-  fetchAnimeRecent,
-  selectAnimeRecent,
-} from "../../store/reducers/AnimeRecentSlice";
-import {
-  fetchAnimeTrending,
-  selectAnimeTrending,
-} from "../../store/reducers/AnimeTrendingSlice";
+import { ReactElement } from "react";
 import HomeItem from "./HomeItem";
 
 function Home(): ReactElement {
-  const dispatch = useAppDispatch();
-  const trending = useAppSelector(selectAnimeTrending);
-
-  useEffect(() => {
-    dispatch(fetchAnimeTrending());
-  }, []);
-
-  return <HomeItem trending={trending} />;
+  return <HomeItem />;
 }
 
 export default Home;
