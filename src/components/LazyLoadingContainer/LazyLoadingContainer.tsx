@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useRef, useState } from "react";
+import { ReactElement, useState } from "react";
 import { useObserver } from "../../hooks/useObserver";
 import styles from "./LazyLoadingContainer.module.scss";
 

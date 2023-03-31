@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RequestStatuses } from "../../const/requestStatuses";
+import { hostUrl, UrlPaths } from "../../const/urlConsts";
 import { IAnimeTrending } from "../../types/IAnimeTrending";
 import { IDataFetch } from "../../types/IDataFetch";
 import { RootState } from "../store";
@@ -18,7 +19,7 @@ const initialState: IDataFetch<IAnimeTrending> = {
 export const fetchAnimeTrending = createAsyncThunk(
   "animeTrending/fetch",
   async () => {
-    const url = "https://api.consumet.org/meta/anilist/trending";
+    const url = hostUrl + UrlPaths.TRENDING;
     const response = await axios.get<IAnimeTrending>(url);
     return response.data;
   }

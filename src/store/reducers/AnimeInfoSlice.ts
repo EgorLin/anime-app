@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { relationType } from "../../const/animeInfoConsts";
 import { RequestStatuses } from "../../const/requestStatuses";
+import { hostUrl, UrlPaths } from "../../const/urlConsts";
 import { IAnimeInfo } from "../../types/IAnimeInfo";
 import { IAnimeRelation } from "../../types/IAnimeRelation";
 import { IDataFetch } from "../../types/IDataFetch";
@@ -60,7 +61,7 @@ const initialState: IDataFetch<IAnimeInfo> = {
 export const fetchAnimeInfo = createAsyncThunk(
   "animeInfo/fetch",
   async (id: string = "1") => {
-    const url = "https://api.consumet.org/meta/anilist/info/" + id;
+    const url = hostUrl + UrlPaths.INFO + id;
     const response = await axios.get<IAnimeInfo>(url, {
       params: { provider: "gogoanime" },
     });

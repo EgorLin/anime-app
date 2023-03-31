@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RequestStatuses } from "../../const/requestStatuses";
+import { hostUrl, UrlPaths } from "../../const/urlConsts";
 import { IDataFetch } from "../../types/IDataFetch";
 import { IStreamInfo } from "../../types/IStreamInfo";
 
@@ -17,9 +18,7 @@ const initialState: IDataFetch<IStreamInfo> = {
 export const fetchStreamInfo = createAsyncThunk(
   "streamInfo/fetch",
   async (animeId: string) => {
-    const url =
-      // "https://api.consumet.org/meta/anilist/watch/chainsaw-man-episode-1";
-      "https://api.consumet.org/meta/anilist/watch/" + animeId;
+    const url = hostUrl + UrlPaths.STREAM + animeId;
     const response = await axios.get<IStreamInfo>(url);
     return response.data;
   }
