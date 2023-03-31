@@ -5,7 +5,4 @@ export enum UrlPaths {
   STREAM = "/watch/",
   RECENT = "/recent-episodes",
   INFO = "/info/",
-  LOGIN = "/login",
-  SINGUP = "/signup",
-  PROFILE = "/profile",
 }

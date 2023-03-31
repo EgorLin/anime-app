@@ -20,9 +20,13 @@ const initialState: IDataFetch<IAnimeRecent> = {
 
 export const fetchAnimeRecent = createAsyncThunk(
   "animeRecent/fetch",
-  async () => {
+  async (page: number) => {
     const url = hostUrl + UrlPaths.RECENT;
-    const response = await axios.get<IAnimeRecent>(url);
+    const response = await axios.get<IAnimeRecent>(url, {
+      params: {
+        page: page,
+      },
+    });
     return response.data;
   }
 );
@@ -38,7 +42,10 @@ export const AnimeRecentSlice = createSlice({
       })
       .addCase(fetchAnimeRecent.fulfilled, (state, action) => {
         state.status = RequestStatuses.SUCCEEDED;
-        state.data = action.payload;
+        state.data = {
+          ...action.payload,
+          results: state.data.results.concat(action.payload.results),
+        };
       })
       .addCase(fetchAnimeRecent.rejected, (state, action) => {
         state.status = RequestStatuses.FAILED;

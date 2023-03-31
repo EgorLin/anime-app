@@ -1,6 +1,6 @@
 import { ReactElement, useState } from "react";
 import { useObserver } from "../../hooks/useObserver";
-import styles from "./LazyLoadingContainer.module.scss";
+import Trigger from "../UI/Trigger/Trigger";
 
 interface IProps {
   children: ReactElement;
@@ -9,14 +9,11 @@ interface IProps {
 function LazyLoadingContainer({ children }: IProps): ReactElement {
   const [isIntersected, setIsIntersected] = useState(false);
 
-  const trigger = useObserver(() => {
+  const target = useObserver(() => {
     setIsIntersected(true);
   });
-  return isIntersected ? (
-    children
-  ) : (
-    <div ref={trigger} className={styles.trigger}></div>
-  );
+
+  return isIntersected ? children : <Trigger target={target} />;
 }
 
 export default LazyLoadingContainer;

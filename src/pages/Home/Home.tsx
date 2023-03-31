@@ -13,14 +13,12 @@ import HomeItem from "./HomeItem";
 function Home(): ReactElement {
   const dispatch = useAppDispatch();
   const trending = useAppSelector(selectAnimeTrending);
-  const recent = useAppSelector(selectAnimeRecent);
 
   useEffect(() => {
     dispatch(fetchAnimeTrending());
-    dispatch(fetchAnimeRecent());
   }, []);
 
-  return <HomeItem trending={trending} recent={recent} />;
+  return <HomeItem trending={trending} />;
 }
 
 export default Home;
