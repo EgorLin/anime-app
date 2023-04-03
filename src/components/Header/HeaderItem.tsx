@@ -1,15 +1,15 @@
-import { ReactElement } from 'react'
-import ControlPanel from '../ControlPanel/ControlPanel'
-import Nav from '../Nav/Nav'
-import SearchPanelItem from '../SearchPanel/SearchPanelItem'
-import BurgerMenu from '../UI/BurgerMenu/BurgerMenu'
-import Logo from '../UI/Logo/Logo'
-import styles from './Header.module.scss'
+import { ReactElement } from "react";
+import ControlPanel from "../ControlPanel/ControlPanel";
+import Nav from "../Nav/Nav";
+import BurgerMenu from "../UI/BurgerMenu/BurgerMenu";
+import Logo from "../UI/Logo/Logo";
+import SearchInput from "../UI/SearchInput/SearchInput";
+import styles from "./Header.module.scss";
 
 interface IProps {
-  isWideScreen: boolean
-  isMenuOpened: boolean
-  setIsMenuOpened: (isOpen: boolean) => void
+  isWideScreen: boolean;
+  isMenuOpened: boolean;
+  setIsMenuOpened: (isOpen: boolean) => void;
 }
 
 function HeaderItem({
@@ -20,10 +20,10 @@ function HeaderItem({
   return (
     <>
       {isWideScreen ? (
-        <header className={[styles.header, styles.menu, 'wrapper'].join(' ')}>
+        <header className={[styles.header, styles.menu, "wrapper"].join(" ")}>
           <Logo />
           <Nav />
-          <SearchPanelItem />
+          <SearchInput />
           <ControlPanel />
         </header>
       ) : (
@@ -31,10 +31,10 @@ function HeaderItem({
           className={[
             styles.header,
             isMenuOpened ? styles.opened : styles.closed,
-          ].join(' ')}
+          ].join(" ")}
         >
-          <Nav className='wrapper' />
-          <div className={[styles.menu, 'wrapper'].join(' ')}>
+          <Nav className="wrapper" />
+          <div className={[styles.menu, "wrapper"].join(" ")}>
             <div className={styles.leftContainer}>
               <BurgerMenu
                 isOpened={isMenuOpened}
@@ -43,13 +43,13 @@ function HeaderItem({
               />
               <Logo />
             </div>
-            <SearchPanelItem />
+            <SearchInput />
             <ControlPanel />
           </div>
         </header>
       )}
     </>
-  )
+  );
 }
 
-export default HeaderItem
+export default HeaderItem;

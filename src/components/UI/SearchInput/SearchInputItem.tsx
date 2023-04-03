@@ -3,12 +3,17 @@ import { Link } from "react-router-dom";
 import { RouteNames } from "../../../router";
 import ButtonIcon from "../ButtonIcon/ButtonIcon";
 import Input from "../Input/Input";
-import styles from "./SearchIcon.module.scss";
+import styles from "./SearchInput.module.scss";
 
-function SearchIconItem(): ReactElement {
+interface IProps {
+  query: string;
+  updateQuery: (newQuery: string) => void;
+}
+
+function SearchInputItem({ query, updateQuery }: IProps): ReactElement {
   return (
     <div className={styles.search}>
-      <Input className={styles.input} />
+      <Input className={styles.input} value={query} changeValue={updateQuery} />
       <Link to={RouteNames.SEARCH}>
         <ButtonIcon className={styles.button}>
           <svg className={styles.image} viewBox="0 0 1024 1024">
@@ -23,4 +28,4 @@ function SearchIconItem(): ReactElement {
   );
 }
 
-export default SearchIconItem;
+export default SearchInputItem;

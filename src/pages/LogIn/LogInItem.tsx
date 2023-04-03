@@ -10,12 +10,12 @@ function LogInItem(): ReactElement {
     <div className={styles.container}>
       <div className={styles.window}>
         <Logo className={styles.logo} />
-        <Input className={styles.input} placeholder="Email" type="email" />
-        <Input
-          className={styles.input}
-          placeholder="Password"
-          type="password"
-        />
+        {/* <Input className={styles.input} placeholder="Email" type="email" /> */}
+        {/* <Input */}
+        {/*   className={styles.input} */}
+        {/*   placeholder="Password" */}
+        {/*   type="password" */}
+        {/* /> */}
         <Link to={RouteNames.HOME} className={styles.button}>
           Log In
         </Link>
