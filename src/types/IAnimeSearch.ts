@@ -20,4 +20,4 @@ export interface ISingeAnimeSearch {
   releaseDate: number;
 }
 
-export interface IAnimeSearch extends IPages<IAnimeSearch> { }
+export interface IAnimeSearch extends IPages<ISingeAnimeSearch> {}

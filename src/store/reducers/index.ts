@@ -1,6 +1,7 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import AnimeInfoSlice from "./AnimeInfoSlice";
 import AnimeRecentSlice from "./AnimeRecentSlice";
+import AnimeSearchSlice from "./AnimeSearchSlice";
 import AnimeTrendingSlice from "./AnimeTrendingSlice";
 import StreamInfoSlice from "./StreamInfoSlice";
 
@@ -9,4 +10,5 @@ export const rootReducer = combineReducers({
   streamInfo: StreamInfoSlice,
   animeTrending: AnimeTrendingSlice,
   animeRecent: AnimeRecentSlice,
+  animeSearch: AnimeSearchSlice,
 });

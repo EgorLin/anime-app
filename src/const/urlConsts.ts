@@ -5,4 +5,5 @@ export enum UrlPaths {
   STREAM = "/watch/",
   RECENT = "/recent-episodes",
   INFO = "/info/",
+  SEARCH = "/advanced-search",
 }
