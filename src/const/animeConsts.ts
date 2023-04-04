@@ -1,38 +1,16 @@
-import { ILanguageTitles } from "./ILanguageTitles";
-import { IPages } from "./IPages";
-
-export interface ISingeAnimeSearch {
-  id: string;
-  malId: number;
-  title: ILanguageTitles;
-  status: string;
-  image: string;
-  cover: string;
-  popularity: number;
-  totalEpisodes: number;
-  currentEpisode: number;
-  countryOfOrigin: string;
-  description: string;
-  genres: string[];
-  rating: number;
-  color: string;
-  type: string;
-  releaseDate: number;
-}
-
-enum EntertainmentType {
+export enum EntertainmentType {
   ANIME = "ANIME",
   MANGA = "MANGA",
 }
 
-enum AnimeSeason {
+export enum AnimeSeason {
   WINTER = "WINTER",
   SPRING = "SPRING",
   SUMMER = "SUMMER",
   FALL = "FALL",
 }
 
-enum AnimeFormat {
+export enum AnimeFormat {
   TV = "TV",
   TV_SHORT = "TV_SHORT",
   OVA = "OVA",
@@ -97,19 +75,3 @@ export enum AnimeStatus {
   CANCELLED = "CANCELLED",
   HIATUS = "HIATUS",
 }
-
-export interface IAnimeSearchSettings {
-  query: string;
-  type: string;
-  page: number;
-  perPage: number;
-  season: string;
-  format: string;
-  sort: string[];
-  genres: string[];
-  id: string;
-  year: string;
-  status: string;
-}
-
-export interface IAnimeSearch extends IPages<ISingeAnimeSearch> { }
