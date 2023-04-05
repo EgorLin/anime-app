@@ -11,6 +11,7 @@ import {
 } from "../../const/animeConsts";
 import AnimeService from "../../api/AnimeService";
 import { IPages } from "../../types/IPages";
+import { removeEmptyKeys } from "../../helpers/removeEmptyKeys";
 
 const initialState: IAnimeSearch = {
   settings: {
@@ -43,14 +44,9 @@ export const fetchAnimeSearch = createAsyncThunk<
   { state: RootState }
 >("animeSearch/fetch", async (_, { getState }) => {
   const settings = getState().animeSearch.settings;
-  const filtredSettings = {};
-  for (const [key, value] of Object.entries(settings)) {
-    if (value) {
-      Object.defineProperty(filtredSettings, key, { value, enumerable: true });
-    }
-  }
-  console.log(filtredSettings);
+  const filtredSettings = removeEmptyKeys(settings);
   const responce = await AnimeService.getSearchedAnime(filtredSettings);
+
   return responce.data;
 });
 
