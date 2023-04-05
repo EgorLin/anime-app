@@ -2,7 +2,6 @@ import { ReactElement, useCallback, useEffect, useState } from "react";
 import { RequestStatuses } from "../../../const/requestStatuses";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import {
-  clearAnimeRecent,
   fetchAnimeRecent,
   selectAnimeRecent,
 } from "../../../store/reducers/AnimeRecentSlice";

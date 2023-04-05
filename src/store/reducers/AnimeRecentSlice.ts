@@ -34,13 +34,7 @@ export const fetchAnimeRecent = createAsyncThunk(
 export const AnimeRecentSlice = createSlice({
   name: "animeRecent",
   initialState,
-  reducers: {
-    clearAnimeRecent(state) {
-      state.status = initialState.status;
-      state.error = initialState.error;
-      state.data = initialState.data;
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(fetchAnimeRecent.pending, (state) => {
@@ -61,6 +55,5 @@ export const AnimeRecentSlice = createSlice({
 });
 
 export default AnimeRecentSlice.reducer;
-export const { clearAnimeRecent } = AnimeRecentSlice.actions;
 
 export const selectAnimeRecent = (store: RootState) => store.animeRecent;

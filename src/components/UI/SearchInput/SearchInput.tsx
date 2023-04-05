@@ -1,23 +1,39 @@
-import { ReactElement, useRef, useState } from "react";
-import { useAppDispatch } from "../../../hooks/redux";
+import { ReactElement } from "react";
+import { useLocation } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import useDebounce from "../../../hooks/useDebounce";
-import { fetchAnimeSearch } from "../../../store/reducers/AnimeSearchSlice";
+import { RouteNames } from "../../../router";
+import {
+  fetchAnimeSearch,
+  selectAnimeSearchSettingsQuery,
+  setSearchQuery,
+} from "../../../store/reducers/AnimeSearchSlice";
 import SearchInputItem from "./SearchInputItem";
 
 function SearchInput(): ReactElement {
-  const [query, setQuery] = useState("");
   const dispatch = useAppDispatch();
-  const dcb = useDebounce(() => {
-    console.log("sended");
-    dispatch(fetchAnimeSearch(query));
+  const location = useLocation();
+  const query = useAppSelector(selectAnimeSearchSettingsQuery);
+  const isSearchPage = location.pathname === RouteNames.SEARCH;
+
+  const sendData = useDebounce(() => {
+    dispatch(fetchAnimeSearch());
   }, 500);
 
   function updateQuery(newQuery: string): void {
-    setQuery(newQuery);
-    dcb();
+    dispatch(setSearchQuery(newQuery));
+    if (isSearchPage) {
+      sendData();
+    }
   }
 
-  return <SearchInputItem query={query} updateQuery={updateQuery} />;
+  return (
+    <SearchInputItem
+      query={query}
+      updateQuery={updateQuery}
+      isSearchPage={isSearchPage}
+    />
+  );
 }
 
 export default SearchInput;

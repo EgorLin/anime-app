@@ -8,6 +8,7 @@ export enum AnimeSeason {
   SPRING = "SPRING",
   SUMMER = "SUMMER",
   FALL = "FALL",
+  NONE = "",
 }
 
 export enum AnimeFormat {
@@ -18,6 +19,7 @@ export enum AnimeFormat {
   MOVIE = "MOVIE",
   SPECIAL = "SPECIAL",
   MUSIC = "MUSIC",
+  NONE = "",
 }
 
 export enum ItemSort {
@@ -66,6 +68,7 @@ export enum ItemGenre {
   SPORTS = "Sports",
   SUPERNATURAL = "Supernatural",
   THRILLER = "Thriller",
+  NONE = "",
 }
 
 export enum AnimeStatus {
@@ -74,4 +77,5 @@ export enum AnimeStatus {
   FINISHED = "FINISHED",
   CANCELLED = "CANCELLED",
   HIATUS = "HIATUS",
+  NONE = "",
 }
