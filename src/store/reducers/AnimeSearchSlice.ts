@@ -1,17 +1,11 @@
-import {
-  IAnimeSearch,
-  IAnimeSearchSettings,
-  ISearchSettings,
-  ISingleAnimeSearch,
-} from "../../types/IAnimeSearch";
+import { IAnimeSearch, ISingleAnimeSearch } from "../../types/IAnimeSearch";
 import { RequestStatuses } from "../../const/requestStatuses";
-import { CombinedState, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import {
   AnimeFormat,
   AnimeSeason,
   AnimeStatus,
-  EntertainmentType,
   ItemGenre,
   ItemSort,
 } from "../../const/animeConsts";
@@ -21,14 +15,12 @@ import { IPages } from "../../types/IPages";
 const initialState: IAnimeSearch = {
   settings: {
     query: "",
-    type: EntertainmentType.ANIME,
     page: 1,
     perPage: 20,
     season: AnimeSeason.NONE,
     format: AnimeFormat.NONE,
     sort: [ItemSort.POPULARITY_DESC, ItemSort.SCORE_DESC],
     genres: ItemGenre.NONE,
-    id: "",
     year: "",
     status: AnimeStatus.NONE,
   },
@@ -45,23 +37,20 @@ const initialState: IAnimeSearch = {
   },
 };
 
-interface Iobj {
-  query?: string;
-}
-
 export const fetchAnimeSearch = createAsyncThunk<
   IPages<ISingleAnimeSearch>,
   void,
   { state: RootState }
 >("animeSearch/fetch", async (_, { getState }) => {
   const settings = getState().animeSearch.settings;
-  const obj: Iobj = {};
+  const filtredSettings = {};
   for (const [key, value] of Object.entries(settings)) {
     if (value) {
-      Object.defineProperty(obj, key, { value });
+      Object.defineProperty(filtredSettings, key, { value, enumerable: true });
     }
   }
-  const responce = await AnimeService.getSearchedAnime(settings);
+  console.log(filtredSettings);
+  const responce = await AnimeService.getSearchedAnime(filtredSettings);
   return responce.data;
 });
 
