@@ -60,6 +60,9 @@ export const AnimeSearchSlice = createSlice({
     setSearchQuery(state, action) {
       state.settings.query = action.payload;
     },
+    setSearchYear(state, action) {
+      state.settings.year = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -79,7 +82,8 @@ export const AnimeSearchSlice = createSlice({
 
 export default AnimeSearchSlice.reducer;
 
-export const { increaseSearchPage, setSearchQuery } = AnimeSearchSlice.actions;
+export const { increaseSearchPage, setSearchQuery, setSearchYear } =
+  AnimeSearchSlice.actions;
 
 export const selectAnimeSearch = (store: RootState) => store.animeSearch;
 export const selectAnimeSearchData = (store: RootState) =>
@@ -88,3 +92,15 @@ export const selectAnimeSearchSettings = (store: RootState) =>
   store.animeSearch.settings;
 export const selectAnimeSearchSettingsQuery = (store: RootState) =>
   store.animeSearch.settings.query;
+export const selectAnimeSearchSettingsYear = (store: RootState) =>
+  store.animeSearch.settings.year;
+export const selectAnimeSearchSettingsSort = (store: RootState) =>
+  store.animeSearch.settings.sort;
+export const selectAnimeSearchSettingsFormat = (store: RootState) =>
+  store.animeSearch.settings.format;
+export const selectAnimeSearchSettingsGenres = (store: RootState) =>
+  store.animeSearch.settings.genres;
+export const selectAnimeSearchSettingsSeason = (store: RootState) =>
+  store.animeSearch.settings.season;
+export const selectAnimeSearchSettingsStatus = (store: RootState) =>
+  store.animeSearch.settings.status;

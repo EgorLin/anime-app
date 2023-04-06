@@ -14,7 +14,7 @@ function useDebounce(
 
       timer.current = setTimeout(() => {
         callback(...args);
-      }, 500);
+      }, delay);
     },
     [callback, delay]
   );
