@@ -11,7 +11,6 @@ import EmptyCatalog from "../EmptyCatalog/EmptyCatalog";
 function RecentReleasesCatalog(): ReactElement {
   const dispatch = useAppDispatch();
   const recent = useAppSelector(selectAnimeRecent);
-  const [currentPage, setCurrentPage] = useState(recent.data.currentPage);
 
   const changePage = useCallback(() => {
     if (recent.data.hasNextPage) {
@@ -31,16 +30,19 @@ function RecentReleasesCatalog(): ReactElement {
       status={recent.status}
       error={recent.error}
       handleTrigger={changePage}
-      elements={recent.data.results.map((anime) => (
-        <RecentCard
-          key={anime.id + anime.episodeNumber}
-          id={anime.id}
-          title={anime.title}
-          image={anime.image}
-          genres={anime.genres}
-          lastEpisode={anime.episodeNumber}
-        />
-      ))}
+      elements={recent.data.results.map(
+        (anime) =>
+          anime && (
+            <RecentCard
+              key={anime.id + anime.episodeNumber}
+              id={anime.id}
+              title={anime.title}
+              image={anime.image}
+              genres={anime.genres}
+              lastEpisode={anime.episodeNumber}
+            />
+          )
+      )}
     />
   );
 }

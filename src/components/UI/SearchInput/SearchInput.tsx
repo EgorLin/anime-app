@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import useDebounce from "../../../hooks/useDebounce";
 import { RouteNames } from "../../../router";
 import {
+  clearSearchResults,
   fetchAnimeSearch,
   selectAnimeSearchSettingsQuery,
   setSearchQuery,
@@ -17,6 +18,7 @@ function SearchInput(): ReactElement {
   const isSearchPage = location.pathname === RouteNames.SEARCH;
 
   const sendData = useDebounce(() => {
+    dispatch(clearSearchResults());
     dispatch(fetchAnimeSearch());
   }, 500);
 

@@ -3,6 +3,7 @@ import { RequestStatuses } from "../../const/requestStatuses";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import useDebounce from "../../hooks/useDebounce";
 import {
+  clearSearchResults,
   fetchAnimeSearch,
   selectAnimeSearch,
   selectAnimeSearchData,
@@ -28,6 +29,7 @@ function SearchSettings(): ReactElement {
   const { status: fetchStatus } = useAppSelector(selectAnimeSearchData);
 
   const debounce = useDebounce(() => {
+    dispatch(clearSearchResults());
     dispatch(fetchAnimeSearch());
   }, 1000);
 

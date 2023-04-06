@@ -63,6 +63,10 @@ export const AnimeSearchSlice = createSlice({
     setSearchYear(state, action) {
       state.settings.year = action.payload;
     },
+    clearSearchResults(state) {
+      state.data.data = initialState.data.data;
+      state.settings.page = initialState.settings.page;
+    },
   },
   extraReducers(builder) {
     builder
@@ -71,7 +75,10 @@ export const AnimeSearchSlice = createSlice({
       })
       .addCase(fetchAnimeSearch.fulfilled, (state, action) => {
         state.data.status = RequestStatuses.SUCCEEDED;
-        state.data.data = action.payload;
+        state.data.data = {
+          ...action.payload,
+          results: state.data.data.results.concat(action.payload.results),
+        };
       })
       .addCase(fetchAnimeSearch.rejected, (state, action) => {
         state.data.status = RequestStatuses.FAILED;
@@ -82,12 +89,20 @@ export const AnimeSearchSlice = createSlice({
 
 export default AnimeSearchSlice.reducer;
 
-export const { increaseSearchPage, setSearchQuery, setSearchYear } =
-  AnimeSearchSlice.actions;
+export const {
+  increaseSearchPage,
+  setSearchQuery,
+  setSearchYear,
+  clearSearchResults,
+} = AnimeSearchSlice.actions;
 
 export const selectAnimeSearch = (store: RootState) => store.animeSearch;
 export const selectAnimeSearchData = (store: RootState) =>
   store.animeSearch.data;
+export const selectAnimeSearchDataCurrentPage = (store: RootState) =>
+  store.animeSearch.data.data.currentPage;
+export const selectAnimeSearchDataHasNextPage = (store: RootState) =>
+  store.animeSearch.data.data.hasNextPage;
 export const selectAnimeSearchSettings = (store: RootState) =>
   store.animeSearch.settings;
 export const selectAnimeSearchSettingsQuery = (store: RootState) =>
@@ -104,3 +119,5 @@ export const selectAnimeSearchSettingsSeason = (store: RootState) =>
   store.animeSearch.settings.season;
 export const selectAnimeSearchSettingsStatus = (store: RootState) =>
   store.animeSearch.settings.status;
+export const selectAnimeSearchSettingsPage = (store: RootState) =>
+  store.animeSearch.settings.page;
