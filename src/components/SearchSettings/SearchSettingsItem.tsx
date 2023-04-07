@@ -1,6 +1,8 @@
 import { ReactElement } from "react";
+import { AnimeFormat } from "../../const/animeConsts";
 import Checkbox from "../UI/Checkbox/Checkbox";
 import Input from "../UI/Input/Input";
+import Select from "../UI/Select/Select";
 import styles from "./SearchSettings.module.scss";
 
 interface IProps {
@@ -11,6 +13,8 @@ interface IProps {
   season: string;
   status: string;
   changeYear: (newYear: string) => void;
+  formatList: string[][];
+  changeFormat: (newFormat: string) => void;
 }
 
 function SearchSettingsItem({
@@ -21,6 +25,8 @@ function SearchSettingsItem({
   season,
   status,
   changeYear,
+  formatList,
+  changeFormat,
 }: IProps): ReactElement {
   return (
     <div className={[styles.container, "wrapperM"].join(" ")}>
@@ -29,6 +35,12 @@ function SearchSettingsItem({
         <Checkbox title={"Custom status"} />
         <Checkbox title={"Custom subOrDub"} />
       </div>
+      <Select
+        title="Anime format"
+        data={formatList}
+        value={format}
+        onChange={changeFormat}
+      />
       <Input className={styles.input} value={year} changeValue={changeYear} />
     </div>
   );

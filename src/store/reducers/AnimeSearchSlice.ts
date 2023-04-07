@@ -63,6 +63,9 @@ export const AnimeSearchSlice = createSlice({
     setSearchYear(state, action) {
       state.settings.year = action.payload;
     },
+    setSearchFormat(state, action) {
+      state.settings.format = action.payload;
+    },
     clearSearchResults(state) {
       state.data.data = initialState.data.data;
       state.settings.page = initialState.settings.page;
@@ -93,6 +96,7 @@ export const {
   increaseSearchPage,
   setSearchQuery,
   setSearchYear,
+  setSearchFormat,
   clearSearchResults,
 } = AnimeSearchSlice.actions;
 

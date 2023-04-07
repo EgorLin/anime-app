@@ -1,4 +1,5 @@
 import { ReactElement, useEffect } from "react";
+import { AnimeFormat } from "../../const/animeConsts";
 import { RequestStatuses } from "../../const/requestStatuses";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import useDebounce from "../../hooks/useDebounce";
@@ -14,6 +15,7 @@ import {
   selectAnimeSearchSettingsSort,
   selectAnimeSearchSettingsStatus,
   selectAnimeSearchSettingsYear,
+  setSearchFormat,
   setSearchYear,
 } from "../../store/reducers/AnimeSearchSlice";
 import SearchSettingsItem from "./SearchSettingsItem";
@@ -27,6 +29,7 @@ function SearchSettings(): ReactElement {
   const season = useAppSelector(selectAnimeSearchSettingsSeason);
   const status = useAppSelector(selectAnimeSearchSettingsStatus);
   const { status: fetchStatus } = useAppSelector(selectAnimeSearchData);
+  const formatList = Object.entries(AnimeFormat);
 
   const debounce = useDebounce(() => {
     dispatch(clearSearchResults());
@@ -35,6 +38,10 @@ function SearchSettings(): ReactElement {
 
   function changeYear(newYear: string) {
     dispatch(setSearchYear(newYear));
+  }
+
+  function changeFormat(newFormat: string) {
+    dispatch(setSearchFormat(newFormat));
   }
 
   useEffect(() => {
@@ -52,6 +59,8 @@ function SearchSettings(): ReactElement {
       season={season}
       status={status}
       changeYear={changeYear}
+      formatList={formatList}
+      changeFormat={changeFormat}
     />
   );
 }

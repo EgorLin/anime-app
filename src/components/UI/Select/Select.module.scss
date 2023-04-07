@@ -1,0 +1,74 @@
+@use "/src/styles/colors";
+@use "/src/styles/mixins/transitions";
+@use "/src/styles/sizes";
+
+.container {
+  position: relative;
+}
+
+.text {
+  cursor: pointer;
+  @include transitions.default(color);
+
+  &:hover {
+    color: colors.$font-accent;
+    @include transitions.default(color);
+  }
+}
+
+.label {
+  position: relative;
+  min-width: 200px;
+
+  svg {
+    position: absolute;
+    right: 12px;
+    top: calc(50% - 3px);
+    width: 14px;
+    height: 8px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+
+    & g {
+      fill: none;
+      stroke: colors.$font-headers;
+      stroke-width: 2px;
+    }
+  }
+
+  .select {
+    -webkit-appearance: none;
+    padding: 7px 40px 7px 12px;
+    width: 100%;
+    border: 2px solid rgba($color: #000000, $alpha: 0);
+    border-radius: 5px;
+    background: colors.$bg-secondary;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1.6rem;
+    transition: all 150ms ease;
+    color: colors.$font-headers;
+
+    &:required:invalid {
+      color: colors.$font-headers;
+    }
+
+    option {
+      color: colors.$font-headers;
+      &[value=""][disabled] {
+        display: none;
+      }
+    }
+
+    &:focus {
+      outline: none;
+      border-color: colors.$font-accent;
+      box-shadow: 0 0 0 2px rgba(colors.$font-accent, 0.2);
+    }
+
+    &:hover + svg {
+      stroke: colors.$font-accent;
+    }
+  }
+}
