@@ -29,7 +29,7 @@ export interface ISearchSettings {
   season: string;
   format: string;
   sort: string[];
-  genres: string[] | string;
+  genres: string[];
   // id: string;
   year: string;
   status: string;

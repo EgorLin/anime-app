@@ -21,7 +21,7 @@ const initialState: IAnimeSearch = {
     season: AnimeSeason.NONE,
     format: AnimeFormat.NONE,
     sort: [ItemSort.POPULARITY_DESC, ItemSort.SCORE_DESC],
-    genres: ItemGenre.NONE,
+    genres: [],
     year: "",
     status: AnimeStatus.NONE,
   },
@@ -66,6 +66,15 @@ export const AnimeSearchSlice = createSlice({
     setSearchFormat(state, action) {
       state.settings.format = action.payload;
     },
+    setSearchStatus(state, action) {
+      state.settings.status = action.payload;
+    },
+    setSearchSeason(state, action) {
+      state.settings.season = action.payload;
+    },
+    setSearchGenres(state, action) {
+      state.settings.genres = action.payload;
+    },
     clearSearchResults(state) {
       state.data.data = initialState.data.data;
       state.settings.page = initialState.settings.page;
@@ -97,6 +106,9 @@ export const {
   setSearchQuery,
   setSearchYear,
   setSearchFormat,
+  setSearchSeason,
+  setSearchStatus,
+  setSearchGenres,
   clearSearchResults,
 } = AnimeSearchSlice.actions;
 

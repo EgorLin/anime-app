@@ -6,12 +6,18 @@ interface IProps {
   title: string;
   showPopUp: boolean;
   changeVisibility: (value?: boolean) => void;
+  data: string[][];
+  activeList: string[];
+  onChange: (newValue: string) => void;
 }
 
 function CheckboxItem({
   title,
   showPopUp,
   changeVisibility,
+  data,
+  activeList,
+  onChange,
 }: IProps): ReactElement {
   return (
     <div className={styles.container}>
@@ -24,13 +30,14 @@ function CheckboxItem({
           onMouseOut={() => changeVisibility(false)}
           className={styles.popUp}
         >
-          <CheckboxButton />
-          <CheckboxButton />
-          <CheckboxButton />
-          <CheckboxButton />
-          <CheckboxButton />
-          <CheckboxButton />
-          <CheckboxButton />
+          {data.map((element) => (
+            <CheckboxButton
+              isSelected={activeList.some((active) => active === element[1])}
+              value={element[1]}
+              title={element[0]}
+              onChange={onChange}
+            />
+          ))}
         </div>
       ) : null}
     </div>

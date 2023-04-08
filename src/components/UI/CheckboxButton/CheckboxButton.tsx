@@ -1,8 +1,30 @@
 import { ReactElement } from "react";
 import CheckboxButtonItem from "./CheckboxButtonItem";
 
-function CheckboxButton(): ReactElement {
-  return <CheckboxButtonItem />;
+interface IProps {
+  value: string;
+  title: string;
+  onChange: (newValue: string) => void;
+  isSelected: boolean;
+}
+
+function CheckboxButton({
+  value,
+  title,
+  onChange,
+  isSelected,
+}: IProps): ReactElement {
+  function handleClick(): void {
+    onChange(value);
+  }
+
+  return (
+    <CheckboxButtonItem
+      title={title}
+      isSelected={isSelected}
+      handleClick={handleClick}
+    />
+  );
 }
 
 export default CheckboxButton;

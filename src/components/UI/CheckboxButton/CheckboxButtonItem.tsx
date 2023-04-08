@@ -1,16 +1,20 @@
 import { ReactElement, useState } from "react";
 import styles from "./CheckboxButton.module.scss";
 
-function CheckboxButtonItem(): ReactElement {
-  const [pressed, setPressed] = useState(false);
+interface IProps {
+  title: string;
+  isSelected: boolean;
+  handleClick: () => void;
+}
 
-  function handleClick(): void {
-    setPressed((prev) => !prev);
-  }
-
+function CheckboxButtonItem({
+  title,
+  isSelected,
+  handleClick,
+}: IProps): ReactElement {
   return (
-    <div className={[styles.item, pressed ? styles.pressed : null].join(" ")}>
-      <span onClick={handleClick}>genre</span>
+    <div className={[styles.item, isSelected ? styles.pressed : ""].join(" ")}>
+      <span onClick={handleClick}>{title}</span>
     </div>
   );
 }

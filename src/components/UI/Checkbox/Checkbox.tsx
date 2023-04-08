@@ -3,9 +3,12 @@ import CheckboxItem from "./CheckboxItem";
 
 interface IProps {
   title: string;
+  data: string[][];
+  activeList: string[];
+  onChange: (newValue: string) => void;
 }
 
-function Checkbox({ title }: IProps): ReactElement {
+function Checkbox({ title, data, activeList, onChange }: IProps): ReactElement {
   const [showPopUp, setShowPopUp] = useState(false);
 
   function changeVisibility(value?: boolean): void {
@@ -21,6 +24,9 @@ function Checkbox({ title }: IProps): ReactElement {
       title={title}
       showPopUp={showPopUp}
       changeVisibility={changeVisibility}
+      data={data}
+      activeList={activeList}
+      onChange={onChange}
     />
   );
 }

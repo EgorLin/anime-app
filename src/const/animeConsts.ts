@@ -68,7 +68,6 @@ export enum ItemGenre {
   SPORTS = "Sports",
   SUPERNATURAL = "Supernatural",
   THRILLER = "Thriller",
-  NONE = "",
 }
 
 export enum AnimeStatus {

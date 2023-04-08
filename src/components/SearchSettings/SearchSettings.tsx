@@ -1,5 +1,10 @@
 import { ReactElement, useEffect } from "react";
-import { AnimeFormat } from "../../const/animeConsts";
+import {
+  AnimeFormat,
+  AnimeSeason,
+  AnimeStatus,
+  ItemGenre,
+} from "../../const/animeConsts";
 import { RequestStatuses } from "../../const/requestStatuses";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import useDebounce from "../../hooks/useDebounce";
@@ -16,6 +21,9 @@ import {
   selectAnimeSearchSettingsStatus,
   selectAnimeSearchSettingsYear,
   setSearchFormat,
+  setSearchGenres,
+  setSearchSeason,
+  setSearchStatus,
   setSearchYear,
 } from "../../store/reducers/AnimeSearchSlice";
 import SearchSettingsItem from "./SearchSettingsItem";
@@ -30,6 +38,9 @@ function SearchSettings(): ReactElement {
   const status = useAppSelector(selectAnimeSearchSettingsStatus);
   const { status: fetchStatus } = useAppSelector(selectAnimeSearchData);
   const formatList = Object.entries(AnimeFormat);
+  const seasonList = Object.entries(AnimeSeason);
+  const statusList = Object.entries(AnimeStatus);
+  const genresList = Object.entries(ItemGenre);
 
   const debounce = useDebounce(() => {
     dispatch(clearSearchResults());
@@ -43,6 +54,27 @@ function SearchSettings(): ReactElement {
   function changeFormat(newFormat: string) {
     dispatch(setSearchFormat(newFormat));
   }
+
+  function changeSeason(newSeason: string) {
+    dispatch(setSearchSeason(newSeason));
+  }
+
+  function changeStatus(newStatus: string) {
+    dispatch(setSearchStatus(newStatus));
+  }
+
+  function changeGenres(newGenre: string) {
+    const isExist = genres.some((genre) => newGenre === genre);
+    let newGenres = [...genres];
+    if (isExist) {
+      newGenres = genres.filter((genre) => genre !== newGenre);
+    } else {
+      newGenres.push(newGenre);
+    }
+    dispatch(setSearchGenres(newGenres));
+  }
+
+  console.log(genres);
 
   useEffect(() => {
     if (fetchStatus === RequestStatuses.SUCCEEDED) {
@@ -60,7 +92,13 @@ function SearchSettings(): ReactElement {
       status={status}
       changeYear={changeYear}
       formatList={formatList}
+      seasonList={seasonList}
+      statusList={statusList}
+      genresList={genresList}
       changeFormat={changeFormat}
+      changeSeason={changeSeason}
+      changeStatus={changeStatus}
+      changeGenres={changeGenres}
     />
   );
 }
