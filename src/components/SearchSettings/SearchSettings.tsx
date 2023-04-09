@@ -1,5 +1,6 @@
 import { ReactElement, useEffect } from "react";
 import {
+  AllowedItemSort,
   AnimeFormat,
   AnimeSeason,
   AnimeStatus,
@@ -11,9 +12,7 @@ import useDebounce from "../../hooks/useDebounce";
 import {
   clearSearchResults,
   fetchAnimeSearch,
-  selectAnimeSearch,
   selectAnimeSearchData,
-  selectAnimeSearchSettings,
   selectAnimeSearchSettingsFormat,
   selectAnimeSearchSettingsGenres,
   selectAnimeSearchSettingsSeason,
@@ -23,6 +22,7 @@ import {
   setSearchFormat,
   setSearchGenres,
   setSearchSeason,
+  setSearchSort,
   setSearchStatus,
   setSearchYear,
 } from "../../store/reducers/AnimeSearchSlice";
@@ -41,6 +41,7 @@ function SearchSettings(): ReactElement {
   const seasonList = Object.entries(AnimeSeason);
   const statusList = Object.entries(AnimeStatus);
   const genresList = Object.entries(ItemGenre);
+  const sortList = Object.entries(AllowedItemSort);
 
   const debounce = useDebounce(() => {
     dispatch(clearSearchResults());
@@ -63,6 +64,10 @@ function SearchSettings(): ReactElement {
     dispatch(setSearchStatus(newStatus));
   }
 
+  function changeSort(newSort: string) {
+    dispatch(setSearchSort(newSort));
+  }
+
   function changeGenres(newGenre: string) {
     const isExist = genres.some((genre) => newGenre === genre);
     let newGenres = [...genres];
@@ -73,8 +78,6 @@ function SearchSettings(): ReactElement {
     }
     dispatch(setSearchGenres(newGenres));
   }
-
-  console.log(genres);
 
   useEffect(() => {
     if (fetchStatus === RequestStatuses.SUCCEEDED) {
@@ -95,10 +98,12 @@ function SearchSettings(): ReactElement {
       seasonList={seasonList}
       statusList={statusList}
       genresList={genresList}
+      sortList={sortList}
       changeFormat={changeFormat}
       changeSeason={changeSeason}
       changeStatus={changeStatus}
       changeGenres={changeGenres}
+      changeSort={changeSort}
     />
   );
 }

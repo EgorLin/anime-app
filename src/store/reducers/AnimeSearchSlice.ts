@@ -3,11 +3,10 @@ import { RequestStatuses } from "../../const/requestStatuses";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import {
+  AllItemSort,
   AnimeFormat,
   AnimeSeason,
   AnimeStatus,
-  ItemGenre,
-  ItemSort,
 } from "../../const/animeConsts";
 import AnimeService from "../../api/AnimeService";
 import { IPages } from "../../types/IPages";
@@ -20,7 +19,7 @@ const initialState: IAnimeSearch = {
     perPage: 20,
     season: AnimeSeason.NONE,
     format: AnimeFormat.NONE,
-    sort: [ItemSort.POPULARITY_DESC, ItemSort.SCORE_DESC],
+    sort: [AllItemSort.POPULARITY_DESC, AllItemSort.SCORE_DESC],
     genres: [],
     year: "",
     status: AnimeStatus.NONE,
@@ -75,6 +74,9 @@ export const AnimeSearchSlice = createSlice({
     setSearchGenres(state, action) {
       state.settings.genres = action.payload;
     },
+    setSearchSort(state, action) {
+      state.settings.sort = [action.payload, AllItemSort.SCORE_DESC];
+    },
     clearSearchResults(state) {
       state.data.data = initialState.data.data;
       state.settings.page = initialState.settings.page;
@@ -109,6 +111,7 @@ export const {
   setSearchSeason,
   setSearchStatus,
   setSearchGenres,
+  setSearchSort,
   clearSearchResults,
 } = AnimeSearchSlice.actions;
 

@@ -16,10 +16,12 @@ interface IProps {
   seasonList: string[][];
   statusList: string[][];
   genresList: string[][];
+  sortList: string[][];
   changeFormat: (newFormat: string) => void;
   changeSeason: (newSeason: string) => void;
   changeStatus: (newStatus: string) => void;
   changeGenres: (newGenre: string) => void;
+  changeSort: (newSort: string) => void;
 }
 
 function SearchSettingsItem({
@@ -35,9 +37,11 @@ function SearchSettingsItem({
   seasonList,
   statusList,
   genresList,
+  sortList,
   changeSeason,
   changeStatus,
   changeGenres,
+  changeSort,
 }: IProps): ReactElement {
   return (
     <div className={[styles.container, "wrapperM"].join(" ")}>
@@ -47,6 +51,12 @@ function SearchSettingsItem({
         data={genresList}
         activeList={genres}
         onChange={changeGenres}
+      />
+      <Select
+        title="Sort"
+        data={sortList}
+        value={sort[0]}
+        onChange={changeSort}
       />
       <Select
         title="Anime format"

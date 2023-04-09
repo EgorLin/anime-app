@@ -22,7 +22,7 @@ export enum AnimeFormat {
   NONE = "",
 }
 
-export enum ItemSort {
+export enum AllItemSort {
   POPULARITY_DESC = "POPULARITY_DESC",
   POPULARITY = "POPULARITY",
   TRENDING_DESC = "TRENDING_DESC",
@@ -48,7 +48,13 @@ export enum ItemSort {
   ID = "ID",
   ID_DESC = "ID_DESC",
 }
-
+export enum AllowedItemSort {
+  POPULARITY_DESC = "POPULARITY_DESC",
+  UPDATED_AT_DESC = "UPDATED_AT_DESC",
+  UPDATED_AT = "UPDATED_AT",
+  TITLE_ROMAJI = "TITLE_ROMAJI",
+  TITLE_ENGLISH = "TITLE_ENGLISH",
+}
 export enum ItemGenre {
   ACTION = "Action",
   ADVENTURE = "Adventure",
