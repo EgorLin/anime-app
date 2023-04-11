@@ -1,0 +1,15 @@
+@use "/src/styles/colors";
+
+.svg {
+  height: 1.6rem;
+  width: 1.6rem;
+  position: relative;
+  top: 0.2rem;
+}
+
+.stroke {
+  fill: none;
+  stroke: colors.$font-accent;
+  stroke-miterlimit: 10;
+  stroke-width: 0.2rem;
+}

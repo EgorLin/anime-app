@@ -1,19 +1,15 @@
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import { ReactElement, useEffect } from "react";
-import { firestoreDB } from "../../firebase";
+import { getAuth, signOut } from "firebase/auth";
+import { ReactElement } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import {
   clearUserData,
   selectCurrentUser,
-  setCurrentUser,
 } from "../../store/reducers/CurrentUserSlice";
-import { IUserData } from "../../types/IUserData";
 import ControlPanelItem from "./ControlPanelItem";
 
 function ControlPanel(): ReactElement {
   const dispatch = useAppDispatch();
-  const { isAuth, username, email } = useAppSelector(selectCurrentUser);
+  const { isAuth, username } = useAppSelector(selectCurrentUser);
 
   function logOut() {
     const auth = getAuth();
