@@ -47,18 +47,30 @@ export const publicRoutes: RouteObject[] = [
   },
   {
     path: RouteNames.LOGIN,
-    element: <LogIn />,
+    element: (
+      <Suspense fallback={<Spinner />}>
+        <LogIn />
+      </Suspense>
+    ),
   },
   {
     path: RouteNames.SINGUP,
-    element: <SignUp />,
+    element: (
+      <Suspense fallback={<Spinner />}>
+        <SignUp />
+      </Suspense>
+    ),
   },
 ];
 
 export const privateRoutes: RouteObject[] = [
   {
     path: RouteNames.HOME,
-    element: <Root />,
+    element: (
+      <Suspense fallback={<Spinner />}>
+        <Root />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
