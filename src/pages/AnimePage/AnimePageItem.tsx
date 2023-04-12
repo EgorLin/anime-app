@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 import Details from "../../components/Details/Details";
 import EpisodeSection from "../../components/EpisodeSection/EpisodeSection";
 import LazyLoadingContainer from "../../components/LazyLoadingContainer/LazyLoadingContainer";
+import RelationSliderPanel from "../../components/SliderPanels/RelationSliderPanel/RelationSliderPanel";
 // import SliderPanel from "../../components/SliderPanel/SliderPanel";
 import RecommendationCard from "../../components/UI/Cards/RecommendationCard/RecommendationCard";
 import RelationCard from "../../components/UI/Cards/RelationCard/RelationCard";
@@ -28,7 +29,7 @@ function AnimePageItem({
 }: IProps): ReactElement {
   const episodes: IAnimeEpisode[] = animeInfo.episodes;
   const recommendations: IAnimeRecommendation[] = animeInfo.recommendations;
-  // console.log(animeInfo);
+
   let content;
   switch (animeStatus) {
     case RequestStatuses.IDLE:
@@ -47,23 +48,12 @@ function AnimePageItem({
             </div>
           )}
 
-          {/* {relations.length > 0 && ( */}
-          {/*   <LazyLoadingContainer> */}
-          {/*     <SliderPanel */}
-          {/*       title="Relations" */}
-          {/*       elements={relations.map((relation) => ( */}
-          {/*         <RelationCard */}
-          {/*           id={relation.id} */}
-          {/*           title={relation.title} */}
-          {/*           type={relation.type} */}
-          {/*           image={relation.image} */}
-          {/*           relationType={relation.relationType} */}
-          {/*         /> */}
-          {/*       ))} */}
-          {/*     /> */}
-          {/*   </LazyLoadingContainer> */}
-          {/* )} */}
-          {/**/}
+          {relations.length > 0 && (
+            <LazyLoadingContainer>
+              <RelationSliderPanel relations={relations} />
+            </LazyLoadingContainer>
+          )}
+
           {/* {recommendations.length > 0 && ( */}
           {/*   <LazyLoadingContainer> */}
           {/*     <SliderPanel */}

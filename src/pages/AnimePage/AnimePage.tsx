@@ -18,11 +18,11 @@ function AnimePage(): ReactElement {
     error: animeError,
     status: animeStatus,
   } = useAppSelector(selectAnimeInfo);
+
   const relations = useAppSelector(
     selectAnimeRelations,
     compareId // to prevent re-renders
   );
-  // const relations = animeInfo.relations;
 
   useEffect(() => {
     dispatch(fetchAnimeInfo(String(id)));
