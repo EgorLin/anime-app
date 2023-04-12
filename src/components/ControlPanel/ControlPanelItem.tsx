@@ -25,12 +25,7 @@ function ControlPanelItem({ isAuth, username }: IProps): ReactElement {
     );
   } else {
     content = (
-      <Link to={RouteNames.LOGIN}>
-        <span className={styles.text}>Sign in</span>
-        <ButtonIcon className={styles.button}>
-          <LogInIcon />
-        </ButtonIcon>
-      </Link>
+      <SmallButton text="Log In" icon={<LogInIcon />} to={RouteNames.LOGIN} />
     );
   }
   return <div className={styles.container}>{content}</div>;

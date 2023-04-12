@@ -82,7 +82,7 @@ export const privateRoutes: RouteObject[] = [
         element: <Search />,
       },
       {
-        path: RouteNames.ANITITLE,
+        path: RouteNames.ANITITLE_DIRTY,
         element: <AnimePage />,
       },
       {
