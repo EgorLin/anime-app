@@ -15,6 +15,7 @@ interface IProps {
   imageSize?: string;
   hasBookmark?: boolean;
   hasPlayButton?: boolean;
+  hasGlowing?: boolean;
   rightCornerContent?: ReactElement | null;
   visibleRightCorner?: boolean;
   title: ILanguageTitles;
@@ -30,6 +31,7 @@ function EmptyCard({
   imageSize = CardSizes.SMALL,
   hasBookmark = false,
   hasPlayButton = false,
+  hasGlowing = false,
   rightCornerContent = null,
   visibleRightCorner = false,
   list = [],
@@ -58,6 +60,7 @@ function EmptyCard({
       imgSize={imgSize}
       hasBookmark={hasBookmark}
       hasPlayButton={hasPlayButton}
+      hasGlowing={hasGlowing}
       rightCornerContent={rightCornerContent}
       visibleRightCorner={visibleRightCorner}
       title={animeTitle}

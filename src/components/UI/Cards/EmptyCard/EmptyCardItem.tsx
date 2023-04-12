@@ -8,6 +8,7 @@ interface IProps {
   imgSize: string;
   hasBookmark: boolean;
   hasPlayButton: boolean;
+  hasGlowing: boolean;
   rightCornerContent: ReactElement | null;
   visibleRightCorner: boolean;
   title: string;
@@ -21,6 +22,7 @@ function EmptyCardItem({
   imgSize,
   hasBookmark,
   hasPlayButton,
+  hasGlowing,
   rightCornerContent,
   visibleRightCorner,
   list,
@@ -29,14 +31,15 @@ function EmptyCardItem({
   onClick,
 }: IProps): ReactElement {
   return (
-    <div onClick={() => onClick()} className={[styles.container].join(" ")}>
-      <div className={styles.imageContainer}>
+    <div onClick={() => onClick()} className={styles.container}>
+      <div className={[styles.imageContainer].join(" ")}>
         {hasPlayButton && <PlayIcon className={styles.playButton} />}
         <img
           className={[
             styles.img,
             imgSize,
             isMainContentIn ? styles.imgTransperent : "",
+            hasGlowing ? styles.glowing : "",
           ].join(" ")}
           src={image}
           alt=""

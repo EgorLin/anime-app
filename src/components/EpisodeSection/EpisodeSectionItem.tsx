@@ -1,9 +1,8 @@
-import { Dispatch, ReactElement, SetStateAction } from "react";
+import { ReactElement } from "react";
 import { IAnimeEpisode } from "../../types/IAnimeEpisode";
 import ArtPlayer from "../ArtPlayer/ArtPlayer";
 import LazyLoadingContainer from "../LazyLoadingContainer/LazyLoadingContainer";
-// import SliderPanel from "../SliderPanel/SliderPanel";
-import EpisodeCard from "../UI/Cards/EpisodeCard/EpisodeCard";
+import EpisodeSliderPanel from "../SliderPanels/EpisodeSliderPanel/EpisodeSliderPanel";
 import styles from "./EpisodeSection.module.scss";
 
 interface IProps {
@@ -26,20 +25,13 @@ function EpisodeSectionItem({
         spinnerContainerSize={styles.spinnerPlayerSize}
       />
 
-      {/* <LazyLoadingContainer> */}
-      {/*   <SliderPanel */}
-      {/*     title="Episodes" */}
-      {/*     elements={episodes.map((episode) => ( */}
-      {/*       <EpisodeCard */}
-      {/*         id={episode.id} */}
-      {/*         title={episode.title} */}
-      {/*         number={episode.number} */}
-      {/*         image={episode.image} */}
-      {/*         applyNewEpisode={applyNewEpisode} */}
-      {/*       /> */}
-      {/*     ))} */}
-      {/*   /> */}
-      {/* </LazyLoadingContainer> */}
+      <LazyLoadingContainer>
+        <EpisodeSliderPanel
+          episodes={episodes}
+          current={currentEpisode.id}
+          applyNewEpisode={applyNewEpisode}
+        />
+      </LazyLoadingContainer>
     </>
   );
 }

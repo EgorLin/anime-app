@@ -9,6 +9,7 @@ interface IProps {
   image: string;
   number: number;
   applyNewEpisode: (id: string) => void;
+  isActive: boolean;
 }
 
 function EpisodeCard({
@@ -17,6 +18,7 @@ function EpisodeCard({
   image,
   number,
   applyNewEpisode,
+  isActive,
 }: IProps): ReactElement {
   const episodeWindow = <EpisodeBox>{number}</EpisodeBox>;
   const englishTitle: ILanguageTitles = {
@@ -32,12 +34,13 @@ function EpisodeCard({
   return (
     <EmptyCard
       imageSize={CardSizes.WIDE}
-      hasPlayButton
+      isMainContentIn
       visibleRightCorner
       title={englishTitle}
       image={image}
       rightCornerContent={episodeWindow}
       onClick={applyEpisode}
+      hasGlowing={isActive}
     />
   );
 }
