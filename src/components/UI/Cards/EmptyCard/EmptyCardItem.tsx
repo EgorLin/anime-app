@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
+import PlayIcon from "../../../../assets/icons/PlayIcon/PlayIcon";
 import Bookmark from "../../Bookmark/Bookmark";
-import PlayIcon from "../../PlayIcon/PlayIcon";
 import styles from "./EmptyCard.module.scss";
 
 interface IProps {

@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 import { NavLink } from "react-router-dom";
+import PlayIcon from "../../assets/icons/PlayIcon/PlayIcon";
+import StarIcon from "../../assets/icons/StarIcon/StarIcon";
 import { IAnimeInfo } from "../../types/IAnimeInfo";
-import PlayIcon from "../UI/PlayIcon/PlayIcon";
-import StarIcon from "../UI/StarIcon/StarIcon";
 import styles from "./Details.module.scss";
 
 interface IProps {

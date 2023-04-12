@@ -5,25 +5,23 @@ import { RouteNames } from "../../router";
 import { Link } from "react-router-dom";
 import AccountIcon from "../../assets/icons/AccountIcon/AccountIcon";
 import LogInIcon from "../../assets/icons/LogInIcon/LogInIcon";
+import SmallButton from "../UI/SmallButton/SmallButton";
 
 interface IProps {
   isAuth: boolean;
   username: string;
-  logOut: () => void;
 }
 
-function ControlPanelItem({ isAuth, username, logOut }: IProps): ReactElement {
+function ControlPanelItem({ isAuth, username }: IProps): ReactElement {
   let content;
 
   if (isAuth) {
     content = (
-      <span className={styles.text} onClick={logOut}>
-        {username}
-
-        <ButtonIcon className={styles.button}>
-          <AccountIcon />
-        </ButtonIcon>
-      </span>
+      <SmallButton
+        text={username}
+        icon={<AccountIcon />}
+        to={RouteNames.PROFILE}
+      />
     );
   } else {
     content = (

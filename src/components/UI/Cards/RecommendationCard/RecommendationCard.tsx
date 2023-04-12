@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
+import StarIcon from "../../../../assets/icons/StarIcon/StarIcon";
 import useNavigateAnime from "../../../../hooks/useNavigateAnime";
 import { ILanguageTitles } from "../../../../types/ILanguageTitles";
-import StarIcon from "../../StarIcon/StarIcon";
 import YearWindow from "../../YearWindow/YearWindow";
 import EmptyCard, { CardSizes } from "../EmptyCard/EmptyCard";
 

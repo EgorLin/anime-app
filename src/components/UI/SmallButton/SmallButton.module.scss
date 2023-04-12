@@ -1,0 +1,15 @@
+@use "/src/styles/colors";
+@use "/src/styles/mixins/transitions";
+
+.text {
+  @include transitions.default(color);
+}
+
+.text:hover {
+  color: colors.$font-accent;
+  @include transitions.default(color);
+}
+
+.button {
+  margin-left: 0.5rem;
+}

@@ -16,9 +16,7 @@ function ControlPanel(): ReactElement {
     signOut(auth);
     dispatch(clearUserData());
   }
-  return (
-    <ControlPanelItem isAuth={isAuth} username={username} logOut={logOut} />
-  );
+  return <ControlPanelItem isAuth={isAuth} username={username} />;
 }
 
 export default ControlPanel;

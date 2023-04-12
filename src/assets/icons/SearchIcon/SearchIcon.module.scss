@@ -1,0 +1,12 @@
+@use "/src/styles/colors";
+@use "/src/styles/mixins/transitions";
+
+.image {
+  height: 2rem;
+  width: 2rem;
+}
+
+.magnifier {
+  fill: colors.$bg-accent;
+  @include transitions.default(fill);
+}
