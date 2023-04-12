@@ -1,6 +1,3 @@
-import { RequestStatuses } from "../../../const/requestStatuses";
-import { useAppSelector } from "../../../hooks/redux";
-import { selectAnimeRelations } from "../../../store/reducers/AnimeInfoSlice";
 import { IAnimeRelation } from "../../../types/IAnimeRelation";
 import RelationCard from "../../UI/Cards/RelationCard/RelationCard";
 import EmptySliderPanel from "../EmptySliderPanel/EmptySliderPanel";
@@ -10,7 +7,6 @@ interface IProps {
 }
 
 function RelationSliderPanel({ relations }: IProps) {
-  console.log(relations);
   return (
     <EmptySliderPanel
       title="Relations"
