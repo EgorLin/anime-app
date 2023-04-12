@@ -3,6 +3,7 @@
 
 .text {
   @include transitions.default(color);
+  cursor: pointer;
 }
 
 .text:hover {

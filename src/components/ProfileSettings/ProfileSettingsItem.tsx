@@ -1,12 +1,24 @@
 import { ReactElement } from "react";
-import ControlPanel from "../ControlPanel/ControlPanel";
+import LogInIcon from "../../assets/icons/LogInIcon/LogInIcon";
+import LogOutIcon from "../../assets/icons/LogOutIcon/LogOutIcon";
+import { RouteNames } from "../../router";
+import SmallButton from "../UI/SmallButton/SmallButton";
 import styles from "./ProfileSettings.module.scss";
 
-function ProfileSettingsItem(): ReactElement {
+interface IProps {
+  logOut: () => void;
+}
+
+function ProfileSettingsItem({ logOut }: IProps): ReactElement {
   return (
     <div className={[styles.container, "wrapperM"].join(" ")}>
       <span className={styles.username}>name</span>
-      <ControlPanel />
+      <SmallButton
+        text="Log out"
+        to={RouteNames.HOME}
+        onClick={logOut}
+        icon={<LogOutIcon />}
+      />
     </div>
   );
 }
