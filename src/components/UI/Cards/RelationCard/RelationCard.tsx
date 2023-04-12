@@ -29,6 +29,7 @@ function RelationCard({
 
   return (
     <EmptyCard
+      animeId={id + ""}
       imageSize={CardSizes.SMALL}
       hasBookmark
       hasPlayButton

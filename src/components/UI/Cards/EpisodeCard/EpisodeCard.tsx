@@ -33,6 +33,7 @@ function EpisodeCard({
 
   return (
     <EmptyCard
+      animeId=""
       imageSize={CardSizes.WIDE}
       isMainContentIn
       visibleRightCorner

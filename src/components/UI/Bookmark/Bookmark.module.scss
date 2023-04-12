@@ -1,5 +1,5 @@
-@use '/src/styles/colors';
-@use '/src/styles/mixins/transitions';
+@use "/src/styles/colors";
+@use "/src/styles/mixins/transitions";
 
 .container {
   width: 3rem;
@@ -9,21 +9,4 @@
   align-items: center;
   justify-content: center;
   border-radius: 1rem;
-
-  &:hover {
-    & path {
-      fill: colors.$font-yel-accent;
-      @include transitions.default(fill);
-    }
-  }
-
-  & svg {
-    width: 2.2rem;
-    height: 2.2rem;
-  }
-
-  & path {
-    fill: colors.$bg-accent;
-    @include transitions.default(fill);
-  }
 }

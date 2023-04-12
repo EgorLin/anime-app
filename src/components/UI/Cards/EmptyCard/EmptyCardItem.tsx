@@ -4,6 +4,7 @@ import Bookmark from "../../Bookmark/Bookmark";
 import styles from "./EmptyCard.module.scss";
 
 interface IProps {
+  animeId: string;
   isMainContentIn: boolean;
   imgSize: string;
   hasBookmark: boolean;
@@ -29,6 +30,7 @@ function EmptyCardItem({
   title,
   image,
   onClick,
+  animeId,
 }: IProps): ReactElement {
   return (
     <div onClick={() => onClick()} className={styles.container}>
@@ -46,7 +48,9 @@ function EmptyCardItem({
         />
       </div>
 
-      {hasBookmark && <Bookmark className={styles.bookmark} />}
+      {hasBookmark && (
+        <Bookmark className={styles.bookmark} animeId={animeId} />
+      )}
       <div
         className={[
           styles.rightCornerContent,

@@ -1,4 +1,5 @@
 import { ReactElement, useEffect } from "react";
+import { RequestStatuses } from "../../../const/requestStatuses";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import {
   clearSearchResults,
@@ -24,9 +25,13 @@ function SearchCatalog(): ReactElement {
   }
 
   useEffect(() => {
-    // if (search.status === RequestStatuses.IDLE) {
-    dispatch(fetchAnimeSearch());
-    // }
+    if (search.status === RequestStatuses.IDLE) {
+      dispatch(fetchAnimeSearch());
+
+      // return () => {
+      //   dispatch(clearSearchResults);
+      // };
+    }
   }, [currentPage]);
 
   return (

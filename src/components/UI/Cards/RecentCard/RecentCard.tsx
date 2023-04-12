@@ -26,6 +26,7 @@ function RecentCard({
 
   return (
     <EmptyCard
+      animeId={id}
       imageSize={CardSizes.AUTO}
       hasBookmark
       hasPlayButton

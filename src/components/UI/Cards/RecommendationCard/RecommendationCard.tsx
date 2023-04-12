@@ -26,6 +26,9 @@ function RecommendationCard({
       <StarIcon /> {rating}
     </YearWindow>
   );
+
+  function changeBookmark() { }
+
   const list = [];
   if (type) {
     list.push(type);
@@ -33,6 +36,7 @@ function RecommendationCard({
 
   return (
     <EmptyCard
+      animeId={id + ""}
       imageSize={CardSizes.SMALL}
       hasBookmark
       hasPlayButton

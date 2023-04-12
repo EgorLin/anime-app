@@ -24,6 +24,7 @@ function TrendingCard({
 
   return (
     <EmptyCard
+      animeId={id}
       imageSize={CardSizes.WIDE}
       isMainContentIn
       hasBookmark

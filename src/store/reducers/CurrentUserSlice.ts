@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAuth, signOut } from "firebase/auth";
 import { IUserData } from "../../types/IUserData";
 import { RootState } from "../store";
 
@@ -11,6 +10,7 @@ const initialState: IAuth = {
   isAuth: false,
   username: "",
   email: "",
+  favorites: [],
 };
 
 export const CurrentUserSlice = createSlice({
@@ -21,11 +21,13 @@ export const CurrentUserSlice = createSlice({
       state.isAuth = true;
       state.username = action.payload.username;
       state.email = action.payload.email;
+      state.favorites = action.payload.favorites;
     },
     clearUserData(state) {
       state.isAuth = false;
       state.username = "";
       state.email = "";
+      state.favorites = [];
     },
   },
 });

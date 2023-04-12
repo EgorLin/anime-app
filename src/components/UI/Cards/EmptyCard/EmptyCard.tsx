@@ -21,12 +21,14 @@ interface IProps {
   title: ILanguageTitles;
   image: string;
   onClick: () => void;
+  animeId: string;
 }
 
 function EmptyCard({
   title,
   image,
   onClick,
+  animeId,
   isMainContentIn = false,
   imageSize = CardSizes.SMALL,
   hasBookmark = false,
@@ -56,6 +58,7 @@ function EmptyCard({
 
   return (
     <EmptyCardItem
+      animeId={animeId}
       isMainContentIn={isMainContentIn}
       imgSize={imgSize}
       hasBookmark={hasBookmark}
