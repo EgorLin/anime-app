@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 import Details from "../../components/Details/Details";
 import EpisodeSection from "../../components/EpisodeSection/EpisodeSection";
 import LazyLoadingContainer from "../../components/LazyLoadingContainer/LazyLoadingContainer";
+import RecommendationSliderPanel from "../../components/SliderPanels/RecommendationSliderPanel/RecommendationSliderPanel";
 import RelationSliderPanel from "../../components/SliderPanels/RelationSliderPanel/RelationSliderPanel";
 // import SliderPanel from "../../components/SliderPanel/SliderPanel";
 import RecommendationCard from "../../components/UI/Cards/RecommendationCard/RecommendationCard";
@@ -54,22 +55,11 @@ function AnimePageItem({
             </LazyLoadingContainer>
           )}
 
-          {/* {recommendations.length > 0 && ( */}
-          {/*   <LazyLoadingContainer> */}
-          {/*     <SliderPanel */}
-          {/*       title="Recommendations" */}
-          {/*       elements={recommendations.map((recommendation) => ( */}
-          {/*         <RecommendationCard */}
-          {/*           id={recommendation.id} */}
-          {/*           title={recommendation.title} */}
-          {/*           type={recommendation.type} */}
-          {/*           image={recommendation.image} */}
-          {/*           rating={recommendation.rating} */}
-          {/*         /> */}
-          {/*       ))} */}
-          {/*     /> */}
-          {/*   </LazyLoadingContainer> */}
-          {/* )} */}
+          {recommendations.length > 0 && (
+            <LazyLoadingContainer>
+              <RecommendationSliderPanel recommendations={recommendations} />
+            </LazyLoadingContainer>
+          )}
         </div>
       );
       break;
