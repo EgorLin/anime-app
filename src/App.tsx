@@ -23,7 +23,7 @@ function App(): ReactElement {
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
-      if (user) {
+      if (user)  {
         setIsLoading(true);
         const docRef = doc(firestoreDB, "users", user.uid);
         const docSnap = await getDoc(docRef);
