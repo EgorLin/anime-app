@@ -37,3 +37,5 @@ export default CurrentUserSlice.reducer;
 export const { setCurrentUser, clearUserData } = CurrentUserSlice.actions;
 
 export const selectCurrentUser = (store: RootState) => store.currentUser;
+export const selectCurrentUserFavorites = (store: RootState) =>
+  store.currentUser.favorites;

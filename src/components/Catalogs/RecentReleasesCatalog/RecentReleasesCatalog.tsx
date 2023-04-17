@@ -5,12 +5,14 @@ import {
   fetchAnimeRecent,
   selectAnimeRecent,
 } from "../../../store/reducers/AnimeRecentSlice";
+import { selectCurrentUserFavorites } from "../../../store/reducers/CurrentUserSlice";
 import RecentCard from "../../UI/Cards/RecentCard/RecentCard";
 import EmptyCatalog from "../EmptyCatalog/EmptyCatalog";
 
 function RecentReleasesCatalog(): ReactElement {
   const dispatch = useAppDispatch();
   const recent = useAppSelector(selectAnimeRecent);
+  const favorites = useAppSelector(selectCurrentUserFavorites);
 
   const changePage = useCallback(() => {
     if (recent.data.hasNextPage) {

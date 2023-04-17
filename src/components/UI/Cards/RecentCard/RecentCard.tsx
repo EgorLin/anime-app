@@ -26,7 +26,6 @@ function RecentCard({
 
   return (
     <EmptyCard
-      animeId={id}
       imageSize={CardSizes.AUTO}
       hasBookmark
       hasPlayButton
@@ -35,6 +34,7 @@ function RecentCard({
       list={genres}
       onClick={openAnime}
       rightCornerContent={episodeWindow}
+      animeId={id}
     />
   );
 }
