@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import AnimeService from "../../api/AnimeService";
 import { RequestStatuses } from "../../const/requestStatuses";
 import { hostUrl, UrlPaths } from "../../const/urlConsts";
 import { IAnimeRecent } from "../../types/IAnimeRecent";
@@ -21,12 +22,7 @@ const initialState: IDataFetch<IAnimeRecent> = {
 export const fetchAnimeRecent = createAsyncThunk(
   "animeRecent/fetch",
   async (page: number) => {
-    const url = hostUrl + UrlPaths.RECENT;
-    const response = await axios.get<IAnimeRecent>(url, {
-      params: {
-        page: page,
-      },
-    });
+    const response = await AnimeService.getAnimeRecent(page);
     return response.data;
   }
 );

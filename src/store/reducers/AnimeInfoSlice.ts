@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import AnimeService from "../../api/AnimeService";
 import { AnimeFormat } from "../../const/animeConsts";
 import { RequestStatuses } from "../../const/requestStatuses";
 import { hostUrl, UrlPaths } from "../../const/urlConsts";
@@ -61,10 +62,7 @@ const initialState: IDataFetch<IAnimeInfo> = {
 export const fetchAnimeInfo = createAsyncThunk(
   "animeInfo/fetch",
   async (id: string = "1") => {
-    const url = hostUrl + UrlPaths.INFO + id;
-    const response = await axios.get<IAnimeInfo>(url, {
-      params: { provider: "gogoanime" },
-    });
+    const response = await AnimeService.getAnimeInfo(id);
     return response.data;
   }
 );
