@@ -1,4 +1,6 @@
-import { MouseEvent, ReactElement } from "react";
+import { MouseEvent, ReactElement, useEffect } from "react";
+import { useAppSelector } from "../../../hooks/redux";
+import { selectCurrentUserFavorites } from "../../../store/reducers/CurrentUserSlice";
 import BookmarkItem from "./BookmarkItem";
 
 interface IProps {
@@ -8,10 +10,13 @@ interface IProps {
 }
 
 function Bookmark({ className, isBooked, onClick }: IProps): ReactElement {
+  const favorite = useAppSelector(selectCurrentUserFavorites);
   function handleClick(e: MouseEvent<HTMLDivElement>) {
     e.stopPropagation();
     onClick();
   }
+
+  useEffect(() => { }, [favorite]);
 
   return (
     <BookmarkItem

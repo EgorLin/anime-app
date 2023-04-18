@@ -1,22 +1,14 @@
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 import EmptyCardItem from "./EmptyCardItem";
 import styles from "./EmptyCard.module.scss";
 import { ILanguageTitles } from "../../../../types/ILanguageTitles";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../../hooks/redux";
 import { getAuth } from "firebase/auth";
-import {
-  arrayRemove,
-  arrayUnion,
-  doc,
-  getDoc,
-  updateDoc,
-} from "firebase/firestore";
-import { firestoreDB } from "../../../../firebase";
-import { setCurrentUser } from "../../../../store/reducers/CurrentUserSlice";
-import { IUserData } from "../../../../types/IUserData";
+import { setUserFavorites } from "../../../../store/reducers/CurrentUserSlice";
 import { RouteNames } from "../../../../router";
 import { useFavorite } from "../../../../hooks/useFavorite";
+import FirebaseService from "../../../../api/FirebaseService";
 
 export enum CardSizes {
   WIDE = "wide",
@@ -55,7 +47,7 @@ function EmptyCard({
 }: IProps): ReactElement {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [isBooked, setIsBooked] = useState(useFavorite(animeId));
+  const isBooked = useFavorite(animeId);
 
   let imgSize = "";
   if (imageSize === CardSizes.WIDE) {
@@ -79,21 +71,21 @@ function EmptyCard({
     const auth = getAuth();
 
     if (auth.currentUser) {
-      const docRef = doc(firestoreDB, "users", auth.currentUser.uid);
+      let data;
       if (isBooked) {
-        await updateDoc(docRef, {
-          favorites: arrayRemove(animeId),
-        });
+        data = await FirebaseService.removeUserFavorite(
+          auth.currentUser.uid,
+          animeId
+        );
       } else {
-        await updateDoc(docRef, {
-          favorites: arrayUnion(animeId),
-        });
+        data = await FirebaseService.addUserFavorite(
+          auth.currentUser.uid,
+          animeId
+        );
       }
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        dispatch(setCurrentUser(docSnap.data() as IUserData));
+      if (data) {
+        dispatch(setUserFavorites(data.favorites));
       }
-      setIsBooked((ib) => !ib);
     } else {
       navigate(RouteNames.LOGIN);
     }

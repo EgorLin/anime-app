@@ -8,10 +8,8 @@ import {
   setCurrentUser,
 } from "./store/reducers/CurrentUserSlice";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { firestoreDB } from "./firebase";
-import { doc, getDoc } from "firebase/firestore";
-import { IUserData } from "./types/IUserData";
 import Spinner from "./components/UI/Spinner/Spinner";
+import FirebaseService from "./api/FirebaseService";
 
 function App(): ReactElement {
   const auth = getAuth();
@@ -23,12 +21,11 @@ function App(): ReactElement {
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
-      if (user)  {
+      if (user) {
         setIsLoading(true);
-        const docRef = doc(firestoreDB, "users", user.uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          dispatch(setCurrentUser(docSnap.data() as IUserData));
+        const data = await FirebaseService.getUserData(user.uid);
+        if (data) {
+          dispatch(setCurrentUser(data));
         }
       }
       setIsLoading(false);

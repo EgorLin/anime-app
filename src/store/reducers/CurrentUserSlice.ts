@@ -23,6 +23,9 @@ export const CurrentUserSlice = createSlice({
       state.email = action.payload.email;
       state.favorites = action.payload.favorites;
     },
+    setUserFavorites(state, action) {
+      state.favorites = action.payload;
+    },
     clearUserData(state) {
       state.isAuth = false;
       state.username = "";
@@ -34,7 +37,8 @@ export const CurrentUserSlice = createSlice({
 
 export default CurrentUserSlice.reducer;
 
-export const { setCurrentUser, clearUserData } = CurrentUserSlice.actions;
+export const { setCurrentUser, setUserFavorites, clearUserData } =
+  CurrentUserSlice.actions;
 
 export const selectCurrentUser = (store: RootState) => store.currentUser;
 export const selectCurrentUserFavorites = (store: RootState) =>

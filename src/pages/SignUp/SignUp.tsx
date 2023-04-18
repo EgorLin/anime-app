@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FirebaseService from "../../api/FirebaseService";
 import { firestoreDB } from "../../firebase";
 import { RouteNames } from "../../router";
 import SignUpItem from "./SignUpItem";
@@ -18,12 +19,10 @@ function SignUp(): ReactElement {
 
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
-        const docRef = await setDoc(
-          doc(firestoreDB, "users", userCredential.user.uid),
-          {
-            username: nickname,
-            email: email,
-          }
+        await FirebaseService.addNewUser(
+          userCredential.user.uid,
+          nickname,
+          email
         );
         navigate(RouteNames.HOME);
       })
