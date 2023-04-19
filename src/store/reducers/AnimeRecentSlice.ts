@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import AnimeService from "../../api/AnimeService";
 import { RequestStatuses } from "../../const/requestStatuses";
-import { hostUrl, UrlPaths } from "../../const/urlConsts";
 import { IAnimeRecent } from "../../types/IAnimeRecent";
 import { IDataFetch } from "../../types/IDataFetch";
 import { RootState } from "../store";

@@ -1,11 +1,15 @@
 import { getAuth, signOut } from "firebase/auth";
 import { ReactElement } from "react";
-import { useAppDispatch } from "../../hooks/redux";
-import { clearUserData } from "../../store/reducers/CurrentUserSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import {
+  clearUserData,
+  selectCurrentUser,
+} from "../../store/reducers/CurrentUserSlice";
 import ProfileSettingsItem from "./ProfileSettingsItem";
 
 function ProfileSettings(): ReactElement {
   const dispatch = useAppDispatch();
+  const { username } = useAppSelector(selectCurrentUser);
 
   function logOut() {
     const auth = getAuth();
@@ -13,7 +17,7 @@ function ProfileSettings(): ReactElement {
     dispatch(clearUserData());
   }
 
-  return <ProfileSettingsItem logOut={logOut} />;
+  return <ProfileSettingsItem username={username} logOut={logOut} />;
 }
 
 export default ProfileSettings;

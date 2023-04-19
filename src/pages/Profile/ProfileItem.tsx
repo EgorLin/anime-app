@@ -9,17 +9,6 @@ function ProfileItem(): ReactElement {
       <h1 className={[styles.title, "wrapperM"].join(" ")}>Profile</h1>
       <ProfileSettings />
       <FavoriteCatalog />
-      {/* <Catalog */}
-      {/*   elements={[ */}
-      {/*     <VideoCard className={styles.card} />, */}
-      {/*     <VideoCard className={styles.card} />, */}
-      {/*     <VideoCard className={styles.card} />, */}
-      {/*     <VideoCard className={styles.card} />, */}
-      {/*     <VideoCard className={styles.card} />, */}
-      {/*     <VideoCard className={styles.card} />, */}
-      {/*     <VideoCard className={styles.card} />, */}
-      {/*   ]} */}
-      {/* /> */}
     </div>
   );
 }

@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import Input from "../../components/UI/Input/Input";
 import Logo from "../../components/UI/Logo/Logo";
 import { RouteNames } from "../../router";
+import { IInput } from "../../types/IInput";
 import styles from "./LogIn.module.scss";
 
 interface IProps {
-  email: string;
+  email: IInput;
   changeEmail: (newValue: string) => void;
-  password: string;
+  password: IInput;
   changePassword: (newValue: string) => void;
   handleLogin: () => void;
 }
@@ -28,14 +29,18 @@ function LogInItem({
           className={styles.input}
           placeholder="Email"
           type="email"
-          value={email}
+          value={email.input.value}
+          errors={email.errors}
+          isDirty={email.isDirty}
           changeValue={changeEmail}
         />
         <Input
           className={styles.input}
           placeholder="Password"
           type="password"
-          value={password}
+          value={password.input.value}
+          errors={password.errors}
+          isDirty={password.isDirty}
           changeValue={changePassword}
         />
         <div onClick={handleLogin} className={styles.button}>

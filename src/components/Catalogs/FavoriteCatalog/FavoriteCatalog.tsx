@@ -2,14 +2,7 @@ import { AxiosResponse } from "axios";
 import { ReactElement, useEffect, useState } from "react";
 import AnimeService from "../../../api/AnimeService";
 import { RequestStatuses } from "../../../const/requestStatuses";
-import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
-import {
-  fetchAnimeSearch,
-  increaseSearchPage,
-  selectAnimeSearchData,
-  selectAnimeSearchDataHasNextPage,
-  selectAnimeSearchSettingsPage,
-} from "../../../store/reducers/AnimeSearchSlice";
+import { useAppSelector } from "../../../hooks/redux";
 import { selectCurrentUserFavorites } from "../../../store/reducers/CurrentUserSlice";
 import { IAnimeInfo } from "../../../types/IAnimeInfo";
 import SearchCard from "../../UI/Cards/SearchCard/SearchCard";
@@ -21,15 +14,6 @@ function FavoriteCatalog(): ReactElement {
     AxiosResponse<IAnimeInfo>[]
   >([]);
 
-  // const currentPage = useAppSelector(selectAnimeSearchSettingsPage);
-  // const hasNextPage = useAppSelector(selectAnimeSearchDataHasNextPage);
-
-  // function loadNextItems() {
-  //   if (hasNextPage) {
-  //     dispatch(increaseSearchPage());
-  //   }
-  // }
-  //
   async function fetchData() {
     const promises = [];
     for (const favorite of favorites) {
@@ -42,28 +26,15 @@ function FavoriteCatalog(): ReactElement {
       (error) => console.log(error)
     );
   }
-  // cannot change bookmark state!!!!!!!!!!!!!!!!!
   function loadNextItems() { }
 
   useEffect(() => {
     fetchData();
-    // if (search.status === RequestStatuses.IDLE) {
-    // dispatch(fetchAnimeSearch());
-
-    // return () => {
-    //   dispatch(clearSearchResults);
-    // };
-    // }
-  }, [
-    favorites,
-    /* currentPage */
-  ]);
-
-  // return <div>catalog</div>;
+  }, [favorites]);
 
   return (
     <>
-      {favoritesData.length > 0 ? (
+      {favoritesData.length > 0 && (
         <EmptyCatalog
           title="Favorites"
           status={RequestStatuses.SUCCEEDED}
@@ -83,8 +54,6 @@ function FavoriteCatalog(): ReactElement {
               )
           )}
         />
-      ) : (
-        <div>No results</div>
       )}
     </>
   );
