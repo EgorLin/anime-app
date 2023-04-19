@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { memo, ReactElement } from "react";
 import PlayIcon from "../../../../assets/icons/PlayIcon/PlayIcon";
 import Bookmark from "../../Bookmark/Bookmark";
 import styles from "./EmptyCard.module.scss";
@@ -79,4 +79,4 @@ function EmptyCardItem({
   );
 }
 
-export default EmptyCardItem;
+export default memo(EmptyCardItem);

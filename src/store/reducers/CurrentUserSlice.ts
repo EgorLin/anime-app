@@ -43,3 +43,5 @@ export const { setCurrentUser, setUserFavorites, clearUserData } =
 export const selectCurrentUser = (store: RootState) => store.currentUser;
 export const selectCurrentUserFavorites = (store: RootState) =>
   store.currentUser.favorites;
+export const selectCurrentUserUsername = (store: RootState) =>
+  store.currentUser.username;

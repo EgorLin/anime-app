@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useCallback } from "react";
 import EmptyCardItem from "./EmptyCardItem";
 import styles from "./EmptyCard.module.scss";
 import { ILanguageTitles } from "../../../../types/ILanguageTitles";
@@ -67,7 +67,7 @@ function EmptyCard({
     animeTitle = title.native;
   }
 
-  async function changeBookmark(): Promise<void> {
+  const changeBookmark = useCallback(async () => {
     const auth = getAuth();
 
     if (auth.currentUser) {
@@ -89,7 +89,7 @@ function EmptyCard({
     } else {
       navigate(RouteNames.LOGIN);
     }
-  }
+  }, [isBooked]);
 
   return (
     <EmptyCardItem

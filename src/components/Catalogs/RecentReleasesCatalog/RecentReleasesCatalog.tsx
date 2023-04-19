@@ -1,18 +1,23 @@
-import { ReactElement, useCallback, useEffect, useState } from "react";
+import { ReactElement, useCallback, useEffect } from "react";
 import { RequestStatuses } from "../../../const/requestStatuses";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import {
   fetchAnimeRecent,
   selectAnimeRecent,
 } from "../../../store/reducers/AnimeRecentSlice";
-import { selectCurrentUserFavorites } from "../../../store/reducers/CurrentUserSlice";
 import RecentCard from "../../UI/Cards/RecentCard/RecentCard";
 import EmptyCatalog from "../EmptyCatalog/EmptyCatalog";
+import { compareId } from "../../../helpers/compareFunctions";
+import { IAnimeRecent } from "../../../types/IAnimeRecent";
+import { IDataFetch } from "../../../types/IDataFetch";
+import { shallowEqual } from "react-redux";
 
 function RecentReleasesCatalog(): ReactElement {
   const dispatch = useAppDispatch();
-  const recent = useAppSelector(selectAnimeRecent);
-  const favorites = useAppSelector(selectCurrentUserFavorites);
+  const recent = useAppSelector(
+    selectAnimeRecent
+    // shallowEqual
+  );
 
   const changePage = useCallback(() => {
     if (recent.data.hasNextPage) {

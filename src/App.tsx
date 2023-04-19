@@ -2,11 +2,8 @@ import "./styles/app.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ReactElement, useEffect, useState } from "react";
 import { privateRoutes, publicRoutes } from "./router";
-import { useAppDispatch, useAppSelector } from "./hooks/redux";
-import {
-  selectCurrentUser,
-  setCurrentUser,
-} from "./store/reducers/CurrentUserSlice";
+import { useAppDispatch } from "./hooks/redux";
+import { setCurrentUser } from "./store/reducers/CurrentUserSlice";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Spinner from "./components/UI/Spinner/Spinner";
 import FirebaseService from "./api/FirebaseService";
@@ -14,10 +11,11 @@ import FirebaseService from "./api/FirebaseService";
 function App(): ReactElement {
   const auth = getAuth();
   const dispatch = useAppDispatch();
-  const { isAuth } = useAppSelector(selectCurrentUser);
   const [isLoading, setIsLoading] = useState(true);
 
-  const router = createBrowserRouter(isAuth ? privateRoutes : publicRoutes);
+  const router = createBrowserRouter(
+    auth.currentUser ? privateRoutes : publicRoutes
+  );
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
