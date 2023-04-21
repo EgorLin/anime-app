@@ -1,43 +1,66 @@
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 import LogInItem from "./LogInItem";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import {
+  IFormConfig,
+  InputErrorTypes,
+  InputTypes,
+  useValidation,
+} from "../../hooks/useInput";
 import { RouteNames } from "../../router";
-import useInput from "../../hooks/useInput";
 
 function LogIn(): ReactElement {
-  // const [email, setEmail] = useState("");
-  const email = useInput("", { isEmpty: true, minLength: 6 });
-  const password = useInput("", { isEmpty: true, minLength: 6 });
+  const config: IFormConfig = {
+    fields: [
+      {
+        type: InputTypes.EMAIL,
+        isRequired: true,
+        template: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+      },
+      {
+        type: InputTypes.PASSWORD,
+        isRequired: true,
+        minLength: 6,
+      },
+    ],
+    onSubmit: (e) => {
+      e.preventDefault();
+      handleSubmit();
+    },
+  };
+  const inputData = useValidation(config);
+
   const navigate = useNavigate();
 
-  function handleLogin(): void {
+  function handleSubmit() {
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email.input.value, password.input.value)
+    let isErrorExist = false;
+    const email = inputData.fields.find(
+      (field) => field.type === InputTypes.EMAIL
+    );
+    const password = inputData.fields.find(
+      (field) => field.type === InputTypes.PASSWORD
+    );
+    console.log(inputData, email!.value, password!.value);
+    signInWithEmailAndPassword(auth, email!.value, password!.value)
       .then((userCredential) => { })
       .catch((error) => {
-        console.log(error);
+        isErrorExist = true;
+        if (error.code === "auth/invalid-email") {
+          email?.addCustomErrorMessage("Incorrect email or password");
+        }
+        console.log(error.code);
+        return;
+      })
+      .finally(() => {
+        if (!isErrorExist) {
+          navigate(RouteNames.HOME);
+        }
       });
-    navigate(RouteNames.HOME);
   }
 
-  function changeEmail(newValue: string): void {
-    email.input.onChange(newValue);
-  }
-
-  function changePassword(newValue: string): void {
-    password.input.onChange(newValue);
-  }
-
-  return (
-    <LogInItem
-      email={email}
-      changeEmail={changeEmail}
-      password={password}
-      changePassword={changePassword}
-      handleLogin={handleLogin}
-    />
-  );
+  return <LogInItem inputData={inputData} />;
 }
 
 export default LogIn;

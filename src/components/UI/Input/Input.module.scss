@@ -2,6 +2,10 @@
 @use "/src/styles/sizes";
 @use "/src/styles/mixins/transitions";
 
+.container {
+  width: 100%;
+}
+
 .input {
   width: 100%;
   background-color: colors.$bg-secondary;
@@ -17,4 +21,16 @@
     border: 0.2rem solid rgba(colors.$bg-accent, 0.6);
     @include transitions.default(border);
   }
+}
+
+.error {
+  font-size: 1.4rem;
+  margin-bottom: 0.5em;
+  color: colors.$font-error;
+  position: relative;
+  left: 1.8rem;
+}
+
+.errorColor {
+  border: 0.2rem solid colors.$bg-error;
 }

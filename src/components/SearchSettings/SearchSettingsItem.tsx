@@ -76,7 +76,12 @@ function SearchSettingsItem({
         value={status}
         onChange={changeStatus}
       />
-      <Input className={styles.input} value={year} changeValue={changeYear} />
+      <Input
+        type=""
+        className={styles.input}
+        value={year}
+        changeValue={changeYear}
+      />
     </div>
   );
 }

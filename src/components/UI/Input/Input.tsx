@@ -1,15 +1,15 @@
 import { ChangeEvent, ReactElement } from "react";
-import { IInputError } from "../../../types/IInput";
+import { IInputErrors } from "../../../hooks/useInput";
 import styles from "./Input.module.scss";
 
 interface IProps {
   className?: string;
   placeholder?: string;
-  type?: string;
-  errors?: IInputError;
+  type: string;
+  errors?: IInputErrors;
   isDirty?: boolean;
   value: string;
-  changeValue: (newValue: string) => void;
+  changeValue: (value: string) => void;
 }
 
 function Input({
@@ -21,27 +21,37 @@ function Input({
   isDirty,
   changeValue,
 }: IProps): ReactElement {
+  const errorsArr = [];
+  console.log(errors);
+  for (const error in errors) {
+    const message = errors[error as keyof typeof errors];
+    if (message)
+      errorsArr.push(
+        <div key={error} className={styles.error}>
+          {message}
+        </div>
+      );
+  }
+
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     changeValue(e.target.value);
   }
-  const errorsArr = [];
-  for (const error in errors) {
-    errorsArr.push(
-      <div key={error}>{errors[error as keyof typeof errors]}</div>
-    );
-  }
 
   return (
-    <>
-      {isDirty && <div>{errorsArr}</div>}
+    <div className={styles.container}>
+      {isDirty && <div>{errorsArr[0]}</div>}
       <input
         value={value}
         onChange={(e) => handleChange(e)}
         placeholder={placeholder}
-        className={[styles.input, className].join(" ")}
+        className={[
+          styles.input,
+          errorsArr.length > 0 ? styles.errorColor : "",
+          className,
+        ].join(" ")}
         type={type}
       />
-    </>
+    </div>
   );
 }
 

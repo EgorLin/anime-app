@@ -1,8 +1,6 @@
 import { ReactElement } from "react";
-import ButtonIcon from "../UI/ButtonIcon/ButtonIcon";
 import styles from "./ControlPanel.module.scss";
 import { RouteNames } from "../../router";
-import { Link } from "react-router-dom";
 import AccountIcon from "../../assets/icons/AccountIcon/AccountIcon";
 import LogInIcon from "../../assets/icons/LogInIcon/LogInIcon";
 import SmallButton from "../UI/SmallButton/SmallButton";

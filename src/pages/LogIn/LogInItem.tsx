@@ -2,50 +2,38 @@ import { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import Input from "../../components/UI/Input/Input";
 import Logo from "../../components/UI/Logo/Logo";
+import { IForm } from "../../hooks/useInput";
 import { RouteNames } from "../../router";
-import { IInput } from "../../types/IInput";
 import styles from "./LogIn.module.scss";
 
 interface IProps {
-  email: IInput;
-  changeEmail: (newValue: string) => void;
-  password: IInput;
-  changePassword: (newValue: string) => void;
-  handleLogin: () => void;
+  inputData: IForm;
 }
 
-function LogInItem({
-  email,
-  changeEmail,
-  password,
-  changePassword,
-  handleLogin,
-}: IProps): ReactElement {
+function LogInItem({ inputData }: IProps): ReactElement {
+  const inputs = inputData.fields.map((input) => (
+    <Input
+      key={input.type}
+      className={styles.input}
+      placeholder={input.type[0].toUpperCase() + input.type.slice(1)}
+      type={input.type}
+      value={input.value}
+      errors={input.errors}
+      isDirty={true}
+      changeValue={input.onChange}
+    />
+  ));
   return (
     <div className={styles.container}>
       <div className={styles.window}>
         <Logo className={styles.logo} />
-        <Input
-          className={styles.input}
-          placeholder="Email"
-          type="email"
-          value={email.input.value}
-          errors={email.errors}
-          isDirty={email.isDirty}
-          changeValue={changeEmail}
-        />
-        <Input
-          className={styles.input}
-          placeholder="Password"
-          type="password"
-          value={password.input.value}
-          errors={password.errors}
-          isDirty={password.isDirty}
-          changeValue={changePassword}
-        />
-        <div onClick={handleLogin} className={styles.button}>
+        {inputs}
+        <button
+          className={styles.button}
+          onClick={(e) => inputData.onSubmit(e)}
+        >
           Log In
-        </div>
+        </button>
         <p>
           Don't have an account?{" "}
           <Link to={RouteNames.SINGUP} className={styles.signUp}>

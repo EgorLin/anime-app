@@ -1,14 +1,12 @@
-import { getAuth } from "firebase/auth";
 import { ReactElement } from "react";
 import { useAppSelector } from "../../hooks/redux";
-import { selectCurrentUserUsername } from "../../store/reducers/CurrentUserSlice";
+import { selectCurrentUser } from "../../store/reducers/CurrentUserSlice";
 import ControlPanelItem from "./ControlPanelItem";
 
 function ControlPanel(): ReactElement {
-  const user = getAuth().currentUser;
-  const username = useAppSelector(selectCurrentUserUsername);
+  const { isAuth, username } = useAppSelector(selectCurrentUser);
 
-  return <ControlPanelItem isAuth={!!user} username={username} />;
+  return <ControlPanelItem isAuth={isAuth} username={username} />;
 }
 
 export default ControlPanel;
