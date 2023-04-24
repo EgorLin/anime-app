@@ -29,9 +29,11 @@ export interface IInputErrors {
 
 export interface IInput {
   type: string;
+  isDirty: boolean;
   value: string;
   errors: IInputErrors;
   onChange: (value: string) => void;
+  onBlur: () => void;
   addCustomErrorMessage: (value: string) => void;
 }
 
@@ -42,12 +44,11 @@ export interface IForm {
 
 export interface IFormConfig {
   fields: IConfigField[];
-  onSubmit: (e: MouseEvent<HTMLButtonElement>) => void;
+  onSubmit: (...args: any[]) => void;
 }
 
 export function useValidation(config: IFormConfig) {
-  const initInputs = initializeInputs(config);
-  const [inputData, setInputData] = useState(initInputs);
+  const [inputData, setInputData] = useState<IForm>(initializeInputs(config));
 
   return inputData;
 
@@ -57,8 +58,10 @@ export function useValidation(config: IFormConfig) {
       const fields: IInput = {
         type: field.type,
         value: "",
+        isDirty: false,
         errors,
         onChange: (...args) => onChange.call(fields, ...args),
+        onBlur: () => onBlur.call(fields),
         addCustomErrorMessage: (...args) =>
           addCustomErrorMessage.call(fields, ...args),
       };
@@ -70,6 +73,26 @@ export function useValidation(config: IFormConfig) {
       fields,
       onSubmit: config.onSubmit,
     } as IForm;
+  }
+
+  function onBlur(this: IInput) {
+    if (!this.isDirty) {
+      setInputData((oldData) => {
+        const newFields = oldData.fields.map((data) => {
+          if (data.type === this.type) {
+            return {
+              ...data,
+              isDirty: true,
+            };
+          }
+          return data;
+        });
+
+        const newData = { ...oldData, fields: newFields };
+
+        return newData;
+      });
+    }
   }
 
   function getErrorsFields(field: IConfigField): IInputErrors {
@@ -122,7 +145,7 @@ export function useValidation(config: IFormConfig) {
 
   function addCustomErrorMessage(this: IInput, message: string) {
     setInputData((oldData) => {
-      const fields = oldData.fields.map((data) => {
+      const newFields = oldData.fields.map((data) => {
         if (data.type === this.type) {
           return {
             ...data,
@@ -132,12 +155,11 @@ export function useValidation(config: IFormConfig) {
         return data;
       });
 
-      return { ...oldData, fields };
+      return { ...oldData, fields: newFields };
     });
   }
 
   function onChange(this: IInput, newValue: string) {
-    console.log("Prev:", inputData);
     const errorMessages: IInputErrors = {};
     const validationRules = config.fields.find(
       (field) => field.type === this.type
@@ -147,21 +169,21 @@ export function useValidation(config: IFormConfig) {
       validateInput(errorMessages, validationRules, newValue);
     }
 
-    const newFields = inputData.fields.map((data) => {
-      if (data.type === this.type) {
-        return {
-          ...data,
-          value: newValue,
-          errors: JSON.parse(JSON.stringify(errorMessages)),
-        };
-      }
-      return data;
+    setInputData((oldData) => {
+      const newFields = oldData.fields.map((data) => {
+        if (data.type === this.type) {
+          return {
+            ...data,
+            value: newValue,
+            errors: JSON.parse(JSON.stringify(errorMessages)),
+          };
+        }
+        return data;
+      });
+
+      const newData = { ...oldData, fields: newFields };
+
+      return newData;
     });
-
-    const newData = { ...inputData, fields: newFields };
-
-    console.log("newData", newData);
-
-    setInputData(newData);
   }
 }

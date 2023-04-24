@@ -51,6 +51,19 @@
   color: colors.$font-headers;
   margin-bottom: 2.5rem;
   margin-top: 2.5rem;
+  border: 2px solid rgba(#000, 0);
+  cursor: pointer;
+}
+
+.select:hover {
+  border: 2px solid colors.$bg-accent;
+  background-color: colors.$bg-secondary;
+}
+
+.disabledButton {
+  background-color: colors.$bg-dark-grey;
+  color: colors.$font-grey;
+  cursor: default;
 }
 
 .signUp {

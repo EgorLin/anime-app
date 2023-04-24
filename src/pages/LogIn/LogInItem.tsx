@@ -8,9 +8,10 @@ import styles from "./LogIn.module.scss";
 
 interface IProps {
   inputData: IForm;
+  hasError: boolean;
 }
 
-function LogInItem({ inputData }: IProps): ReactElement {
+function LogInItem({ inputData, hasError }: IProps): ReactElement {
   const inputs = inputData.fields.map((input) => (
     <Input
       key={input.type}
@@ -19,7 +20,8 @@ function LogInItem({ inputData }: IProps): ReactElement {
       type={input.type}
       value={input.value}
       errors={input.errors}
-      isDirty={true}
+      isDirty={input.isDirty}
+      onBlur={input.onBlur}
       changeValue={input.onChange}
     />
   ));
@@ -29,8 +31,12 @@ function LogInItem({ inputData }: IProps): ReactElement {
         <Logo className={styles.logo} />
         {inputs}
         <button
-          className={styles.button}
+          className={[
+            styles.button,
+            hasError ? styles.disabledButton : styles.selected,
+          ].join(" ")}
           onClick={(e) => inputData.onSubmit(e)}
+          disabled={hasError}
         >
           Log In
         </button>

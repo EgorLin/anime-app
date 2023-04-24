@@ -52,13 +52,15 @@ export default class FirebaseService {
 
   static async addNewUser(
     id: string,
-    nickname: string,
-    email: string
+    username: string,
+    email: string,
+    favorites: string[]
   ): Promise<void> {
     try {
       return await setDoc(doc(firestoreDB, "users", id), {
-        username: nickname,
-        email: email,
+        username,
+        favorites,
+        email,
       });
     } catch (error) {
       console.log(error);

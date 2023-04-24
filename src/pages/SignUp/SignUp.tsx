@@ -19,10 +19,12 @@ function SignUp(): ReactElement {
 
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
+        const favorites: string[] = [];
         await FirebaseService.addNewUser(
           userCredential.user.uid,
           nickname,
-          email
+          email,
+          favorites
         );
         navigate(RouteNames.HOME);
       })

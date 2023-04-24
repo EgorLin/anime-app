@@ -33,4 +33,9 @@
 
 .errorColor {
   border: 0.2rem solid colors.$bg-error;
+
+  &:focus {
+    border-color: rgba(colors.$bg-accent, 0.6);
+    @include transitions.default(border);
+  }
 }

@@ -8,6 +8,7 @@ interface IProps {
   type: string;
   errors?: IInputErrors;
   isDirty?: boolean;
+  onBlur?: () => void;
   value: string;
   changeValue: (value: string) => void;
 }
@@ -19,10 +20,10 @@ function Input({
   value,
   errors,
   isDirty,
+  onBlur,
   changeValue,
 }: IProps): ReactElement {
   const errorsArr = [];
-  console.log(errors);
   for (const error in errors) {
     const message = errors[error as keyof typeof errors];
     if (message)
@@ -44,9 +45,10 @@ function Input({
         value={value}
         onChange={(e) => handleChange(e)}
         placeholder={placeholder}
+        onBlur={onBlur}
         className={[
           styles.input,
-          errorsArr.length > 0 ? styles.errorColor : "",
+          errorsArr.length > 0 && isDirty ? styles.errorColor : "",
           className,
         ].join(" ")}
         type={type}

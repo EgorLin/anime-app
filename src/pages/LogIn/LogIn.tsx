@@ -3,8 +3,8 @@ import LogInItem from "./LogInItem";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import {
+  IForm,
   IFormConfig,
-  InputErrorTypes,
   InputTypes,
   useValidation,
 } from "../../hooks/useInput";
@@ -24,43 +24,55 @@ function LogIn(): ReactElement {
         minLength: 6,
       },
     ],
-    onSubmit: (e) => {
+    onSubmit: function (this: IForm, e) {
       e.preventDefault();
-      handleSubmit();
+
+      const auth = getAuth();
+      let isErrorExist = false;
+      const email = this.fields.find(
+        (field) => field.type === InputTypes.EMAIL
+      );
+      const password = this.fields.find(
+        (field) => field.type === InputTypes.PASSWORD
+      );
+
+      signInWithEmailAndPassword(auth, email!.value, password!.value)
+        .then((userCredential) => {})
+        .catch((error) => {
+          isErrorExist = true;
+          switch (error.code) {
+            case "auth/invalid-email":
+            case "auth/user-not-found":
+              email!.addCustomErrorMessage("Incorrect email");
+              break;
+            case "auth/wrong-password":
+              password!.addCustomErrorMessage("Incorrect password");
+              break;
+            default:
+              console.log(error.code);
+          }
+        })
+        .finally(() => {
+          if (!isErrorExist) {
+            navigate(RouteNames.HOME);
+          }
+        });
     },
   };
   const inputData = useValidation(config);
+  const hasError = inputData.fields.some((field) => {
+    for (const error of Object.entries(field.errors)) {
+      const isNotEmpty = error[1] !== "";
+      if (isNotEmpty) {
+        return true;
+      }
+    }
+    return false;
+  });
 
   const navigate = useNavigate();
 
-  function handleSubmit() {
-    const auth = getAuth();
-    let isErrorExist = false;
-    const email = inputData.fields.find(
-      (field) => field.type === InputTypes.EMAIL
-    );
-    const password = inputData.fields.find(
-      (field) => field.type === InputTypes.PASSWORD
-    );
-    console.log(inputData, email!.value, password!.value);
-    signInWithEmailAndPassword(auth, email!.value, password!.value)
-      .then((userCredential) => { })
-      .catch((error) => {
-        isErrorExist = true;
-        if (error.code === "auth/invalid-email") {
-          email?.addCustomErrorMessage("Incorrect email or password");
-        }
-        console.log(error.code);
-        return;
-      })
-      .finally(() => {
-        if (!isErrorExist) {
-          navigate(RouteNames.HOME);
-        }
-      });
-  }
-
-  return <LogInItem inputData={inputData} />;
+  return <LogInItem inputData={inputData} hasError={hasError} />;
 }
 
 export default LogIn;
