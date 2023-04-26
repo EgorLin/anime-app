@@ -32,19 +32,37 @@ function DetailsItem({ animeInfo }: IProps): ReactElement {
         )}
         <h1>{animeInfo?.title.english}</h1>
         <div className={styles.shortDetails}>
-          <span className={styles.rating}>
-            <StarIcon /> {animeInfo?.rating}
-          </span>
-          <span className={styles.separator}>|</span>
-          <span>{animeInfo?.genres[0]}</span>
-          <span className={styles.separator}>|</span>
-          <span>{animeInfo?.releaseDate}</span>
-          <span className={styles.separator}>|</span>
-          <span>{animeInfo?.status}</span>
-          <span className={styles.separator}>|</span>
-          <span>
-            {animeInfo?.currentEpisode + "/" + animeInfo?.totalEpisodes}
-          </span>
+          {animeInfo.rating && (
+            <>
+              <span className={styles.rating}>
+                <StarIcon /> {animeInfo?.rating}
+              </span>
+              <span className={styles.separator}>|</span>{" "}
+            </>
+          )}
+          {animeInfo.genres.length > 0 && (
+            <>
+              <span>{animeInfo?.genres[0]}</span>
+              <span className={styles.separator}>|</span>{" "}
+            </>
+          )}
+          {animeInfo.releaseDate && (
+            <>
+              <span>{animeInfo?.releaseDate}</span>
+              <span className={styles.separator}>|</span>
+            </>
+          )}
+          {animeInfo.status && (
+            <>
+              <span>{animeInfo?.status}</span>
+              <span className={styles.separator}>|</span>
+            </>
+          )}
+          {animeInfo.currentEpisode && animeInfo.totalEpisodes && (
+            <span>
+              {animeInfo?.currentEpisode + "/" + animeInfo?.totalEpisodes}
+            </span>
+          )}
         </div>
         <div
           className={styles.description}
