@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import useDebounce from "../../../hooks/useDebounce";

@@ -1,9 +1,6 @@
 import { ReactElement } from "react";
-import { Link } from "react-router-dom";
-import SearchIcon from "../../../assets/icons/SearchIcon/SearchIcon";
-import { RouteNames } from "../../../router";
-import ButtonIcon from "../ButtonIcon/ButtonIcon";
 import Input from "../Input/Input";
+import SearchButton from "../SearchButton/SearchButton";
 import styles from "./SearchInput.module.scss";
 
 interface IProps {
@@ -27,13 +24,7 @@ function SearchInputItem({
         changeValue={updateQuery}
       />
 
-      {!isSearchPage && (
-        <Link to={RouteNames.SEARCH}>
-          <ButtonIcon className={styles.button}>
-            <SearchIcon />
-          </ButtonIcon>
-        </Link>
-      )}
+      {!isSearchPage && <SearchButton />}
     </div>
   );
 }

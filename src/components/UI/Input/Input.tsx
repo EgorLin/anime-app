@@ -5,13 +5,13 @@ import styles from "./Input.module.scss";
 interface IProps {
   className?: string;
   placeholder?: string;
-  inputType: string;
+  inputType?: string;
   type: string;
   errors?: IInputErrors;
   isDirty?: boolean;
   onBlur?: () => void;
   value: string;
-  changeValue: (type: string, value: string) => void;
+  changeValue: (value: string, type?: string) => void;
 }
 
 function Input({
@@ -37,7 +37,10 @@ function Input({
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    changeValue(inputType, e.target.value);
+    if (inputType) {
+      changeValue(e.target.value, inputType);
+    }
+    changeValue(e.target.value);
   }
 
   return (

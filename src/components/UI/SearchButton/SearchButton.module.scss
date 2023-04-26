@@ -1,0 +1,16 @@
+@use "/src/styles/colors";
+@use "/src/styles/mixins/transitions";
+
+.button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 2rem;
+
+  &:hover {
+    .magnifier {
+      fill: colors.$font-headers;
+      @include transitions.default(fill);
+    }
+  }
+}

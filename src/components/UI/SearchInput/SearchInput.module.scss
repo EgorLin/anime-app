@@ -9,17 +9,3 @@
 .input {
   padding: 1rem 6rem 1rem 2rem;
 }
-
-.button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 2rem;
-
-  &:hover {
-    .magnifier {
-      fill: colors.$font-headers;
-      @include transitions.default(fill);
-    }
-  }
-}

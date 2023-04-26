@@ -58,7 +58,7 @@ export interface IFormConfig {
 export function useValidation(config: IFormConfig) {
   const [inputData, setInputData] = useState<IForm>(initializeInputs(config));
 
-  function onChange(type: string, newValue: string) {
+  function onChange(newValue: string, type: string) {
     const errorMessages: IInputErrors = {};
     const validationRules = config.fields.find((field) => field.type === type);
 
