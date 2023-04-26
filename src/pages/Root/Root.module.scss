@@ -1,5 +1,6 @@
-@use '/src/styles/mixins/breakpoints';
+@use "/src/styles/mixins/breakpoints";
 
 .main {
   padding-top: 6rem;
+  min-height: 83vh;
 }

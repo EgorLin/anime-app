@@ -27,7 +27,7 @@ function EmptyCatalogItem({
       content = <></>;
       break;
     case RequestStatuses.LOADING:
-      content = <Spinner />;
+      content = <Spinner containerSize={styles.spinnerHeight} />;
       break;
     case RequestStatuses.SUCCEEDED:
       content = <Trigger target={target} />;
