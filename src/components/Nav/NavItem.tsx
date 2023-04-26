@@ -1,20 +1,28 @@
-import { ReactElement } from 'react'
-import styles from './Nav.module.scss'
+import { ReactElement } from "react";
+import { Link } from "react-router-dom";
+import { RouteNames } from "../../router";
+import styles from "./Nav.module.scss";
 
 interface IProps {
-  className?: string
+  className?: string;
 }
 
-function NavItem({ className }: IProps):ReactElement {
+function NavItem({ className }: IProps): ReactElement {
   return (
     <nav className={className}>
       <ul className={styles.nav}>
-        <li>Home</li>
-        <li>New releases</li>
-        <li>About us</li>
+        <li>
+          <Link to={RouteNames.HOME}>Home</Link>
+        </li>
+        <li>
+          <Link to={RouteNames.SEARCH}>Search</Link>
+        </li>
+        <li>
+          <Link to={RouteNames.HOME}>About us</Link>
+        </li>
       </ul>
     </nav>
-  )
+  );
 }
 
-export default NavItem
+export default NavItem;

@@ -11,7 +11,11 @@ import {
 } from "../../../store/reducers/AnimeSearchSlice";
 import SearchInputItem from "./SearchInputItem";
 
-function SearchInput(): ReactElement {
+interface IProps {
+  className?: string;
+}
+
+function SearchInput({ className }: IProps): ReactElement {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const query = useAppSelector(selectAnimeSearchSettingsQuery);
@@ -34,6 +38,7 @@ function SearchInput(): ReactElement {
       query={query}
       updateQuery={updateQuery}
       isSearchPage={isSearchPage}
+      className={className}
     />
   );
 }

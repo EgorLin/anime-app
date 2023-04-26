@@ -21,10 +21,14 @@ function HeaderItem({
     <>
       {isWideScreen ? (
         <header className={[styles.header, styles.menu, "wrapper"].join(" ")}>
-          <Logo />
-          <Nav />
-          <SearchInput />
-          <ControlPanel />
+          <div className={styles.leftHeaderContainer}>
+            <Logo />
+            <Nav className={[styles.nav].join(" ")} />
+          </div>
+          <div className={styles.rightHeaderContainer}>
+            <SearchInput className={styles.search} />
+            <ControlPanel />
+          </div>
         </header>
       ) : (
         <header
@@ -33,7 +37,7 @@ function HeaderItem({
             isMenuOpened ? styles.opened : styles.closed,
           ].join(" ")}
         >
-          <Nav className="wrapper" />
+          <Nav className={["wrapper", styles.nav].join(" ")} />
           <div className={[styles.menu, "wrapper"].join(" ")}>
             <div className={styles.leftContainer}>
               <BurgerMenu

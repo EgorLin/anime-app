@@ -51,6 +51,11 @@ ul {
   list-style-type: none;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .wrapper {
   padding: 0 calc((100% - sizes.$max-wrapper-width) / 2);
 

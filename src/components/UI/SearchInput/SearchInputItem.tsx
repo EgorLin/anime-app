@@ -4,6 +4,7 @@ import SearchButton from "../SearchButton/SearchButton";
 import styles from "./SearchInput.module.scss";
 
 interface IProps {
+  className?: string;
   query: string;
   updateQuery: (newQuery: string) => void;
   isSearchPage: boolean;
@@ -13,9 +14,10 @@ function SearchInputItem({
   query,
   updateQuery,
   isSearchPage,
+  className,
 }: IProps): ReactElement {
   return (
-    <div className={styles.search}>
+    <div className={[styles.search, className].join(" ")}>
       <Input
         type=""
         inputType=""

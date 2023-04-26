@@ -1,5 +1,5 @@
-@use '/src/styles/colors';
-@use '/src/styles/mixins/transitions';
+@use "/src/styles/colors";
+@use "/src/styles/mixins/transitions";
 
 .header {
   width: 100vw;
@@ -14,6 +14,27 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.search {
+  flex: 0 1 70%;
+}
+
+.nav {
+  margin-left: 5vw;
+}
+
+.leftHeaderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rightHeaderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 1 40%;
 }
 
 .burgerBtn {
