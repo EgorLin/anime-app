@@ -5,18 +5,20 @@ import styles from "./Input.module.scss";
 interface IProps {
   className?: string;
   placeholder?: string;
+  inputType: string;
   type: string;
   errors?: IInputErrors;
   isDirty?: boolean;
   onBlur?: () => void;
   value: string;
-  changeValue: (value: string) => void;
+  changeValue: (type: string, value: string) => void;
 }
 
 function Input({
   className,
   placeholder,
   type,
+  inputType,
   value,
   errors,
   isDirty,
@@ -35,7 +37,7 @@ function Input({
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    changeValue(e.target.value);
+    changeValue(inputType, e.target.value);
   }
 
   return (

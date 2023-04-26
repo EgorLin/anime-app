@@ -2,67 +2,52 @@ import { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import Input from "../../components/UI/Input/Input";
 import Logo from "../../components/UI/Logo/Logo";
+import { IForm, InputTypes } from "../../hooks/useInput";
 import { RouteNames } from "../../router";
 import styles from "./SignUp.module.scss";
 
 interface IProps {
-  nickname: string;
-  email: string;
-  password: string;
-  passwordRep: string;
-  changeNickname: (newValue: string) => void;
-  changeEmail: (newValue: string) => void;
-  changePassword: (newValue: string) => void;
-  changePasswordRep: (newValue: string) => void;
-  handleSignup: () => void;
+  inputData: IForm;
+  onInputChange: (...args: any[]) => void;
+  hasError: boolean;
 }
 
 function SignUpItem({
-  nickname,
-  email,
-  password,
-  passwordRep,
-  changeNickname,
-  changeEmail,
-  changePassword,
-  changePasswordRep,
-  handleSignup,
+  inputData,
+  onInputChange,
+  hasError,
 }: IProps): ReactElement {
+  const inputs = inputData.fields.map((input) => (
+    <Input
+      key={input.inputType}
+      className={styles.input}
+      placeholder={input.placeholder}
+      type={input.type}
+      inputType={input.inputType}
+      value={input.value}
+      errors={input.errors}
+      isDirty={input.isDirty}
+      onBlur={input.onBlur}
+      changeValue={onInputChange}
+    />
+  ));
+
   return (
     <div className={styles.container}>
       <div className={styles.window}>
         <Logo className={styles.logo} />
-        <Input
-          className={styles.input}
-          placeholder="Nickname"
-          type="text"
-          value={nickname}
-          changeValue={changeNickname}
-        />
-        <Input
-          className={styles.input}
-          placeholder="Email"
-          type="email"
-          value={email}
-          changeValue={changeEmail}
-        />
-        <Input
-          className={styles.input}
-          placeholder="Password"
-          type="password"
-          value={password}
-          changeValue={changePassword}
-        />
-        <Input
-          className={styles.input}
-          placeholder="Repeat password"
-          type="password"
-          value={passwordRep}
-          changeValue={changePasswordRep}
-        />
-        <div className={styles.button} onClick={handleSignup}>
+        {inputs}
+        <button
+          className={[
+            styles.button,
+            hasError ? styles.disabledButton : styles.selected,
+          ].join(" ")}
+          onClick={(e) => inputData.onSubmit(e)}
+          disabled={hasError}
+        >
           Sign up
-        </div>
+        </button>
+
         <p>
           Already have an account?{" "}
           <Link to={RouteNames.LOGIN} className={styles.signUp}>

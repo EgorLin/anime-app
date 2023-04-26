@@ -59,7 +59,7 @@ function LogIn(): ReactElement {
         });
     },
   };
-  const inputData = useValidation(config);
+  const { inputData, onChange } = useValidation(config);
   const hasError = inputData.fields.some((field) => {
     for (const error of Object.entries(field.errors)) {
       const isNotEmpty = error[1] !== "";
@@ -72,7 +72,9 @@ function LogIn(): ReactElement {
 
   const navigate = useNavigate();
 
-  return <LogInItem inputData={inputData} hasError={hasError} />;
+  return (
+    <LogInItem inputData={inputData} onChange={onChange} hasError={hasError} />
+  );
 }
 
 export default LogIn;

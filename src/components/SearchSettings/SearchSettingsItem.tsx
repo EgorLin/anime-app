@@ -78,6 +78,7 @@ function SearchSettingsItem({
       />
       <Input
         type=""
+        inputType=""
         className={styles.input}
         value={year}
         changeValue={changeYear}

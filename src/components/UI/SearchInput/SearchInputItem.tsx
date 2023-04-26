@@ -21,6 +21,7 @@ function SearchInputItem({
     <div className={styles.search}>
       <Input
         type=""
+        inputType=""
         className={!isSearchPage ? styles.input : ""}
         value={query}
         changeValue={updateQuery}

@@ -8,21 +8,23 @@ import styles from "./LogIn.module.scss";
 
 interface IProps {
   inputData: IForm;
+  onChange: (...args: any[]) => void;
   hasError: boolean;
 }
 
-function LogInItem({ inputData, hasError }: IProps): ReactElement {
+function LogInItem({ inputData, onChange, hasError }: IProps): ReactElement {
   const inputs = inputData.fields.map((input) => (
     <Input
-      key={input.type}
+      key={input.inputType}
       className={styles.input}
       placeholder={input.type[0].toUpperCase() + input.type.slice(1)}
       type={input.type}
+      inputType={input.inputType}
       value={input.value}
       errors={input.errors}
       isDirty={input.isDirty}
       onBlur={input.onBlur}
-      changeValue={input.onChange}
+      changeValue={onChange}
     />
   ));
   return (
