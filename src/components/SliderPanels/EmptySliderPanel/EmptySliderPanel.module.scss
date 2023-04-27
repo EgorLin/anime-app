@@ -6,6 +6,7 @@
   position: relative;
   margin-bottom: 3rem;
 }
+
 .slider {
   display: flex;
   overflow-x: scroll;
@@ -38,28 +39,21 @@
   justify-content: center;
 
   &:hover {
-    background: linear-gradient(90deg, rgba(#000, 0.3) 0%, rgba(#000, 0) 100%);
+    background: linear-gradient(90deg, rgba(#000, 0.5) 0%, rgba(#000, 0) 100%);
+    cursor: pointer;
 
     & path {
-      fill: rgba(colors.$font-default, 1);
+      fill: rgba(colors.$font-accent, 1);
       @include transitions.default(fill);
     }
   }
-}
-
-.button svg {
-  height: 100px;
-}
-
-.button path {
-  fill: rgba(colors.$font-default, 0);
-  @include transitions.default(fill);
 }
 
 .right {
   right: 0;
 
   &:hover {
-    background: linear-gradient(270deg, rgba(#000, 0.3) 0%, rgba(#000, 0) 100%);
+    cursor: pointer;
+    background: linear-gradient(270deg, rgba(#000, 0.5) 0%, rgba(#000, 0) 100%);
   }
 }

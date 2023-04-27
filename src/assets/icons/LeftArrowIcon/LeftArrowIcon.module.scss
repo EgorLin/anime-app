@@ -1,0 +1,11 @@
+@use "/src/styles/colors";
+@use "/src/styles/mixins/transitions";
+
+.svg {
+  height: 100px;
+
+  & path {
+    fill: rgba(colors.$font-accent, 0);
+    @include transitions.default(fill);
+  }
+}
