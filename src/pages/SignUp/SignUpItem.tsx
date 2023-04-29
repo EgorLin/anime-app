@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import Input from "../../components/UI/Input/Input";
 import Logo from "../../components/UI/Logo/Logo";
-import { IForm, InputTypes } from "../../hooks/useInput";
+import { IForm } from "../../hooks/useInput";
 import { RouteNames } from "../../router";
 import styles from "./SignUp.module.scss";
 

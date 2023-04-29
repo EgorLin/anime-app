@@ -40,7 +40,7 @@ function Input({
     if (inputType) {
       changeValue(e.target.value, inputType);
     }
-    changeValue(e.target.value);
+    // changeValue(e.target.value);
   }
 
   return (

@@ -17,7 +17,7 @@ function LogInItem({ inputData, onChange, hasError }: IProps): ReactElement {
     <Input
       key={input.inputType}
       className={styles.input}
-      placeholder={input.type[0].toUpperCase() + input.type.slice(1)}
+      placeholder={input.placeholder}
       type={input.type}
       inputType={input.inputType}
       value={input.value}

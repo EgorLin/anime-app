@@ -19,7 +19,7 @@ function LogIn(): ReactElement {
         template: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
       },
       {
-        type: InputTypes.PASSWORD,
+        type: InputTypes.CURRENT_PASSWORD,
         isRequired: true,
         minLength: 6,
       },
@@ -30,10 +30,10 @@ function LogIn(): ReactElement {
       const auth = getAuth();
       let isErrorExist = false;
       const email = this.fields.find(
-        (field) => field.type === InputTypes.EMAIL
+        (field) => field.inputType === InputTypes.EMAIL
       );
       const password = this.fields.find(
-        (field) => field.type === InputTypes.PASSWORD
+        (field) => field.inputType === InputTypes.CURRENT_PASSWORD
       );
 
       signInWithEmailAndPassword(auth, email!.value, password!.value)

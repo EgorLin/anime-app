@@ -1,15 +1,25 @@
 import { getAuth, signOut } from "firebase/auth";
 import { ReactElement } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { ProfileTabs } from "../../pages/Profile/Profile";
 import {
   clearUserData,
   selectCurrentUser,
 } from "../../store/reducers/CurrentUserSlice";
 import ProfileSettingsItem from "./ProfileSettingsItem";
 
-function ProfileSettings(): ReactElement {
+interface IProps {
+  activeTab: string;
+  changeTab: (tab: string) => void;
+}
+
+function ProfileSettings({ activeTab, changeTab }: IProps): ReactElement {
   const dispatch = useAppDispatch();
-  const { username } = useAppSelector(selectCurrentUser);
+  const { username, imageUrl } = useAppSelector(selectCurrentUser);
+  const tabs = Object.values(ProfileTabs).map((value) => {
+    const str = String(value);
+    return str;
+  });
 
   function logOut() {
     const auth = getAuth();
@@ -17,7 +27,16 @@ function ProfileSettings(): ReactElement {
     dispatch(clearUserData());
   }
 
-  return <ProfileSettingsItem username={username} logOut={logOut} />;
+  return (
+    <ProfileSettingsItem
+      username={username}
+      imageUrl={imageUrl}
+      logOut={logOut}
+      tabs={tabs}
+      activeTab={activeTab}
+      changeTab={changeTab}
+    />
+  );
 }
 
 export default ProfileSettings;

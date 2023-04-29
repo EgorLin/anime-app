@@ -11,6 +11,7 @@ const initialState: IAuth = {
   username: "",
   email: "",
   favorites: [],
+  imageUrl: "",
 };
 
 export const CurrentUserSlice = createSlice({
@@ -22,6 +23,7 @@ export const CurrentUserSlice = createSlice({
       state.username = action.payload.username;
       state.email = action.payload.email;
       state.favorites = action.payload.favorites;
+      state.imageUrl = action.payload.imageUrl;
     },
     setUserFavorites(state, action) {
       state.favorites = action.payload;
@@ -31,6 +33,7 @@ export const CurrentUserSlice = createSlice({
       state.username = "";
       state.email = "";
       state.favorites = [];
+      state.imageUrl = "";
     },
   },
 });
@@ -45,3 +48,5 @@ export const selectCurrentUserFavorites = (store: RootState) =>
   store.currentUser.favorites;
 export const selectCurrentUserUsername = (store: RootState) =>
   store.currentUser.username;
+export const selectCurrentUserImageUrl = (store: RootState) =>
+  store.currentUser.imageUrl;

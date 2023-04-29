@@ -1,9 +1,11 @@
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useCallback, useState } from "react";
 
 export enum InputTypes {
   USERNAME = "username",
   EMAIL = "email",
-  PASSWORD = "password",
+  IMAGE_URL = "imageUrl",
+  CURRENT_PASSWORD = "currentPassword",
+  NEW_PASSWORD = "newPassword",
   REPEAT_PASSWORD = "repeatPassword",
 }
 
@@ -58,53 +60,76 @@ export interface IFormConfig {
 export function useValidation(config: IFormConfig) {
   const [inputData, setInputData] = useState<IForm>(initializeInputs(config));
 
-  function onChange(newValue: string, type: string) {
-    const errorMessages: IInputErrors = {};
-    const validationRules = config.fields.find((field) => field.type === type);
-
-    if (validationRules) {
-      if (type === InputTypes.REPEAT_PASSWORD) {
-        const passwordValue = inputData.fields.find(
-          (field) => field.type === InputTypes.PASSWORD
-        )?.value;
-        validateInput(errorMessages, validationRules, newValue, passwordValue);
-      } else {
-        validateInput(errorMessages, validationRules, newValue);
-      }
-    }
-
-    setInputData((oldData) => {
-      const newFields = oldData.fields.map((data) => {
-        if (data.type === type) {
-          return {
-            ...data,
-            value: newValue,
-            errors: JSON.parse(JSON.stringify(errorMessages)),
-          };
+  const onChange = useCallback(
+    (newValue: string, type: string) => {
+      const errorMessages: IInputErrors = {};
+      const validationRules = config.fields.find(
+        (field) => field.type === type
+      );
+      if (validationRules) {
+        if (type === InputTypes.REPEAT_PASSWORD) {
+          const passwordValue = inputData.fields.find(
+            (field) => field.inputType === InputTypes.NEW_PASSWORD
+          )?.value;
+          validateInput(
+            errorMessages,
+            validationRules,
+            newValue,
+            passwordValue
+          );
+        } else {
+          validateInput(errorMessages, validationRules, newValue);
         }
-        return data;
+      }
+
+      setInputData((oldData) => {
+        const newFields = oldData.fields.map((data) => {
+          if (data.inputType === type) {
+            return {
+              ...data,
+              value: newValue,
+              errors: JSON.parse(JSON.stringify(errorMessages)),
+            };
+          }
+          return data;
+        });
+
+        const newData = { ...oldData, fields: newFields };
+
+        return newData;
       });
-
-      const newData = { ...oldData, fields: newFields };
-
-      return newData;
-    });
-  }
+    },
+    [inputData.fields]
+  );
 
   return { inputData, onChange };
 
   function initializeInputs(config: IFormConfig) {
     const fields = config.fields.map((field) => {
       const errors = getErrorsFields(field);
+
       let type = "";
-      let placeholder = "";
-      if (field.type === InputTypes.REPEAT_PASSWORD) {
-        type = InputTypes.PASSWORD;
-        placeholder = "Repeat password";
-      } else {
-        type = field.type;
-        placeholder = field.type[0].toUpperCase() + field.type.slice(1);
+      switch (field.type) {
+        case InputTypes.CURRENT_PASSWORD:
+        case InputTypes.NEW_PASSWORD:
+        case InputTypes.REPEAT_PASSWORD:
+          type = "password";
+          break;
+        case InputTypes.IMAGE_URL:
+          type = "text";
+          break;
+        default:
+          type = field.type;
       }
+
+      const placeholder = field.type
+        // insert a space before all caps
+        .replace(/([A-Z])/g, " $1")
+        // uppercase the first character
+        .replace(/^./, function (str) {
+          return str.toUpperCase();
+        });
+
       const fields: IInput = {
         type,
         placeholder,
@@ -116,6 +141,8 @@ export function useValidation(config: IFormConfig) {
         addCustomErrorMessage: (...args) =>
           addCustomErrorMessage.call(fields, ...args),
       };
+
+      console.log(fields);
 
       return fields;
     });

@@ -54,16 +54,26 @@ export default class FirebaseService {
     id: string,
     username: string,
     email: string,
-    favorites: string[]
+    favorites: string[],
+    imageUrl: string
   ): Promise<void> {
     try {
       return await setDoc(doc(firestoreDB, "users", id), {
         username,
         favorites,
         email,
+        imageUrl,
       });
     } catch (error) {
       console.log(error);
     }
+  }
+
+  static async updateUserImageUrl(userId: string, newUrl: string) {
+    return this.getUserData(userId, async (docRef) => {
+      await updateDoc(docRef, {
+        imageUrl: newUrl,
+      });
+    });
   }
 }

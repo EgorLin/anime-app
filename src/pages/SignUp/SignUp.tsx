@@ -28,7 +28,7 @@ function SignUp(): ReactElement {
         maxLength: 32,
       },
       {
-        type: InputTypes.PASSWORD,
+        type: InputTypes.NEW_PASSWORD,
         isRequired: true,
         minLength: 6,
         maxLength: 16,
@@ -47,23 +47,26 @@ function SignUp(): ReactElement {
       const auth = getAuth();
       let isErrorExist = false;
       const username = this.fields.find(
-        (field) => field.type === InputTypes.USERNAME
+        (field) => field.inputType === InputTypes.USERNAME
       );
       const email = this.fields.find(
-        (field) => field.type === InputTypes.EMAIL
+        (field) => field.inputType === InputTypes.EMAIL
       );
       const password = this.fields.find(
-        (field) => field.type === InputTypes.PASSWORD
+        (field) => field.inputType === InputTypes.NEW_PASSWORD
       );
 
       createUserWithEmailAndPassword(auth, email!.value, password!.value)
         .then(async (userCredential) => {
           const favorites: string[] = [];
+          const imageUrl: string =
+            "https://www.pinta-ural.com/userFiles/image/sotrudnik_1.png";
           await FirebaseService.addNewUser(
             userCredential.user.uid,
             username!.value,
             email!.value,
-            favorites
+            favorites,
+            imageUrl
           );
         })
         .catch((error) => {
