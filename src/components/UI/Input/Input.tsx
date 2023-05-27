@@ -39,8 +39,9 @@ function Input({
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     if (inputType) {
       changeValue(e.target.value, inputType);
+    } else {
+      changeValue(e.target.value);
     }
-    // changeValue(e.target.value);
   }
 
   return (

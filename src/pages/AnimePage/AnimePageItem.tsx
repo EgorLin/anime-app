@@ -1,12 +1,10 @@
 import { ReactElement } from "react";
+import Comments from "../../components/Comments/Comments";
 import Details from "../../components/Details/Details";
 import EpisodeSection from "../../components/EpisodeSection/EpisodeSection";
 import LazyLoadingContainer from "../../components/LazyLoadingContainer/LazyLoadingContainer";
 import RecommendationSliderPanel from "../../components/SliderPanels/RecommendationSliderPanel/RecommendationSliderPanel";
 import RelationSliderPanel from "../../components/SliderPanels/RelationSliderPanel/RelationSliderPanel";
-// import SliderPanel from "../../components/SliderPanel/SliderPanel";
-import RecommendationCard from "../../components/UI/Cards/RecommendationCard/RecommendationCard";
-import RelationCard from "../../components/UI/Cards/RelationCard/RelationCard";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import { RequestStatuses } from "../../const/requestStatuses";
 import { IAnimeEpisode } from "../../types/IAnimeEpisode";
@@ -42,7 +40,7 @@ function AnimePageItem({
           <Details animeInfo={animeInfo} />
 
           {episodes.length > 0 ? (
-            <EpisodeSection episodes={episodes} />
+            <EpisodeSection episodes={[...episodes].reverse()} />
           ) : (
             <div className={styles.sorry}>
               This anime isn't available for watching. We are sorry
@@ -60,6 +58,10 @@ function AnimePageItem({
               <RecommendationSliderPanel recommendations={recommendations} />
             </LazyLoadingContainer>
           )}
+
+          <LazyLoadingContainer>
+            <Comments animeId={animeInfo.id} />
+          </LazyLoadingContainer>
         </div>
       );
       break;

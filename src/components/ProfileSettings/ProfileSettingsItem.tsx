@@ -36,7 +36,7 @@ function ProfileSettingsItem({
   });
   return (
     <div className={[styles.container, "wrapperM"].join(" ")}>
-      <img src={imageUrl} />
+      <img src={imageUrl} className={styles.profileImage} />
       <span className={styles.username}>{username}</span>
       <div>{navs}</div>
       <SmallButton

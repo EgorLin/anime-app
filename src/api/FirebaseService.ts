@@ -9,18 +9,64 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { firestoreDB } from "../firebase";
+import { IComment, ICommentsData } from "../types/ICommentsData";
 import { IUserData } from "../types/IUserData";
 
 export default class FirebaseService {
-  static async getUserData(
+  static async getFirebaseData<T>(
     id: string,
+    docName: string,
     callback?: (docRef: DocumentReference<DocumentData>) => void
-  ): Promise<IUserData | undefined> {
-    const docRef = doc(firestoreDB, "users", id);
+  ): Promise<T | undefined> {
+    const docRef = doc(firestoreDB, docName, id);
     callback && callback(docRef);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      return docSnap.data() as IUserData;
+      return docSnap.data() as T;
+    }
+  }
+
+  static async getUserData(id: string): Promise<IUserData | undefined> {
+    return this.getFirebaseData<IUserData>(id, "users");
+  }
+
+  static async getCommentsData(id: string): Promise<ICommentsData | undefined> {
+    return this.getFirebaseData<ICommentsData>(id, "comments");
+  }
+
+  static async addNewComment(
+    animeId: string,
+    uid: string,
+    date: number,
+    text: string
+  ): Promise<IComment[] | undefined> {
+    try {
+      return this.getFirebaseData<IComment[]>(
+        animeId,
+        "comments",
+        async (docRef) => {
+          await updateDoc(docRef, {
+            comments: arrayUnion({ uid, date, text }),
+          });
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  static async addFirstComment(
+    animeId: string,
+    uid: string,
+    date: number,
+    text: string
+  ): Promise<void> {
+    try {
+      return await setDoc(doc(firestoreDB, "comments", animeId), {
+        comments: [{ uid, date, text }],
+      });
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -28,7 +74,7 @@ export default class FirebaseService {
     userId: string,
     animeId: string
   ): Promise<IUserData | undefined> {
-    return this.getUserData(userId, async (docRef) => {
+    return this.getFirebaseData<IUserData>(userId, "users", async (docRef) => {
       await updateDoc(docRef, {
         favorites: arrayUnion(animeId),
       });
@@ -40,11 +86,15 @@ export default class FirebaseService {
     animeId: string
   ): Promise<IUserData | undefined> {
     try {
-      return this.getUserData(userId, async (docRef) => {
-        await updateDoc(docRef, {
-          favorites: arrayRemove(animeId),
-        });
-      });
+      return this.getFirebaseData<IUserData>(
+        userId,
+        "users",
+        async (docRef) => {
+          await updateDoc(docRef, {
+            favorites: arrayRemove(animeId),
+          });
+        }
+      );
     } catch (error) {
       console.log(error);
     }
@@ -70,7 +120,7 @@ export default class FirebaseService {
   }
 
   static async updateUserImageUrl(userId: string, newUrl: string) {
-    return this.getUserData(userId, async (docRef) => {
+    return this.getFirebaseData(userId, "users", async (docRef) => {
       await updateDoc(docRef, {
         imageUrl: newUrl,
       });

@@ -28,3 +28,11 @@
 .activeTab {
   color: red;
 }
+
+.profileImage {
+  position: relative;
+  cursor: pointer;
+  height: 6rem;
+  border-radius: 50%;
+  border: 2px solid rgba(#000, 0);
+}

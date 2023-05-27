@@ -1,0 +1,45 @@
+@use "/src/styles/colors";
+
+.container {
+  width: 100%;
+  padding: 2rem;
+  border: 2px solid colors.$bg-secondary;
+  border-radius: 1.6rem;
+  margin-bottom: 4rem;
+
+  & > textarea {
+    background-color: colors.$bg-secondary;
+    border: none;
+    width: 100%;
+    border-radius: 1.6rem;
+    padding: 2rem;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.6rem;
+    resize: none;
+    margin-bottom: 2rem;
+  }
+}
+
+.logIn {
+  text-decoration: none;
+  color: colors.$font-accent;
+}
+
+.button {
+  background-color: colors.$bg-accent;
+  border: none;
+  width: 140px;
+  border-radius: 1.6rem;
+  padding: 1.5rem 2rem;
+  color: white;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.disabledButton {
+  background-color: colors.$bg-dark-grey;
+  color: colors.$font-grey;
+  cursor: default;
+}
