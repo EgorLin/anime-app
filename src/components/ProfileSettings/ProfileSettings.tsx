@@ -1,7 +1,9 @@
 import { getAuth, signOut } from "firebase/auth";
 import { ReactElement } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { ProfileTabs } from "../../pages/Profile/Profile";
+import { RouteNames } from "../../router";
 import {
   clearUserData,
   selectCurrentUser,
@@ -15,6 +17,7 @@ interface IProps {
 
 function ProfileSettings({ activeTab, changeTab }: IProps): ReactElement {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { username, imageUrl } = useAppSelector(selectCurrentUser);
   const tabs = Object.values(ProfileTabs).map((value) => {
     const str = String(value);

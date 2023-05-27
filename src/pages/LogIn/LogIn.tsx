@@ -24,7 +24,7 @@ function LogIn(): ReactElement {
         minLength: 6,
       },
     ],
-    onSubmit: function (this: IForm, e) {
+    onSubmit: function(this: IForm, e) {
       e.preventDefault();
 
       const auth = getAuth();
@@ -37,7 +37,7 @@ function LogIn(): ReactElement {
       );
 
       signInWithEmailAndPassword(auth, email!.value, password!.value)
-        .then((userCredential) => {})
+        .then((userCredential) => { })
         .catch((error) => {
           isErrorExist = true;
           switch (error.code) {
@@ -49,7 +49,6 @@ function LogIn(): ReactElement {
               password!.addCustomErrorMessage("Incorrect password");
               break;
             default:
-              console.log(error.code);
           }
         })
         .finally(() => {

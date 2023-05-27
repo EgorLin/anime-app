@@ -40,19 +40,19 @@ function EmptySliderPanelItem({
         <>
           <div className={styles.slider}>{divElements}</div>
 
-          {buttonsVisibility.left && (
-            <span onClick={slideBackward} className={styles.button}>
-              <LeftArrowIcon />
-            </span>
-          )}
-          {buttonsVisibility.right && (
-            <span
-              onClick={slideForward}
-              className={[styles.button, styles.right].join(" ")}
-            >
-              <RightArrowIcon />
-            </span>
-          )}
+          {/* {buttonsVisibility.left && ( */}
+          {/*   <span onClick={slideBackward} className={styles.button}> */}
+          {/*     <LeftArrowIcon /> */}
+          {/*   </span> */}
+          {/* )} */}
+          {/* {buttonsVisibility.right && ( */}
+          {/*   <span */}
+          {/*     onClick={slideForward} */}
+          {/*     className={[styles.button, styles.right].join(" ")} */}
+          {/*   > */}
+          {/*     <RightArrowIcon /> */}
+          {/*   </span> */}
+          {/* )} */}
         </>
       );
       break;

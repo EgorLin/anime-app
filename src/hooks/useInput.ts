@@ -126,7 +126,7 @@ export function useValidation(config: IFormConfig) {
         // insert a space before all caps
         .replace(/([A-Z])/g, " $1")
         // uppercase the first character
-        .replace(/^./, function (str) {
+        .replace(/^./, function(str) {
           return str.toUpperCase();
         });
 
@@ -141,8 +141,6 @@ export function useValidation(config: IFormConfig) {
         addCustomErrorMessage: (...args) =>
           addCustomErrorMessage.call(fields, ...args),
       };
-
-      console.log(fields);
 
       return fields;
     });
