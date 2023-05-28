@@ -18,7 +18,7 @@ function NavItem({ className }: IProps): ReactElement {
           <Link to={RouteNames.SEARCH}>Search</Link>
         </li>
         <li>
-          <Link to={RouteNames.HOME}>About us</Link>
+          <Link to={RouteNames.HOME}>About project</Link>
         </li>
       </ul>
     </nav>

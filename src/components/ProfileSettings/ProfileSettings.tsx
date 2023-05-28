@@ -17,7 +17,6 @@ interface IProps {
 
 function ProfileSettings({ activeTab, changeTab }: IProps): ReactElement {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const { username, imageUrl } = useAppSelector(selectCurrentUser);
   const tabs = Object.values(ProfileTabs).map((value) => {
     const str = String(value);

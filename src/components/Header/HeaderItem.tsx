@@ -27,7 +27,7 @@ function HeaderItem({
           </div>
           <div className={styles.rightHeaderContainer}>
             <SearchInput className={styles.search} />
-            <ControlPanel />
+            <ControlPanel isWideScreen={isWideScreen} />
           </div>
         </header>
       ) : (
@@ -45,10 +45,10 @@ function HeaderItem({
                 setIsOpened={setIsMenuOpened}
                 className={styles.burgerBtn}
               />
-              <Logo />
+              {/* <Logo /> */}
             </div>
             <SearchInput />
-            <ControlPanel />
+            <ControlPanel isWideScreen={isWideScreen} />
           </div>
         </header>
       )}

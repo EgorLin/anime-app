@@ -4,35 +4,63 @@
 
 .container {
   background-color: colors.$bg-secondary;
-  height: 8rem;
+  min-height: 8rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-radius: sizes.$border-radius;
-  padding: 0 3rem;
+  padding: 3rem;
+
+  // display: grid;
+  // grid-template-columns: repeat(1, 1fr);
+  // column-gap: 3rem;
+  // row-gap: 3rem;
 
   @include breakpoints.breakpoint(mobile) {
-    padding: 0 1.5rem;
+    padding: 1.5rem;
+    flex-direction: column;
+    align-items: start;
+
+    & > * {
+      margin-top: 2rem;
+    }
+
+    & > *:first-child {
+      margin-top: 0;
+    }
   }
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
 }
 
 .username {
   font-weight: 700;
+  font-size: 2rem;
+}
+
+.tabs {
+  order: 2;
 }
 
 .tab {
   margin-right: 2rem;
-  text-transform: capitalize;
+  text-transform: uppercase;
 }
 
 .activeTab {
-  color: red;
+  color: colors.$font-accent;
 }
 
 .profileImage {
   position: relative;
   cursor: pointer;
   height: 6rem;
+  width: 6rem;
   border-radius: 50%;
   border: 2px solid rgba(#000, 0);
+  margin-right: 2rem;
+  object-fit: cover;
 }

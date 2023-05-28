@@ -32,6 +32,7 @@ function CheckboxItem({
         >
           {data.map((element) => (
             <CheckboxButton
+              key={element[1]}
               isSelected={activeList.some((active) => active === element[1])}
               value={element[1]}
               title={element[0]}

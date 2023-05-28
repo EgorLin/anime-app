@@ -1,9 +1,11 @@
 @use "/src/styles/colors";
 @use "/src/styles/mixins/transitions";
 @use "/src/styles/sizes";
+@use "/src/styles/mixins/breakpoints";
 
 .container {
   position: relative;
+  padding: 7px 40px 7px 12px;
 }
 
 .text {
@@ -28,4 +30,10 @@
   border-radius: sizes.$border-radius;
   z-index: 50;
   top: 2.5rem;
+
+  @include breakpoints.breakpoint(mobile) {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1rem;
+    row-gap: 1rem;
+  }
 }

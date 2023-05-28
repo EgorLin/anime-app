@@ -3,10 +3,20 @@ import { useAppSelector } from "../../hooks/redux";
 import { selectCurrentUser } from "../../store/reducers/CurrentUserSlice";
 import ControlPanelItem from "./ControlPanelItem";
 
-function ControlPanel(): ReactElement {
+interface IProps {
+  isWideScreen: boolean;
+}
+
+function ControlPanel({ isWideScreen }: IProps): ReactElement {
   const { isAuth, username } = useAppSelector(selectCurrentUser);
 
-  return <ControlPanelItem isAuth={isAuth} username={username} />;
+  return (
+    <ControlPanelItem
+      isWideScreen={isWideScreen}
+      isAuth={isAuth}
+      username={username}
+    />
+  );
 }
 
 export default ControlPanel;

@@ -36,9 +36,11 @@ function ProfileSettingsItem({
   });
   return (
     <div className={[styles.container, "wrapperM"].join(" ")}>
-      <img src={imageUrl} className={styles.profileImage} />
-      <span className={styles.username}>{username}</span>
-      <div>{navs}</div>
+      <div className={styles.userInfo}>
+        <img src={imageUrl} className={styles.profileImage} />
+        <span className={styles.username}>{username}</span>
+      </div>
+      <div className={styles.tabs}>{navs}</div>
       <SmallButton
         text="Log out"
         to={RouteNames.HOME}
