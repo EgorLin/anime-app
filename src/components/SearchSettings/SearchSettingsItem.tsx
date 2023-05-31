@@ -45,7 +45,6 @@ function SearchSettingsItem({
 }: IProps): ReactElement {
   return (
     <div className={[styles.container, "wrapperM"].join(" ")}>
-      {/* <div className={styles.leftHand}></div> */}
       <Checkbox
         title="Genres"
         data={genresList}

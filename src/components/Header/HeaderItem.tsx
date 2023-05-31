@@ -45,7 +45,6 @@ function HeaderItem({
                 setIsOpened={setIsMenuOpened}
                 className={styles.burgerBtn}
               />
-              {/* <Logo /> */}
             </div>
             <SearchInput />
             <ControlPanel isWideScreen={isWideScreen} />

@@ -2,24 +2,19 @@ import {
   EmailAuthProvider,
   getAuth,
   reauthenticateWithCredential,
-  updateCurrentUser,
   updatePassword,
 } from "firebase/auth";
 import { ReactElement } from "react";
 import FirebaseService from "../../api/FirebaseService";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import {
   IForm,
   IFormConfig,
   InputTypes,
   useValidation,
 } from "../../hooks/useInput";
-import { selectCurrentUserImageUrl } from "../../store/reducers/CurrentUserSlice";
 import UserSettingsItem from "./UserSettingsItem";
 
 function UserSettings(): ReactElement {
-  const imageUrl = useAppSelector(selectCurrentUserImageUrl);
-  const dispatch = useAppDispatch();
   const config: IFormConfig = {
     fields: [
       {
@@ -47,7 +42,7 @@ function UserSettings(): ReactElement {
         recheckPassword: true,
       },
     ],
-    onSubmit: function (this: IForm, e) {
+    onSubmit: function(this: IForm, e) {
       e.preventDefault();
 
       const auth = getAuth();
@@ -63,7 +58,7 @@ function UserSettings(): ReactElement {
       );
 
       if (newImageUrl?.value !== "" && newImageUrl?.isDirty) {
-        (async function () {
+        (async function() {
           await FirebaseService.updateUserImageUrl(
             auth.currentUser!.uid,
             newImageUrl!.value.trim()
@@ -71,10 +66,7 @@ function UserSettings(): ReactElement {
         })();
       }
 
-      console.log(currentPassword?.isDirty && newPassword?.isDirty);
-
       if (currentPassword?.isDirty && newPassword?.isDirty) {
-        console.log("dirty");
         if (auth.currentUser?.email) {
           const credential = EmailAuthProvider.credential(
             auth.currentUser!.email,
@@ -86,12 +78,9 @@ function UserSettings(): ReactElement {
               console.log(error.code);
             }
           );
-          console.log("credential");
 
           updatePassword(auth.currentUser!, newPassword!.value)
-            .then(() => {
-              console.log("updated");
-            })
+            .then(() => { })
             .catch((error) => {
               isErrorExist = true;
               switch (error.code) {
@@ -104,7 +93,6 @@ function UserSettings(): ReactElement {
             })
             .finally(() => {
               if (!isErrorExist) {
-                // clear passwords
               }
             });
         }

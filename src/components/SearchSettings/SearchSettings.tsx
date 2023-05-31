@@ -7,6 +7,7 @@ import {
   ItemGenre,
 } from "../../const/animeConsts";
 import { RequestStatuses } from "../../const/requestStatuses";
+import { toCapitalizeFirstInPair } from "../../helpers/capitalize";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import useDebounce from "../../hooks/useDebounce";
 import {
@@ -37,11 +38,11 @@ function SearchSettings(): ReactElement {
   const season = useAppSelector(selectAnimeSearchSettingsSeason);
   const status = useAppSelector(selectAnimeSearchSettingsStatus);
   const { status: fetchStatus } = useAppSelector(selectAnimeSearchData);
-  const formatList = Object.entries(AnimeFormat);
-  const seasonList = Object.entries(AnimeSeason);
-  const statusList = Object.entries(AnimeStatus);
-  const genresList = Object.entries(ItemGenre);
-  const sortList = Object.entries(AllowedItemSort);
+  const formatList = toCapitalizeFirstInPair(Object.entries(AnimeFormat));
+  const seasonList = toCapitalizeFirstInPair(Object.entries(AnimeSeason));
+  const statusList = toCapitalizeFirstInPair(Object.entries(AnimeStatus));
+  const genresList = toCapitalizeFirstInPair(Object.entries(ItemGenre));
+  const sortList = toCapitalizeFirstInPair(Object.entries(AllowedItemSort));
 
   const debounce = useDebounce(() => {
     dispatch(clearSearchResults());

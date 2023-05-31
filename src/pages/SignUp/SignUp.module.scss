@@ -1,5 +1,6 @@
 @use "/src/styles/colors";
 @use "/src/styles/sizes";
+@use "/src/styles/mixins/breakpoints";
 
 .container {
   display: flex;
@@ -21,6 +22,11 @@
   align-items: center;
   width: 40rem;
   padding: 3rem;
+  margin: 0 1.5rem;
+
+  @include breakpoints.breakpoint(mobile) {
+    padding: 3rem 1.5rem;
+  }
 }
 
 .logo {

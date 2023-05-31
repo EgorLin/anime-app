@@ -11,11 +11,6 @@
   border-radius: sizes.$border-radius;
   padding: 3rem;
 
-  // display: grid;
-  // grid-template-columns: repeat(1, 1fr);
-  // column-gap: 3rem;
-  // row-gap: 3rem;
-
   @include breakpoints.breakpoint(mobile) {
     padding: 1.5rem;
     flex-direction: column;
@@ -42,7 +37,9 @@
 }
 
 .tabs {
-  order: 2;
+  @include breakpoints.breakpoint(mobile) {
+    order: 2;
+  }
 }
 
 .tab {

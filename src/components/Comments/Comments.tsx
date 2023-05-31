@@ -1,4 +1,3 @@
-import { getAuth } from "firebase/auth";
 import { ReactElement, useEffect, useState } from "react";
 import FirebaseService from "../../api/FirebaseService";
 import { RequestStatuses } from "../../const/requestStatuses";

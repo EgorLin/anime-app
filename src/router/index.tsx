@@ -10,6 +10,7 @@ const AnimePage = lazy(() => import("../pages/AnimePage/AnimePage"));
 const LogIn = lazy(() => import("../pages/LogIn/LogIn"));
 const SignUp = lazy(() => import("../pages/SignUp/SignUp"));
 const Profile = lazy(() => import("../pages/Profile/Profile"));
+const About = lazy(() => import("../pages/About/About"));
 
 export enum RouteNames {
   HOME = "/",
@@ -19,6 +20,7 @@ export enum RouteNames {
   LOGIN = "/login",
   SINGUP = "/signup",
   PROFILE = "/profile",
+  ABOUT = "/about",
 }
 
 export const publicRoutes: RouteObject[] = [
@@ -42,6 +44,10 @@ export const publicRoutes: RouteObject[] = [
       {
         path: RouteNames.ANITITLE_DIRTY,
         element: <AnimePage />,
+      },
+      {
+        path: RouteNames.ABOUT,
+        element: <About />,
       },
     ],
   },
@@ -88,6 +94,10 @@ export const privateRoutes: RouteObject[] = [
       {
         path: RouteNames.PROFILE,
         element: <Profile />,
+      },
+      {
+        path: RouteNames.ABOUT,
+        element: <About />,
       },
     ],
   },

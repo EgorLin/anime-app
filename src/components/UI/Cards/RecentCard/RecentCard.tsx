@@ -21,7 +21,9 @@ function RecentCard({
 }: IProps): ReactElement {
   const episodeWindow = lastEpisode ? (
     <EpisodeBox>{lastEpisode}</EpisodeBox>
-  ) : null;
+  ) : (
+    <></>
+  );
   const openAnime = useNavigateAnime(id);
 
   return (
