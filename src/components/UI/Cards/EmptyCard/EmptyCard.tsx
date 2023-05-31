@@ -58,7 +58,7 @@ function EmptyCard({
     imgSize = styles.smallSize;
   }
 
-  let animeTitle = "Unknown";
+  let animeTitle = "";
   if (title.english) {
     animeTitle = title.english;
   } else if (title.romaji) {

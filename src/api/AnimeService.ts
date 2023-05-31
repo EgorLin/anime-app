@@ -1,17 +1,21 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { hostUrl, UrlPaths } from "../const/urlConsts";
+import { stringifyArrays } from "../helpers/stringifyArrays";
 import { IAnimeInfo } from "../types/IAnimeInfo";
 import { IAnimeRecent } from "../types/IAnimeRecent";
-import { ISingleAnimeSearch } from "../types/IAnimeSearch";
+import { ISearchSettings, ISingleAnimeSearch } from "../types/IAnimeSearch";
 import { IAnimeTrending } from "../types/IAnimeTrending";
 import { IPages } from "../types/IPages";
 import { IStreamInfo } from "../types/IStreamInfo";
 
 export default class AnimeService {
   static async getSearchedAnime(
-    params: Object
+    params: ISearchSettings
   ): Promise<AxiosResponse<IPages<ISingleAnimeSearch>>> {
-    const conf: AxiosRequestConfig = { params };
+    const parsedParams = stringifyArrays(params);
+    const conf: AxiosRequestConfig = {
+      params: parsedParams,
+    };
     return axios.get<IPages<ISingleAnimeSearch>>(
       hostUrl + UrlPaths.SEARCH,
       conf

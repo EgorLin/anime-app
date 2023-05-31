@@ -29,6 +29,7 @@
     }
 
     .bookmark {
+      display: block;
       width: 3rem;
       height: 3rem;
       @include transitions.default(all);
@@ -83,14 +84,20 @@
 
 .wideSize {
   min-width: 40rem;
+  width: 40rem;
+  height: 30rem;
   aspect-ratio: 4/3;
 
   @include breakpoints.breakpoint(mobile) {
     min-width: 32rem;
+    width: 32rem;
+    height: 24rem;
   }
 
   @include breakpoints.breakpoint(laptop-desktop) {
     min-width: 36rem;
+    width: 36rem;
+    height: 27rem;
   }
 }
 
@@ -123,6 +130,7 @@
 }
 
 .bookmark {
+  display: none;
   position: absolute;
   top: 5%;
   left: 10%;

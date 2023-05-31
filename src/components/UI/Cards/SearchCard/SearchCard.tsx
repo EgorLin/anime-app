@@ -19,9 +19,11 @@ function SearchCard({
   genres,
   lastEpisode,
 }: IProps): ReactElement {
-  const episodeWindow = lastEpisode ? (
+  const episodeWindow = +lastEpisode ? (
     <EpisodeBox>{lastEpisode}</EpisodeBox>
-  ) : null;
+  ) : (
+    <></>
+  );
   const openAnime = useNavigateAnime(id);
 
   return (

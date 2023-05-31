@@ -19,7 +19,7 @@ function RecentCard({
   genres,
   lastEpisode,
 }: IProps): ReactElement {
-  const episodeWindow = lastEpisode ? (
+  const episodeWindow = +lastEpisode ? (
     <EpisodeBox>{lastEpisode}</EpisodeBox>
   ) : (
     <></>

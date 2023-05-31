@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 import styles from "./CheckboxButton.module.scss";
 
 interface IProps {

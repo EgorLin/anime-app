@@ -77,6 +77,7 @@ function SearchSettings(): ReactElement {
     } else {
       newGenres.push(newGenre);
     }
+    console.log("new genres", newGenres);
     dispatch(setSearchGenres(newGenres));
   }
 

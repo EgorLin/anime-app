@@ -1,4 +1,8 @@
-import { IAnimeSearch, ISingleAnimeSearch } from "../../types/IAnimeSearch";
+import {
+  IAnimeSearch,
+  ISearchSettings,
+  ISingleAnimeSearch,
+} from "../../types/IAnimeSearch";
 import { RequestStatuses } from "../../const/requestStatuses";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
@@ -43,7 +47,7 @@ export const fetchAnimeSearch = createAsyncThunk<
   { state: RootState }
 >("animeSearch/fetch", async (_, { getState }) => {
   const settings = getState().animeSearch.settings;
-  const filtredSettings = removeEmptyKeys(settings);
+  const filtredSettings = removeEmptyKeys(settings) as ISearchSettings;
   const responce = await AnimeService.getSearchedAnime(filtredSettings);
 
   return responce.data;

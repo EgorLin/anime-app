@@ -26,6 +26,23 @@ function About(): ReactElement {
   return (
     <div className={[styles.container, "wrapperM"].join(" ")}>
       <h1>About project</h1>
+      <span>
+        For better experience, you should disable the ad blocker that conflicts
+        with the API.
+      </span>
+
+      <span>
+        The code can be seen on{" "}
+        <a
+          rel="noreferrer"
+          target="_blank"
+          href="https://github.com/EgorLin/anime-app"
+        >
+          GitHub
+        </a>
+        .
+      </span>
+
       <h2>Technology stack</h2>
       <ul>
         <li>
@@ -111,16 +128,6 @@ function About(): ReactElement {
         This project does not use any design pattern, but uses decomposition,
         container components that share logic and view and state management.
       </p>
-      <span>
-        The code can be seen on{" "}
-        <a
-          rel="noreferrer"
-          target="_blank"
-          href="https://github.com/EgorLin/anime-app"
-        >
-          GitHub
-        </a>
-      </span>
     </div>
   );
 }
