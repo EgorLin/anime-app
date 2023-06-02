@@ -1,8 +1,9 @@
-import { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode, RefObject } from "react";
 import LeftArrowIcon from "../../../assets/icons/LeftArrowIcon/LeftArrowIcon";
 import RightArrowIcon from "../../../assets/icons/RightArrowIcon/RightArrowIcon";
 import { RequestStatuses } from "../../../const/requestStatuses";
 import Spinner from "../../UI/Spinner/Spinner";
+import Trigger from "../../UI/Trigger/Trigger";
 import styles from "./EmptySliderPanel.module.scss";
 
 interface IProps {
@@ -14,6 +15,8 @@ interface IProps {
     right: boolean;
   };
   divElements: ReactNode[];
+  target: RefObject<HTMLDivElement>;
+  isIntersected: boolean;
   slideForward: () => void;
   slideBackward: () => void;
 }
@@ -24,6 +27,8 @@ function EmptySliderPanelItem({
   status,
   error,
   buttonsVisibility,
+  target,
+  isIntersected,
   slideForward,
   slideBackward,
 }: IProps): ReactElement {
@@ -39,20 +44,20 @@ function EmptySliderPanelItem({
       content = (
         <>
           <div className={styles.slider}>{divElements}</div>
-
-          {/* {buttonsVisibility.left && ( */}
-          {/*   <span onClick={slideBackward} className={styles.button}> */}
-          {/*     <LeftArrowIcon /> */}
-          {/*   </span> */}
-          {/* )} */}
-          {/* {buttonsVisibility.right && ( */}
-          {/*   <span */}
-          {/*     onClick={slideForward} */}
-          {/*     className={[styles.button, styles.right].join(" ")} */}
-          {/*   > */}
-          {/*     <RightArrowIcon /> */}
-          {/*   </span> */}
-          {/* )} */}
+          {buttonsVisibility.left && (
+            <span onClick={slideBackward} className={styles.button}>
+              <LeftArrowIcon />
+            </span>
+          )}
+          {buttonsVisibility.right && (
+            <span
+              onClick={slideForward}
+              className={[styles.button, styles.right].join(" ")}
+            >
+              <RightArrowIcon />
+            </span>
+          )}
+          {!isIntersected && <Trigger target={target} />}
         </>
       );
       break;

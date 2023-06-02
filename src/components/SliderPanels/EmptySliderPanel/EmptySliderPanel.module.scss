@@ -9,7 +9,7 @@
 
 .slider {
   display: flex;
-  overflow-x: auto;
+  overflow-x: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
 
@@ -19,7 +19,7 @@
 }
 
 .card {
-  scroll-snap-align: start;
+  // scroll-snap-align: start;
   margin-right: 3rem;
 
   &:last-child {

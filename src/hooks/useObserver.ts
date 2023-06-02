@@ -12,6 +12,7 @@ export function useObserver(callback: () => void, status?: string) {
       threshold: 1,
     };
     observer.current = new IntersectionObserver((entries) => {
+      console.log(entries);
       if (entries[0].isIntersecting) {
         callback();
       }
