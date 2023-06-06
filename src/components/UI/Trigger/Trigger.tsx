@@ -1,4 +1,4 @@
-import { ReactElement, RefObject, useRef } from "react";
+import { ReactElement, RefObject } from "react";
 import styles from "./Trigger.module.scss";
 
 interface IProps {

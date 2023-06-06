@@ -7,10 +7,6 @@ import {
 } from "../../../store/reducers/AnimeRecentSlice";
 import RecentCard from "../../UI/Cards/RecentCard/RecentCard";
 import EmptyCatalog from "../EmptyCatalog/EmptyCatalog";
-import { compareId } from "../../../helpers/compareFunctions";
-import { IAnimeRecent } from "../../../types/IAnimeRecent";
-import { IDataFetch } from "../../../types/IDataFetch";
-import { shallowEqual } from "react-redux";
 
 function RecentReleasesCatalog(): ReactElement {
   const dispatch = useAppDispatch();

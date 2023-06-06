@@ -1,9 +1,7 @@
 import { getAuth, signOut } from "firebase/auth";
 import { ReactElement } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { ProfileTabs } from "../../pages/Profile/Profile";
-import { RouteNames } from "../../router";
 import {
   clearUserData,
   selectCurrentUser,

@@ -10,7 +10,6 @@ function EpisodeSection({ episodes }: IProps): ReactElement {
   const [currentEpisode, setCurrentEpisode] = useState<IAnimeEpisode>(
     episodes[0]
   );
-  // const [currentEpisodeId, setCurrentEpisodeId] = useState(currentEpisode.id);
 
   function applyNewEpisode(id: string): void {
     const newEp = episodes.find((episode) => episode.id === id);

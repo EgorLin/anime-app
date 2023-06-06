@@ -20,12 +20,6 @@ function RelationCard({
 }: IProps): ReactElement {
   const openAnime = useNavigateAnime(id);
   const list = [type, relationType];
-  // if (type) {
-  //   list.push(type);
-  // }
-  // if (relationType) {
-  //   list.push(relationType);
-  // }
 
   return (
     <EmptyCard

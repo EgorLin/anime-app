@@ -27,8 +27,6 @@ function RecommendationCard({
     </YearWindow>
   );
 
-  function changeBookmark() { }
-
   const list = [];
   if (type) {
     list.push(type);

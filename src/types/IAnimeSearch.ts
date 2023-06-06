@@ -23,14 +23,12 @@ export interface ISingleAnimeSearch {
 
 export interface ISearchSettings {
   query: string;
-  // type: string;
   page: number;
   perPage: number;
   season: string;
   format: string;
   sort: string[];
   genres: string[];
-  // id: string;
   year: string;
   status: string;
 }

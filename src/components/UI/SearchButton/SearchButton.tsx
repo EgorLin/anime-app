@@ -1,5 +1,5 @@
 import { ReactElement, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SearchIcon from "../../../assets/icons/SearchIcon/SearchIcon";
 import { RouteNames } from "../../../router";
 import ButtonIcon from "../ButtonIcon/ButtonIcon";

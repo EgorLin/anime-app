@@ -1,5 +1,4 @@
 import { ReactElement } from "react";
-import ButtonIcon from "../../components/UI/ButtonIcon/ButtonIcon";
 import styles from "./ErrorPage.module.scss";
 import { RouteNames } from "../../router";
 import { Link } from "react-router-dom";

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { RequestStatuses } from "../const/requestStatuses";
 
 export function useObserver(callback: () => void, status?: string) {
@@ -12,7 +12,6 @@ export function useObserver(callback: () => void, status?: string) {
       threshold: 1,
     };
     observer.current = new IntersectionObserver((entries) => {
-      console.log(entries);
       if (entries[0].isIntersecting) {
         callback();
       }

@@ -1,9 +1,7 @@
-import { ReactElement, ReactNode, useEffect, useRef, useState } from "react";
+import { ReactElement, ReactNode, useRef, useState } from "react";
 import { RequestStatuses } from "../../../const/requestStatuses";
 import EmptySliderPanelItem from "./EmptySliderPanelItem";
 import styles from "./EmptySliderPanel.module.scss";
-import { useWindowSize } from "../../../hooks/useWidnowSize";
-import { breakpoints } from "../../../const/breakpoints";
 import { useObserver } from "../../../hooks/useObserver";
 
 interface IProps {
@@ -14,7 +12,7 @@ interface IProps {
 }
 
 interface IIndex {
-  current: number;
+  current: string;
   max: number;
 }
 
@@ -24,118 +22,112 @@ function EmptySliderPanel({
   status = RequestStatuses.SUCCEEDED,
   error = "Slider panel error",
 }: IProps): ReactElement {
-  const idRoot = (title ? title : "empty-slider") + "-";
-  const observEls = useRef(new Array());
-  const divElements = useRef(new Array());
-  const [isRendered, setIsRendered] = useState(false);
+  const idBase = (title ? title : "empty-slider") + "-";
+  const itemsRef = useRef<Map<string, HTMLDivElement> | null>(null);
+  const observedStates = useRef<Map<string, boolean>>(new Map());
+  const observer = useRef<IntersectionObserver>();
+
   const [indexes, setIndexes] = useState<IIndex>({
-    current: 0,
+    current: "",
     max: 0,
   });
+
   const [buttonsVisibility, setButtonsVisibility] = useState({
     left: false,
     right: false,
   });
-  const isWideScreen = useWindowSize(breakpoints.mobile);
-  const observedStates = useRef<Array<Boolean>>([]);
 
-  const observer = useRef<IntersectionObserver>();
-  const [isIntersected, setIsIntersected] = useState(false);
   const target = useObserver(() => {
-    if (divElements.current.length !== 0) {
+    if (status === RequestStatuses.SUCCEEDED) {
       initElements();
     }
+  }, status);
+  const [isIntersected, setIsIntersected] = useState(false);
 
-    // setTimeout(() => {
-
-    console.log(
-      "first target",
-      divElements.current,
-      observedStates.current.length
-    );
-    if (observedStates.current.length !== 0) {
-      setIsIntersected(true);
-
-      setIndexes((i) => ({
-        ...i,
-        max: divElements.current.length,
-      }));
-
-      const isHiddenEl = observedStates.current.some((el) => {
-        return !el;
-      });
-
-      console.log(
-        "first target in condition",
-        observedStates.current,
-        isHiddenEl
-      );
-      if (isHiddenEl) {
-        setButtonsVisibility((bv) => ({
-          ...bv,
-          right: true,
-        }));
-      }
+  function getMap() {
+    if (!itemsRef.current) {
+      itemsRef.current = new Map();
     }
-    // }, 1000);
-  });
+    return itemsRef.current;
+  }
 
-  useEffect(() => {
-    if (status === RequestStatuses.SUCCEEDED) {
-      divElements.current = elements.map((element, index) => (
-        <div
-          key={index}
-          ref={(el) => observEls.current.push(el)}
-          id={idRoot + index}
-          className={styles.card}
-        >
-          {element}
-        </div>
-      ));
-      setIsRendered(true);
-    }
-  }, [status]);
+  const divElements = elements.map((element, index) => (
+    <div
+      key={index}
+      ref={(node) => {
+        const map = getMap();
+        if (node) {
+          map.set(idBase + index, node);
+        } else {
+          map.delete(idBase + index);
+        }
+      }}
+      id={idBase + index}
+      className={styles.card}
+    >
+      {element}
+    </div>
+  ));
 
   function initElements(): void {
     const options = {
       threshold: 1,
     };
 
-    console.log("initElements");
     let intersectionCallback: IntersectionObserverCallback = (entries) => {
-      console.log("initElements callback");
-      if (observedStates.current.length === 0) {
-        console.log("initElements callback in stuff");
-        const newArr: Array<Boolean> = [];
+      if (observedStates.current?.size === 0) {
         for (let en of entries) {
-          newArr.push(en.isIntersecting);
+          observedStates.current.set(en.target.id, en.isIntersecting);
         }
-        observedStates.current = newArr;
+
+        if (observedStates.current.size !== 0) {
+          setIsIntersected(true);
+
+          setIndexes((i) => ({
+            current: entries[0].target.id,
+            max: observedStates.current?.size!,
+          }));
+
+          const isHiddenEl = Array.from(observedStates.current).some((el) => {
+            return !el[1];
+          });
+
+          if (isHiddenEl) {
+            setButtonsVisibility((bv) => ({
+              ...bv,
+              right: true,
+            }));
+          }
+        }
       } else {
-        const index = entries[0].target.id.match(/\d+/)![0];
-        observedStates.current[index] = entries[0].isIntersecting;
+        const index = entries[0].target.id;
+        observedStates.current?.set(index, entries[0].isIntersecting);
       }
     };
 
     observer.current = new IntersectionObserver(intersectionCallback, options);
 
-    for (let el of observEls.current) {
-      observer.current.observe(el);
-    }
+    const map = getMap();
 
-    console.log("observedEls", observEls);
+    map.forEach((value) => observer.current!.observe(value));
   }
 
   function slideForward() {
     let currentSnap = indexes.current;
-    let nextSnap = 0;
-    observedStates.current.forEach((el, index) => {
-      if (!el && index > currentSnap && nextSnap === 0) {
-        nextSnap = index;
+    let nextSnap = idBase + 0;
+    observedStates.current?.forEach((isVisible, id) => {
+      const isGreaterCurrent =
+        +id.match(/\d+/)![0] > +currentSnap.match(/\d+/)![0];
+      const notFoundedNextElement = nextSnap === idBase + 0;
+
+      if (!isVisible && isGreaterCurrent && notFoundedNextElement) {
+        nextSnap = id;
       }
     });
 
-    const isNewValueLast = nextSnap === observedStates.current.length - 1;
+    const isNewValueLast =
+      nextSnap === idBase + (observedStates.current?.size! - 1);
+
     if (isNewValueLast) {
       setButtonsVisibility((bv) => ({
         ...bv,
@@ -147,11 +139,11 @@ function EmptySliderPanel({
         left: true,
       }));
     }
-    console.log("snap to", currentSnap, nextSnap);
 
-    const target = document.getElementById(idRoot + nextSnap);
+    const map = getMap();
+    const node = map.get(nextSnap)!;
 
-    target?.scrollIntoView({
+    node?.scrollIntoView({
       block: "nearest",
       inline: "end",
       behavior: "smooth",
@@ -164,19 +156,21 @@ function EmptySliderPanel({
   }
 
   function slideBackward() {
-    let defaultNum = observedStates.current.length + 1;
+    let defaultNum = String(observedStates.current.size + 1);
     let currentSnap = indexes.current;
     let nextSnap = defaultNum;
-    // console.log("aaaaaa", observedStates);
-    observedStates.current.forEach((el, index) => {
-      // console.log("from next loop", el);
-      if (!el && index < currentSnap) {
-        nextSnap = index;
+
+    observedStates.current.forEach((isVisible, id) => {
+      const isLowerCurrent =
+        +id.match(/\d+/)![0] < +currentSnap.match(/\d+/)![0];
+
+      if (!isVisible && isLowerCurrent) {
+        nextSnap = id;
       }
     });
 
-    const isNewValueFirst = nextSnap === 0;
-    // console.log(nextSnap, observedStates.current.length - 1);
+    const isNewValueFirst = nextSnap === idBase + 0;
+
     if (isNewValueFirst) {
       setButtonsVisibility((bv) => ({
         ...bv,
@@ -189,9 +183,9 @@ function EmptySliderPanel({
       }));
     }
 
-    const target = document.getElementById(idRoot + nextSnap);
-
-    target?.scrollIntoView({
+    const map = getMap();
+    const node = map.get(nextSnap)!;
+    node?.scrollIntoView({
       block: "nearest",
       inline: "start",
       behavior: "smooth",
@@ -206,7 +200,7 @@ function EmptySliderPanel({
   return (
     <EmptySliderPanelItem
       title={title}
-      divElements={divElements.current}
+      divElements={divElements}
       slideForward={slideForward}
       slideBackward={slideBackward}
       buttonsVisibility={buttonsVisibility}

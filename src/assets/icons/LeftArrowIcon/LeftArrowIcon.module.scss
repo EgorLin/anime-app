@@ -2,10 +2,10 @@
 @use "/src/styles/mixins/transitions";
 
 .svg {
-  height: 100px;
+  height: 160px;
 
   & path {
-    fill: rgba(colors.$font-accent, 0);
-    @include transitions.default(fill);
+    fill: rgba(colors.$font-accent, 1);
+    // @include transitions.default(fill);
   }
 }
